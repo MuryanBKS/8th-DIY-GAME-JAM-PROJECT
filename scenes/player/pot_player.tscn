@@ -17,3 +17,5 @@ texture = ExtResource("2_fb2sj")
 hframes = 56
 vframes = 20
 frame = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]

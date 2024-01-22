@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://7pik6e57xcb0"]
+
+[ext_resource type="Script" path="res://scenes/player/pot_player.gd" id="1_3sroy"]
+[ext_resource type="Texture2D" uid="uid://ctr0eaxnlafh8" path="res://assets/Halloween_Shadow_Singles_48x48_53.png" id="1_5ostv"]
+[ext_resource type="Texture2D" uid="uid://chistkvsdu0m8" path="res://assets/Accessory_24_Pumpkin_Head_48x48.png" id="2_fb2sj"]
+
+[node name="PotPlayer" type="CharacterBody2D"]
+script = ExtResource("1_3sroy")
+
+[node name="HalloweenShadowSingles48x4853" type="Sprite2D" parent="."]
+position = Vector2(2, -4)
+texture = ExtResource("1_5ostv")
+
+[node name="PumpkinHead" type="Sprite2D" parent="."]
+position = Vector2(1, -27)
+texture = ExtResource("2_fb2sj")
+hframes = 56
+vframes = 20
+frame = 1

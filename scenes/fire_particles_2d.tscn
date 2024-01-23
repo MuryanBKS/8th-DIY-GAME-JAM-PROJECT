@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://dfq1o55mrsj2j"]
+
+[ext_resource type="Script" path="res://scenes/fire_particles_2d.gd" id="1_yc8ml"]
+
+[sub_resource type="Gradient" id="Gradient_cig7a"]
+offsets = PackedFloat32Array(0, 0.551587, 0.998016)
+colors = PackedColorArray(1, 0.786913, 0, 1, 0.956342, 0.344166, 0.0284734, 1, 1, 0, 0.0073452, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_quxxn"]
+gradient = SubResource("Gradient_cig7a")
+
+[sub_resource type="Curve" id="Curve_f7uti"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.582999), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ilr8d"]
+curve = SubResource("Curve_f7uti")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_q6rj8"]
+particle_flag_disable_z = true
+direction = Vector3(0, -1, 0)
+spread = 88.428
+initial_velocity_min = 60.0
+initial_velocity_max = 120.0
+gravity = Vector3(0, 0, 0)
+scale_min = 2.0
+scale_max = 4.0
+scale_curve = SubResource("CurveTexture_ilr8d")
+color_ramp = SubResource("GradientTexture1D_quxxn")
+turbulence_enabled = true
+turbulence_noise_scale = 4.699
+
+[node name="FireParticles2D" type="GPUParticles2D"]
+z_index = -1
+amount = 60
+process_material = SubResource("ParticleProcessMaterial_q6rj8")
+lifetime = 0.3
+randomness = 0.5
+script = ExtResource("1_yc8ml")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

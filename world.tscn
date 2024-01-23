@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbglov652jnsr"]
+
+[ext_resource type="PackedScene" uid="uid://cn38ud11gvhsv" path="res://scenes/player/player.tscn" id="1_qyi1p"]
+
+[node name="World" type="Node2D"]
+
+[node name="Player" parent="." instance=ExtResource("1_qyi1p")]
+
+[node name="Fire" type="Node2D" parent="." groups=["fire"]]

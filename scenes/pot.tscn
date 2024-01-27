@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://cblaytvi5tp5m"]
 
-[ext_resource type="Texture2D" uid="uid://ctr0eaxnlafh8" path="res://assets/Halloween_Shadow_Singles_48x48_53.png" id="1_4q40y"]
 [ext_resource type="Script" path="res://scenes/pot.gd" id="1_gclxe"]
+[ext_resource type="Texture2D" uid="uid://bs2ryprwx0arw" path="res://assets/Halloween_Shadow_Singles_48x48_54.png" id="2_ylohe"]
 
 [node name="Pot" type="StaticBody2D"]
 script = ExtResource("1_gclxe")
 
 [node name="PotSprite" type="Sprite2D" parent="."]
-texture = ExtResource("1_4q40y")
+texture = ExtResource("2_ylohe")
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.3

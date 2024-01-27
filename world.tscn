@@ -6,4 +6,9 @@
 
 [node name="Player" parent="." instance=ExtResource("1_qyi1p")]
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+position_smoothing_enabled = true
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
 [node name="Fire" type="Node2D" parent="." groups=["fire"]]

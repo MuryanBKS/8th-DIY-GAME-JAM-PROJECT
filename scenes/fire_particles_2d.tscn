@@ -31,7 +31,6 @@ turbulence_enabled = true
 turbulence_noise_scale = 4.699
 
 [node name="FireParticles2D" type="GPUParticles2D"]
-z_index = -1
 amount = 60
 process_material = SubResource("ParticleProcessMaterial_q6rj8")
 lifetime = 0.3

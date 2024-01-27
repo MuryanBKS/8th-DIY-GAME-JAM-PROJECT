@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://ckbf5eqgs5mc5"]
+
+[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_4tir8"]
+[ext_resource type="Texture2D" uid="uid://bh0yvtuu1o0xw" path="res://assets/mushroom.png" id="2_pklqc"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6asw"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_tbj27"]
+radius = 14.0
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_4tir8")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2, 2)
+texture = ExtResource("2_pklqc")
+hframes = 4
+vframes = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_m6asw")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("CircleShape2D_tbj27")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

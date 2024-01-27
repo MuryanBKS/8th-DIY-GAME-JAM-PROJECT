@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://chistkvsdu0m8"
-path="res://.godot/imported/Accessory_24_Pumpkin_Head_48x48.png-be531d56412f783ccf4856a59b055957.ctex"
+uid="uid://bojyf4gios6by"
+path="res://.godot/imported/LargeShadow.png-dbad8dd51c47ae492f532443c8fa15d2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Accessory_24_Pumpkin_Head_48x48.png"
-dest_files=["res://.godot/imported/Accessory_24_Pumpkin_Head_48x48.png-be531d56412f783ccf4856a59b055957.ctex"]
+source_file="res://assets/LargeShadow.png"
+dest_files=["res://.godot/imported/LargeShadow.png-dbad8dd51c47ae492f532443c8fa15d2.ctex"]
 
 [params]
 

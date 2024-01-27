@@ -1,4 +1,5 @@
-extends StaticBody2D
+class_name Pot
+extends Area2D
 
 func _ready() -> void:
 	var player = get_tree().get_first_node_in_group("player")

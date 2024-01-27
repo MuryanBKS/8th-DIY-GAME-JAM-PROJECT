@@ -1,6 +1,9 @@
 extends GPUParticles2D
 
 func _ready() -> void:
+	start()
+
+func start():
 	$Timer.wait_time = randf_range(0.2, 0.5)
 	$Timer.start()
 

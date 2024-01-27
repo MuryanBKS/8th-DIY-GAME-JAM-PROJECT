@@ -1,8 +1,9 @@
-[gd_scene load_steps=122 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=123 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://assets/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wk4am"]
 [ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/fire_particles_2d.tscn" id="2_l5dwu"]
+[ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/LargeShadow.png" id="3_52dnf"]
 [ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/pot.tscn" id="4_hypyu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_phxgj"]
@@ -1078,9 +1079,6 @@ nodes/walk_bs2d/node = SubResource("AnimationNodeBlendSpace2D_yesvj")
 nodes/walk_bs2d/position = Vector2(945.809, 219.615)
 node_connections = [&"TimeScale", 0, &"walk_bs2d", &"output", 0, &"TimeScale"]
 
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_y2s5h"]
-advance_mode = 2
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bbker"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ocajj"]
@@ -1093,16 +1091,19 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fc81q"]
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_x48y8"]
+advance_mode = 2
+
 [sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_x544q"]
 states/End/position = Vector2(950, 279)
-states/Start/position = Vector2(151, 365)
+states/Start/position = Vector2(538, 624)
 states/idle/node = SubResource("AnimationNodeBlendTree_8enhn")
-states/idle/position = Vector2(538, 365)
+states/idle/position = Vector2(531, 387)
 states/push_cart/node = SubResource("AnimationNodeBlendTree_tjc8v")
-states/push_cart/position = Vector2(741, 269)
+states/push_cart/position = Vector2(292, 353)
 states/walk/node = SubResource("AnimationNodeBlendTree_y2sqk")
 states/walk/position = Vector2(489, 176)
-transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_y2s5h"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_bbker"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ocajj"), "walk", "push_cart", SubResource("AnimationNodeStateMachineTransition_kar06"), "push_cart", "walk", SubResource("AnimationNodeStateMachineTransition_smn4c"), "push_cart", "idle", SubResource("AnimationNodeStateMachineTransition_i7q3k"), "idle", "push_cart", SubResource("AnimationNodeStateMachineTransition_fc81q")]
+transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_bbker"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ocajj"), "walk", "push_cart", SubResource("AnimationNodeStateMachineTransition_kar06"), "push_cart", "walk", SubResource("AnimationNodeStateMachineTransition_smn4c"), "push_cart", "idle", SubResource("AnimationNodeStateMachineTransition_i7q3k"), "idle", "push_cart", SubResource("AnimationNodeStateMachineTransition_fc81q"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x48y8")]
 graph_offset = Vector2(-106, 107)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
@@ -1110,6 +1111,11 @@ y_sort_enabled = true
 motion_mode = 1
 script = ExtResource("1_wk4am")
 fire_particle = ExtResource("2_l5dwu")
+
+[node name="LargeShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.415686)
+position = Vector2(2, -2)
+texture = ExtResource("3_52dnf")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_cdjl1")

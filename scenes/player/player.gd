@@ -6,7 +6,7 @@ signal press_dash
 
 const ACCELERATION := 3000
 const FRICTION = 3000
-const MAX_SPEED = 900
+const MAX_SPEED = 450
 const MAX_DASH_SPEED = 2000
 
 
@@ -56,14 +56,14 @@ func move(delta):
 		elif input_vector != Vector2.ZERO and is_pushing_cart:
 			state = PUSH_CART
 			apply_movement(input_vector * ACCELERATION * delta)
-			if global_position.y >= 500:
-				velocity.y = clamp(velocity.y, -MAX_SPEED, 0)
-				if input_vector == Vector2.DOWN:
-					velocity.x = lerp(velocity.x, 0.0, 1 - exp(-2 * delta))
-			if global_position.y <= -350:
-				velocity.y = clamp(velocity.y, 0, MAX_SPEED)
-				if input_vector == Vector2.UP:
-					velocity.x = lerp(velocity.x, 0.0, 1 - exp(-2 * delta))
+			#if global_position.y >= 500:
+				#velocity.y = clamp(velocity.y, -MAX_SPEED, 0)
+				#if input_vector == Vector2.DOWN:
+					#velocity.x = lerp(velocity.x, 0.0, 1 - exp(-2 * delta))
+			#if global_position.y <= -350:
+				#velocity.y = clamp(velocity.y, 0, MAX_SPEED)
+				#if input_vector == Vector2.UP:
+					#velocity.x = lerp(velocity.x, 0.0, 1 - exp(-2 * delta))
 			blend_position = input_vector
 			if randf() > 0.8:
 				spawn_fire()

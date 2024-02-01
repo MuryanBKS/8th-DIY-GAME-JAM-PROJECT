@@ -8,5 +8,5 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
-	global_position.x = lerp(global_position.x, player.global_position.x, 1 - exp(-5 * delta))
+	global_position = lerp(global_position, player.global_position, 1 - exp(-5 * delta))
 

@@ -21,11 +21,9 @@ ssao_horizon = 1.0
 ssao_light_affect = 0.28
 ssao_ao_channel_affect = 1.0
 glow_enabled = true
-glow_intensity = 1.15
-glow_strength = 1.25
+glow_strength = 1.3
 glow_blend_mode = 0
-glow_hdr_threshold = 0.92
-glow_hdr_scale = 1.43
+glow_hdr_scale = 1.5
 fog_light_color = Color(0.870588, 0, 0.929412, 1)
 fog_light_energy = 3.7
 fog_sun_scatter = 0.14
@@ -33,8 +31,8 @@ fog_density = 0.347
 fog_height = -22.02
 fog_height_density = 4.2437
 adjustment_enabled = true
-adjustment_brightness = 0.6
-adjustment_contrast = 1.6
+adjustment_brightness = 0.52
+adjustment_contrast = 1.45
 adjustment_saturation = 1.2
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_tuup4"]

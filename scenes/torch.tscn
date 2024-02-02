@@ -26,8 +26,8 @@ animations = [{
 }]
 
 [sub_resource type="Gradient" id="Gradient_lhwpx"]
-offsets = PackedFloat32Array(0, 0.6575)
-colors = PackedColorArray(1, 0.886288, 0.651811, 0.654902, 0.00392157, 0, 0, 0.823529)
+offsets = PackedFloat32Array(0, 0.6825)
+colors = PackedColorArray(1, 0.886275, 0.65098, 0.521569, 0.00392157, 0, 0, 0.823529)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_xk52m"]
 gradient = SubResource("Gradient_lhwpx")

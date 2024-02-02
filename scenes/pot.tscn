@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://cblaytvi5tp5m"]
+[gd_scene load_steps=28 format=3 uid="uid://cblaytvi5tp5m"]
 
 [ext_resource type="Script" path="res://scenes/pot.gd" id="1_gclxe"]
 [ext_resource type="Texture2D" uid="uid://chdwb4flsrq85" path="res://assets/animated_witch_cauldron_48x48.png" id="2_qb81h"]
@@ -305,6 +305,15 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_2l6ui"]
 radius = 44.0
 
+[sub_resource type="Gradient" id="Gradient_jmpxr"]
+offsets = PackedFloat32Array(0.105, 0.615)
+colors = PackedColorArray(1, 0.729412, 0.505882, 0.6, 0, 0, 0, 0.431373)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_7pa3b"]
+gradient = SubResource("Gradient_jmpxr")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
 [node name="Pot" type="Area2D"]
 script = ExtResource("1_gclxe")
 
@@ -358,6 +367,12 @@ autoplay = "burn"
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-1, 8)
 shape = SubResource("CircleShape2D_2l6ui")
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+color = Color(0.988235, 0.560784, 0.105882, 1)
+energy = 0.5
+texture = SubResource("GradientTexture2D_7pa3b")
+texture_scale = 5.0
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

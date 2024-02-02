@@ -21,9 +21,10 @@ ssao_horizon = 1.0
 ssao_light_affect = 0.28
 ssao_ao_channel_affect = 1.0
 glow_enabled = true
-glow_strength = 1.3
+glow_strength = 1.25
 glow_blend_mode = 0
-glow_hdr_scale = 1.5
+glow_hdr_threshold = 0.83
+glow_hdr_scale = 1.1
 fog_light_color = Color(0.870588, 0, 0.929412, 1)
 fog_light_energy = 3.7
 fog_sun_scatter = 0.14
@@ -1163,7 +1164,7 @@ traps = [NodePath("../Traps/SpikeTrap15"), NodePath("../Traps/SpikeTrap16"), Nod
 [node name="Fire" type="Node2D" parent="." groups=["fire"]]
 
 [node name="Player" parent="." instance=ExtResource("1_qyi1p")]
-position = Vector2(29, 108)
+position = Vector2(64, 480)
 
 [node name="Enemy" parent="." instance=ExtResource("4_diusp")]
 position = Vector2(1888, 1120)

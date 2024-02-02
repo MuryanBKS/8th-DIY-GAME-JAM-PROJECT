@@ -21,7 +21,7 @@ func zoom_in():
 	if tween:
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(self, "zoom", Vector2(4.0, 4.0), 1.0).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT_IN)
+	tween.tween_property(self, "zoom", Vector2(4.0, 4.0), 1.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT_IN)
 	
 	
 func zoom_out():
@@ -29,7 +29,7 @@ func zoom_out():
 	if tween:
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(self, "zoom", Vector2(1.5, 1.5), 1.5).set_trans(Tween.TRANS_LINEAR).set_ease(Tween.EASE_OUT)
+	tween.tween_property(self, "zoom", Vector2(1.5, 1.5), 2.5).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT)
 	
 func on_press_dash():
 	zoom_in()

@@ -375,5 +375,7 @@ energy = 0.5
 texture = SubResource("GradientTexture2D_7pa3b")
 texture_scale = 7.63
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="area_exited" from="." to="." method="_on_area_exited"]
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

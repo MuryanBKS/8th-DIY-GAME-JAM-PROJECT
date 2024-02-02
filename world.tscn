@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://cbglov652jnsr"]
+[gd_scene load_steps=22 format=3 uid="uid://cbglov652jnsr"]
 
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_cgrp3"]
 [ext_resource type="Script" path="res://world.gd" id="1_hrmsn"]
@@ -33,7 +33,7 @@ fog_density = 0.347
 fog_height = -22.02
 fog_height_density = 4.2437
 adjustment_enabled = true
-adjustment_brightness = 0.52
+adjustment_brightness = 0.62
 adjustment_contrast = 1.6
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_tuup4"]
@@ -1083,6 +1083,12 @@ pattern_5 = SubResource("TileMapPattern_jjobc")
 pattern_6 = SubResource("TileMapPattern_noilh")
 pattern_7 = SubResource("TileMapPattern_fgles")
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_pf2qb"]
+size = Vector2(96, 224)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6r4jx"]
+size = Vector2(96, 224)
+
 [node name="World" type="Node2D"]
 script = ExtResource("1_hrmsn")
 
@@ -1146,25 +1152,23 @@ position = Vector2(1408, 1056)
 position = Vector2(1408, 1152)
 
 [node name="TrapTrigger" parent="." node_paths=PackedStringArray("traps") instance=ExtResource("3_g6xx1")]
-position = Vector2(320, 1118)
+position = Vector2(512, 1120)
 traps = [NodePath("../Traps/SpikeTrap"), NodePath("../Traps/SpikeTrap2"), NodePath("../Traps/SpikeTrap3"), NodePath("../Traps/SpikeTrap4"), NodePath("../Traps/SpikeTrap5"), NodePath("../Traps/SpikeTrap6")]
 
-[node name="TrapTrigger3" parent="." node_paths=PackedStringArray("traps") instance=ExtResource("3_g6xx1")]
-position = Vector2(704, 1120)
-traps = [NodePath("../Traps/SpikeTrap"), NodePath("../Traps/SpikeTrap2"), NodePath("../Traps/SpikeTrap3"), NodePath("../Traps/SpikeTrap4"), NodePath("../Traps/SpikeTrap5"), NodePath("../Traps/SpikeTrap6")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapTrigger"]
+shape = SubResource("RectangleShape2D_pf2qb")
 
 [node name="TrapTrigger2" parent="." node_paths=PackedStringArray("traps") instance=ExtResource("3_g6xx1")]
-position = Vector2(1120, 1120)
+position = Vector2(1312, 1120)
 traps = [NodePath("../Traps/SpikeTrap15"), NodePath("../Traps/SpikeTrap16"), NodePath("../Traps/SpikeTrap17"), NodePath("../Traps/SpikeTrap18"), NodePath("../Traps/SpikeTrap19"), NodePath("../Traps/SpikeTrap20")]
 
-[node name="TrapTrigger4" parent="." node_paths=PackedStringArray("traps") instance=ExtResource("3_g6xx1")]
-position = Vector2(1504, 1120)
-traps = [NodePath("../Traps/SpikeTrap15"), NodePath("../Traps/SpikeTrap16"), NodePath("../Traps/SpikeTrap17"), NodePath("../Traps/SpikeTrap18"), NodePath("../Traps/SpikeTrap19"), NodePath("../Traps/SpikeTrap20")]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TrapTrigger2"]
+shape = SubResource("RectangleShape2D_6r4jx")
 
 [node name="Fire" type="Node2D" parent="." groups=["fire"]]
 
 [node name="Player" parent="." instance=ExtResource("1_qyi1p")]
-position = Vector2(64, 480)
+position = Vector2(11, 274)
 
 [node name="Enemy" parent="." instance=ExtResource("4_diusp")]
 position = Vector2(1888, 1120)
@@ -1203,4 +1207,4 @@ position = Vector2(416, 960)
 position = Vector2(1248, 960)
 
 [node name="Torch5" parent="." instance=ExtResource("8_8uw4c")]
-position = Vector2(864, 960)
+position = Vector2(832, 960)

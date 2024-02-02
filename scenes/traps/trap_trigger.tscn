@@ -1,14 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://chbc3kq3aiyb3"]
+[gd_scene load_steps=2 format=3 uid="uid://chbc3kq3aiyb3"]
 
 [ext_resource type="Script" path="res://scenes/traps/trap_trigger.gd" id="1_wb6co"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_wlyt1"]
-radius = 52.0
-
 [node name="TrapTrigger" type="Area2D"]
 script = ExtResource("1_wb6co")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_wlyt1")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

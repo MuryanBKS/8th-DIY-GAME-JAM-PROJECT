@@ -3,25 +3,25 @@
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_4tir8"]
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://assets/Bat_Sprite_Sheet.png" id="2_b1qpj"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_isaxv"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_b0eoq"]
 atlas = ExtResource("2_b1qpj")
-region = Rect2(0, 24, 16, 24)
+region = Rect2(0, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_b8yqp"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_fr07i"]
 atlas = ExtResource("2_b1qpj")
-region = Rect2(16, 24, 16, 24)
+region = Rect2(16, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6e3m7"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ku08o"]
 atlas = ExtResource("2_b1qpj")
-region = Rect2(32, 24, 16, 24)
+region = Rect2(32, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_h8udf"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1mlb"]
 atlas = ExtResource("2_b1qpj")
-region = Rect2(48, 24, 16, 24)
+region = Rect2(48, 0, 16, 24)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3ucug"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_57sot"]
 atlas = ExtResource("2_b1qpj")
-region = Rect2(64, 24, 16, 24)
+region = Rect2(64, 0, 16, 24)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2l1e4"]
 atlas = ExtResource("2_b1qpj")
@@ -47,19 +47,19 @@ region = Rect2(64, 48, 16, 24)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_isaxv")
+"texture": SubResource("AtlasTexture_b0eoq")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_b8yqp")
+"texture": SubResource("AtlasTexture_fr07i")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6e3m7")
+"texture": SubResource("AtlasTexture_ku08o")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_h8udf")
+"texture": SubResource("AtlasTexture_h1mlb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3ucug")
+"texture": SubResource("AtlasTexture_57sot")
 }],
 "loop": true,
 "name": &"default",
@@ -97,8 +97,8 @@ script = ExtResource("1_4tir8")
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_icdt3")
-animation = &"died"
 autoplay = "default"
+frame = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_m6asw")

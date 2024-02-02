@@ -9,7 +9,7 @@ signal dash_finished
 const ACCELERATION := 3000
 const FRICTION = 100
 const MAX_SPEED = 450
-const MAX_DASH_SPEED = 2500
+const MAX_DASH_SPEED = 1500
 
 
 enum {IDLE, WALK, PUSH_CART}
@@ -70,8 +70,11 @@ func move(delta):
 		dash(input_vector * 3000)
 		
 	if is_dashing:
-		#Engine.time_scale = 0.3
-		animation_tree.set("parameters/push_cart/TimeScale/scale", 5.0)
+		animation_tree.set("parameters/push_cart/TimeScale/scale", 3.0)
+		if Engine.time_scale == 0.1:
+			$DashTimer.paused = true
+		else:
+			$DashTimer.paused = false
 		if randf() > 0.4:
 			spawn_fire()
 	
@@ -137,9 +140,13 @@ func animate() -> void:
 	animation_tree.set(blend_pos_paths[state], blend_position)
 
 
+func get_is_dashing() -> bool:
+	return is_dashing
+	
+
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
-	#Engine.time_scale = 1.0
+	Engine.time_scale = 1.0
 	dash_finished.emit()
 	animation_tree.set("parameters/push_cart/TimeScale/scale", 1.0)
 	

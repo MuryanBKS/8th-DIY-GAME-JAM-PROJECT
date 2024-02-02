@@ -1,4 +1,4 @@
-[gd_scene load_steps=123 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=124 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://assets/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wk4am"]
@@ -528,8 +528,8 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_5flsh"]
-size = Vector2(30, 12)
+[sub_resource type="CircleShape2D" id="CircleShape2D_6hleg"]
+radius = 10.0499
 
 [sub_resource type="Animation" id="Animation_do5c3"]
 length = 0.001
@@ -1039,6 +1039,7 @@ blend_point_3/pos = Vector2(0, 1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tjc8v"]
+graph_offset = Vector2(315.818, 286.455)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_1sc5r")
 nodes/TimeScale/position = Vector2(1546.09, 415.805)
 nodes/output/position = Vector2(1840, 260)
@@ -1104,7 +1105,9 @@ states/push_cart/position = Vector2(292, 353)
 states/walk/node = SubResource("AnimationNodeBlendTree_y2sqk")
 states/walk/position = Vector2(489, 176)
 transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_bbker"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ocajj"), "walk", "push_cart", SubResource("AnimationNodeStateMachineTransition_kar06"), "push_cart", "walk", SubResource("AnimationNodeStateMachineTransition_smn4c"), "push_cart", "idle", SubResource("AnimationNodeStateMachineTransition_i7q3k"), "idle", "push_cart", SubResource("AnimationNodeStateMachineTransition_fc81q"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x48y8")]
-graph_offset = Vector2(-106, 107)
+graph_offset = Vector2(-151, 216)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogafx"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
@@ -1123,9 +1126,9 @@ animation = &"idle"
 frame = 18
 offset = Vector2(0, -48)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -6)
-shape = SubResource("RectangleShape2D_5flsh")
+[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -5)
+shape = SubResource("CircleShape2D_6hleg")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1146,6 +1149,8 @@ parameters/walk/TimeScale/scale = 1.0
 parameters/walk/walk_bs2d/blend_position = Vector2(0, 0)
 
 [node name="Pot" parent="." instance=ExtResource("4_hypyu")]
+position = Vector2(-60, -39)
+disable_mode = 2
 
 [node name="CartPosition" type="Node2D" parent="."]
 
@@ -1168,5 +1173,9 @@ position = Vector2(1, -90)
 [node name="DashTimer" type="Timer" parent="."]
 wait_time = 0.2
 one_shot = true
+
+[node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-76, -38)
+shape = SubResource("CircleShape2D_ogafx")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

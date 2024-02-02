@@ -302,8 +302,8 @@ _data = {
 "burn": SubResource("Animation_p4f70")
 }
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pnvqn"]
-radius = 32.1403
+[sub_resource type="CircleShape2D" id="CircleShape2D_2l6ui"]
+radius = 44.0
 
 [node name="Pot" type="Area2D"]
 script = ExtResource("1_gclxe")
@@ -315,7 +315,7 @@ frame_progress = 0.0212083
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(-28, 23)
-scale = Vector2(0.114952, 0.114952)
+scale = Vector2(0.1, 0.1)
 skew = -0.174533
 sprite_frames = SubResource("SpriteFrames_hcudi")
 autoplay = "default"
@@ -323,7 +323,7 @@ frame_progress = 0.659564
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="."]
 position = Vector2(-13, 34)
-scale = Vector2(0.133583, 0.133583)
+scale = Vector2(0.12, 0.12)
 skew = 0.174533
 sprite_frames = SubResource("SpriteFrames_hcudi")
 autoplay = "default"
@@ -331,7 +331,7 @@ frame_progress = 0.206203
 
 [node name="AnimatedSprite2D3" type="AnimatedSprite2D" parent="."]
 position = Vector2(11, 33)
-scale = Vector2(0.134952, 0.134952)
+scale = Vector2(0.12, 0.12)
 skew = -0.174533
 sprite_frames = SubResource("SpriteFrames_hcudi")
 autoplay = "default"
@@ -356,6 +356,8 @@ libraries = {
 autoplay = "burn"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-shape = SubResource("CircleShape2D_pnvqn")
+position = Vector2(-1, 8)
+shape = SubResource("CircleShape2D_2l6ui")
 
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

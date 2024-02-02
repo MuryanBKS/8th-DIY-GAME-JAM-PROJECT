@@ -1,0 +1,126 @@
+[gd_scene load_steps=19 format=3 uid="uid://dhp1g5kgdmsyx"]
+
+[ext_resource type="Script" path="res://scenes/traps/spike_trap.gd" id="1_5bs4g"]
+[ext_resource type="Texture2D" uid="uid://dl7j3hkqauqg7" path="res://assets/Traps/Spike Trap.png" id="1_gbyyr"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_40w0y"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_fdvyv"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7lxra"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mubnr"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a0cg8"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ijnyi"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_3jpbe"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_it015"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_a1ckd"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xaymr"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_qxajg"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2bb2x"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(352, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m1lu1"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(384, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lav1m"]
+atlas = ExtResource("1_gbyyr")
+region = Rect2(416, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8wjxc"]
+animations = [{
+"frames": [{
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_40w0y")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_fdvyv")
+}, {
+"duration": 0.5,
+"texture": SubResource("AtlasTexture_7lxra")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mubnr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a0cg8")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ijnyi")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_3jpbe")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_it015")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_a1ckd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xaymr")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_qxajg")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2bb2x")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_m1lu1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lav1m")
+}],
+"loop": false,
+"name": &"default",
+"speed": 20.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_n00eg"]
+radius = 19.0263
+
+[node name="SpikeTrap" type="Area2D"]
+scale = Vector2(2.5, 2.5)
+script = ExtResource("1_5bs4g")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_8wjxc")
+frame = 13
+frame_progress = 1.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 2)
+shape = SubResource("CircleShape2D_n00eg")

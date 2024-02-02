@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://d3icemy1sf8i6"
-path="res://.godot/imported/tilemap_packed.png-00e287f8652b59d808085133cd8f140d.ctex"
+uid="uid://bsja5jq0tqwo5"
+path="res://.godot/imported/Push_Trap_Front.png-a65dfa354fdaabd25ea58e278fb4f1c3.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/map/tilemap_packed.png"
-dest_files=["res://.godot/imported/tilemap_packed.png-00e287f8652b59d808085133cd8f140d.ctex"]
+source_file="res://assets/Traps/Push_Trap_Front.png"
+dest_files=["res://.godot/imported/Push_Trap_Front.png-a65dfa354fdaabd25ea58e278fb4f1c3.ctex"]
 
 [params]
 

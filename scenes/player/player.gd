@@ -70,7 +70,7 @@ func move(delta):
 		dash(input_vector * 3000)
 		
 	if is_dashing:
-		Engine.time_scale = 0.3
+		#Engine.time_scale = 0.3
 		animation_tree.set("parameters/push_cart/TimeScale/scale", 5.0)
 		if randf() > 0.4:
 			spawn_fire()
@@ -139,7 +139,7 @@ func animate() -> void:
 
 func _on_dash_timer_timeout() -> void:
 	is_dashing = false
-	Engine.time_scale = 1.0
+	#Engine.time_scale = 1.0
 	dash_finished.emit()
 	animation_tree.set("parameters/push_cart/TimeScale/scale", 1.0)
 	

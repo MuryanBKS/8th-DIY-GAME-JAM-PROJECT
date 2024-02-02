@@ -31,10 +31,12 @@ func move(delta):
 func hurt():
 	is_alive = false
 	is_hurt = true
+	Engine.time_scale = 0.1
 	$KnockbackTimer.start()
 
 
 func _on_knockback_timer_timeout() -> void:
+	Engine.time_scale = 1.0
 	$CollisionShape2D.set_deferred("disabled", true)
 	is_hurt = false
 	is_died = true

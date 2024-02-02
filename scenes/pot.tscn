@@ -306,13 +306,13 @@ _data = {
 radius = 44.0
 
 [sub_resource type="Gradient" id="Gradient_jmpxr"]
-offsets = PackedFloat32Array(0.0025, 0.0925, 0.55)
-colors = PackedColorArray(0, 0.984314, 0.537255, 0.8, 1, 0.729412, 0.505882, 0.72549, 0, 0, 0, 0.8)
+offsets = PackedFloat32Array(0.0025, 0.075, 0.6225)
+colors = PackedColorArray(0, 0.984314, 0.537255, 0.407843, 1, 0.729412, 0.505882, 0.776471, 0, 0, 0, 0.8)
 
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_7pa3b"]
 gradient = SubResource("Gradient_jmpxr")
 fill = 1
-fill_from = Vector2(0.5, 0.57)
+fill_from = Vector2(0.5, 0.56)
 
 [node name="Pot" type="Area2D"]
 script = ExtResource("1_gclxe")
@@ -373,7 +373,7 @@ position = Vector2(0, -39)
 color = Color(0.988235, 0.560784, 0.105882, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_7pa3b")
-texture_scale = 5.22
+texture_scale = 7.63
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

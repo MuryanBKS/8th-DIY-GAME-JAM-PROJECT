@@ -35,7 +35,6 @@ fog_height_density = 4.2437
 adjustment_enabled = true
 adjustment_brightness = 0.52
 adjustment_contrast = 1.6
-adjustment_saturation = 1.2
 
 [sub_resource type="TileMapPattern" id="TileMapPattern_tuup4"]
 tile_data = PackedInt32Array(0, 196608, 2, 65536, 196608, 3, 1, 262144, 2, 65537, 262144, 3)

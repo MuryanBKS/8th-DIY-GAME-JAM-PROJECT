@@ -31,6 +31,7 @@ func move(delta):
 
 func hurt():
 	$CollisionShape2D.set_deferred("disabled", true)
+	%AnimationPlayer.play("hurt")
 	spawn_explosion()
 	await get_tree().create_timer(0.1).timeout
 	is_hurt = true

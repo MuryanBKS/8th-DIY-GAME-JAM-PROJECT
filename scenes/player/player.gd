@@ -12,13 +12,13 @@ const MAX_SPEED = 450
 const MAX_DASH_SPEED = 1500
 
 
-enum {IDLE, WALK, PUSH_CART}
+enum {IDLE, PUSH_CART}
 enum {UP, DOWN, RIGHT, LEFT}
 
 var state = IDLE
 var cart_pos: int
-var is_pushing_cart = false
 var is_dashing = false
+var is_decelerating = false
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine = animation_tree["parameters/playback"]
@@ -28,19 +28,14 @@ var time_scale = 1.0
 
 var blend_pos_paths = [
 	"parameters/idle/idle_bs2d/blend_position",
-	"parameters/walk/walk_bs2d/blend_position",
 	"parameters/push_cart/push_bs2d/blend_position",
 ]
 var animation_tree_state_keys = [
 	"idle",
-	"walk",
 	"push_cart"
 ]
 
 func _physics_process(delta: float) -> void:
-	if Input.is_action_just_pressed("push"):
-		is_pushing_cart = !is_pushing_cart
-		
 	move(delta)
 	animate()
 	
@@ -51,32 +46,27 @@ func move(delta):
 		if input_vector == Vector2.ZERO:
 			state = IDLE
 			apply_friction(delta)
-			
-		elif input_vector != Vector2.ZERO and not is_pushing_cart:
-			state = WALK
-			apply_movement(input_vector * ACCELERATION * delta)
-			blend_position = input_vector
-		elif input_vector != Vector2.ZERO and is_pushing_cart:
+		elif input_vector != Vector2.ZERO:
 			state = PUSH_CART
-			apply_movement(input_vector * ACCELERATION * delta)
+			apply_movement(input_vector * ACCELERATION * delta, delta)
 			blend_position = input_vector
 			if randf() > 0.95:
 				spawn_fire()
 			
 	if not is_dashing and Input.is_action_just_pressed("dash") and input_vector != Vector2.ZERO:
-		is_dashing = true
-		press_dash.emit()
-		$DashTimer.start()
+		press_dash.emit(input_vector)
 		dash(input_vector * 3000)
 		
 	if is_dashing:
-		animation_tree.set("parameters/push_cart/TimeScale/scale", 3.0)
-		if Engine.time_scale == 0.1:
-			$DashTimer.paused = true
-		else:
-			$DashTimer.paused = false
-		if randf() > 0.4:
+		if randf() > 0.1:
 			spawn_fire()
+			
+	if Engine.time_scale == 0.1:
+		$DashTimer.paused = true
+		animation_tree.set("parameters/push_cart/TimeScale/scale", 5.0)
+	else:
+		$DashTimer.paused = false
+		animation_tree.set("parameters/push_cart/TimeScale/scale", 1.0)
 	
 	move_and_slide()
 	
@@ -104,10 +94,7 @@ func spawn_fire():
 	var size = randf_range(0.3, 0.8)
 	if is_dashing:
 		size = randf_range(0.5, 4.0)
-	
 	fire_particle_instance.scale = Vector2(size, size)
-	
-	
 	if cart_pos == UP:
 		fire_particle_instance.global_position = %CartUp.global_position
 	if cart_pos == DOWN:
@@ -119,34 +106,46 @@ func spawn_fire():
 	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)
 		
 func apply_friction(delta) -> void:
-	if velocity.length() > 200:
-		#velocity -= velocity.normalized() * amount
+	if velocity.length() > 50:
 		velocity = lerp(velocity, Vector2.ZERO, 1 - exp(-5 * delta))
 	else:
 		velocity = Vector2.ZERO
 		
 		
-func apply_movement(amount) -> void:
+func apply_movement(amount, delta) -> void:
 	velocity += amount
-	velocity = velocity.limit_length(MAX_SPEED)
+	if velocity.length() > MAX_SPEED and is_decelerating:
+		velocity = lerp(velocity, velocity.limit_length(MAX_SPEED), 1 - exp(-10 * delta))
+	else:
+		velocity = velocity.limit_length(MAX_SPEED)
 			
 			
 func dash(amount):
+	is_dashing = true
+	$DashTimer.start()
 	velocity = amount
 	velocity = velocity.limit_length(MAX_DASH_SPEED)
+	is_decelerating = true
+	%DecelerateTimer.start()
 	
 func animate() -> void:
 	state_machine.travel(animation_tree_state_keys[state])
 	animation_tree.set(blend_pos_paths[state], blend_position)
-
+	
 
 func get_is_dashing() -> bool:
 	return is_dashing
 	
+func get_is_decelerating() -> bool:
+	return is_decelerating
+
 
 func _on_dash_timer_timeout() -> void:
+	GameManager.slow_down_finished.emit()
 	is_dashing = false
-	Engine.time_scale = 1.0
 	dash_finished.emit()
-	animation_tree.set("parameters/push_cart/TimeScale/scale", 1.0)
 	
+
+func _on_decelerate_timer_timeout() -> void:
+	is_decelerating = false
+	GameManager.slow_down_finished.emit()

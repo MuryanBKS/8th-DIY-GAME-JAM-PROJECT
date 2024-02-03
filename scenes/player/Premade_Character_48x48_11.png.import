@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bojyf4gios6by"
-path="res://.godot/imported/LargeShadow.png-dbad8dd51c47ae492f532443c8fa15d2.ctex"
+uid="uid://t6ym8pkknabt"
+path="res://.godot/imported/Premade_Character_48x48_11.png-488a61d020cef42bc3edc08987fcbf2e.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/LargeShadow.png"
-dest_files=["res://.godot/imported/LargeShadow.png-dbad8dd51c47ae492f532443c8fa15d2.ctex"]
+source_file="res://scenes/player/Premade_Character_48x48_11.png"
+dest_files=["res://.godot/imported/Premade_Character_48x48_11.png-488a61d020cef42bc3edc08987fcbf2e.ctex"]
 
 [params]
 

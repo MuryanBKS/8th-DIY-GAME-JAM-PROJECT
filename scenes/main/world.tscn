@@ -1,13 +1,13 @@
 [gd_scene load_steps=22 format=3 uid="uid://cbglov652jnsr"]
 
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_cgrp3"]
-[ext_resource type="Script" path="res://world.gd" id="1_hrmsn"]
-[ext_resource type="Script" path="res://Camera2D.gd" id="1_kt6uq"]
+[ext_resource type="Script" path="res://scenes/main/world.gd" id="1_hrmsn"]
+[ext_resource type="Script" path="res://scenes/camera/camera.gd" id="1_kt6uq"]
 [ext_resource type="PackedScene" uid="uid://cn38ud11gvhsv" path="res://scenes/player/player.tscn" id="1_qyi1p"]
 [ext_resource type="PackedScene" uid="uid://chbc3kq3aiyb3" path="res://scenes/traps/trap_trigger.tscn" id="3_g6xx1"]
 [ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/enemy.tscn" id="4_diusp"]
 [ext_resource type="PackedScene" uid="uid://dhp1g5kgdmsyx" path="res://scenes/traps/spike_trap.tscn" id="5_kyud8"]
-[ext_resource type="PackedScene" uid="uid://df5hywb5pcxrm" path="res://scenes/torch.tscn" id="8_8uw4c"]
+[ext_resource type="PackedScene" uid="uid://df5hywb5pcxrm" path="res://scenes/objects/torch.tscn" id="8_8uw4c"]
 
 [sub_resource type="Environment" id="Environment_7rrmb"]
 background_mode = 3
@@ -1070,6 +1070,7 @@ texture_region_size = Vector2i(32, 32)
 [sub_resource type="TileSet" id="TileSet_k2n13"]
 tile_size = Vector2i(32, 32)
 physics_layer_0/collision_layer = 1
+physics_layer_0/collision_mask = 0
 terrain_set_0/mode = 0
 terrain_set_0/terrain_0/name = "Terrain 0"
 terrain_set_0/terrain_0/color = Color(0.5, 0.34375, 0.25, 1)
@@ -1084,10 +1085,10 @@ pattern_6 = SubResource("TileMapPattern_noilh")
 pattern_7 = SubResource("TileMapPattern_fgles")
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pf2qb"]
-size = Vector2(96, 224)
+size = Vector2(18, 171)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6r4jx"]
-size = Vector2(96, 224)
+size = Vector2(18, 171)
 
 [node name="World" type="Node2D"]
 script = ExtResource("1_hrmsn")
@@ -1163,6 +1164,7 @@ position = Vector2(1312, 1120)
 traps = [NodePath("../Traps/SpikeTrap15"), NodePath("../Traps/SpikeTrap16"), NodePath("../Traps/SpikeTrap17"), NodePath("../Traps/SpikeTrap18"), NodePath("../Traps/SpikeTrap19"), NodePath("../Traps/SpikeTrap20")]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="TrapTrigger2"]
+position = Vector2(0, -8)
 shape = SubResource("RectangleShape2D_6r4jx")
 
 [node name="Fire" type="Node2D" parent="." groups=["fire"]]

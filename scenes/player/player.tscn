@@ -1,10 +1,10 @@
-[gd_scene load_steps=124 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=114 format=3 uid="uid://cn38ud11gvhsv"]
 
-[ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://assets/Premade_Character_48x48_11.png" id="1_4mymq"]
+[ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wk4am"]
-[ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/fire_particles_2d.tscn" id="2_l5dwu"]
-[ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/LargeShadow.png" id="3_52dnf"]
-[ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/pot.tscn" id="4_hypyu"]
+[ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/particles/fire_particles_2d.tscn" id="2_l5dwu"]
+[ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
+[ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot.tscn" id="4_hypyu"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_phxgj"]
 atlas = ExtResource("1_4mymq")
@@ -531,6 +531,8 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_6hleg"]
 radius = 10.0499
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogafx"]
+
 [sub_resource type="Animation" id="Animation_do5c3"]
 length = 0.001
 tracks/0/type = "value"
@@ -1047,47 +1049,6 @@ nodes/push_bs2d/node = SubResource("AnimationNodeBlendSpace2D_uk4jg")
 nodes/push_bs2d/position = Vector2(1115.64, 319.174)
 node_connections = [&"TimeScale", 0, &"push_bs2d", &"output", 0, &"TimeScale"]
 
-[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_jglaf"]
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qo3mk"]
-animation = &"walk_left"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5pmia"]
-animation = &"walk_right"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_p0htk"]
-animation = &"walk_up"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b55hr"]
-animation = &"walk_down"
-
-[sub_resource type="AnimationNodeBlendSpace2D" id="AnimationNodeBlendSpace2D_yesvj"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_qo3mk")
-blend_point_0/pos = Vector2(-1, 0)
-blend_point_1/node = SubResource("AnimationNodeAnimation_5pmia")
-blend_point_1/pos = Vector2(1, 0)
-blend_point_2/node = SubResource("AnimationNodeAnimation_p0htk")
-blend_point_2/pos = Vector2(0, -1)
-blend_point_3/node = SubResource("AnimationNodeAnimation_b55hr")
-blend_point_3/pos = Vector2(0, 1)
-blend_mode = 1
-
-[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_y2sqk"]
-nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_jglaf")
-nodes/TimeScale/position = Vector2(1322.08, 229.864)
-nodes/output/position = Vector2(1680, 240)
-nodes/walk_bs2d/node = SubResource("AnimationNodeBlendSpace2D_yesvj")
-nodes/walk_bs2d/position = Vector2(945.809, 219.615)
-node_connections = [&"TimeScale", 0, &"walk_bs2d", &"output", 0, &"TimeScale"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bbker"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ocajj"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kar06"]
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_smn4c"]
-
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_i7q3k"]
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_fc81q"]
@@ -1101,56 +1062,20 @@ states/Start/position = Vector2(538, 624)
 states/idle/node = SubResource("AnimationNodeBlendTree_8enhn")
 states/idle/position = Vector2(531, 387)
 states/push_cart/node = SubResource("AnimationNodeBlendTree_tjc8v")
-states/push_cart/position = Vector2(292, 353)
-states/walk/node = SubResource("AnimationNodeBlendTree_y2sqk")
-states/walk/position = Vector2(489, 176)
-transitions = ["idle", "walk", SubResource("AnimationNodeStateMachineTransition_bbker"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_ocajj"), "walk", "push_cart", SubResource("AnimationNodeStateMachineTransition_kar06"), "push_cart", "walk", SubResource("AnimationNodeStateMachineTransition_smn4c"), "push_cart", "idle", SubResource("AnimationNodeStateMachineTransition_i7q3k"), "idle", "push_cart", SubResource("AnimationNodeStateMachineTransition_fc81q"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x48y8")]
-graph_offset = Vector2(-151, 216)
+states/push_cart/position = Vector2(259, 387)
+transitions = ["push_cart", "idle", SubResource("AnimationNodeStateMachineTransition_i7q3k"), "idle", "push_cart", SubResource("AnimationNodeStateMachineTransition_fc81q"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x48y8")]
+graph_offset = Vector2(-141, 0)
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ogafx"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_kglci"]
+radius = 25.02
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
+collision_layer = 2
+collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_wk4am")
 fire_particle = ExtResource("2_l5dwu")
-
-[node name="LargeShadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.415686)
-position = Vector2(2, -2)
-texture = ExtResource("3_52dnf")
-
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-sprite_frames = SubResource("SpriteFrames_cdjl1")
-animation = &"idle"
-frame = 18
-offset = Vector2(0, -48)
-
-[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(2, -5)
-shape = SubResource("CircleShape2D_6hleg")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_jownx")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="."]
-libraries = {
-"": SubResource("AnimationLibrary_jownx")
-}
-tree_root = SubResource("AnimationNodeStateMachine_x544q")
-anim_player = NodePath("../AnimationPlayer")
-parameters/idle/TimeScale/scale = 1.0
-parameters/idle/idle_bs2d/blend_position = Vector2(0, 0)
-parameters/push_cart/TimeScale/scale = 1.0
-parameters/push_cart/push_bs2d/blend_position = Vector2(0, 0)
-parameters/walk/TimeScale/scale = 1.0
-parameters/walk/walk_bs2d/blend_position = Vector2(0, 0)
-
-[node name="Pot" parent="." instance=ExtResource("4_hypyu")]
-position = Vector2(-60, -39)
-disable_mode = 2
 
 [node name="CartPosition" type="Node2D" parent="."]
 
@@ -1170,12 +1095,61 @@ position = Vector2(-60, -39)
 unique_name_in_owner = true
 position = Vector2(1, -90)
 
-[node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.2
-one_shot = true
+[node name="LargeShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.415686)
+position = Vector2(2, -2)
+texture = ExtResource("3_52dnf")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_cdjl1")
+animation = &"idle"
+frame = 18
+offset = Vector2(0, -48)
+
+[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(2, -5)
+shape = SubResource("CircleShape2D_6hleg")
 
 [node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(-76, -38)
 shape = SubResource("CircleShape2D_ogafx")
 
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jownx")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_jownx")
+}
+tree_root = SubResource("AnimationNodeStateMachine_x544q")
+anim_player = NodePath("../AnimationPlayer")
+parameters/idle/TimeScale/scale = 1.0
+parameters/idle/idle_bs2d/blend_position = Vector2(0, 0)
+parameters/push_cart/TimeScale/scale = 1.0
+parameters/push_cart/push_bs2d/blend_position = Vector2(0, 0)
+
+[node name="Pot" parent="." instance=ExtResource("4_hypyu")]
+position = Vector2(-60, -39)
+disable_mode = 2
+
+[node name="DashTimer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="DecelerateTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+wait_time = 0.7
+one_shot = true
+
+[node name="HurtBox" type="Area2D" parent="."]
+collision_layer = 32
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
+position = Vector2(2, -30)
+shape = SubResource("CircleShape2D_kglci")
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
+[connection signal="timeout" from="DecelerateTimer" to="." method="_on_decelerate_timer_timeout"]

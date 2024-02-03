@@ -6,7 +6,6 @@ var player: CharacterBody2D
 var knockback_velocity: Vector2
 var is_hurt = false
 var is_died = false
-var is_alive = true
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
@@ -15,28 +14,26 @@ func _physics_process(delta: float) -> void:
 	move(delta)
 
 func get_player_direction(delta) -> Vector2:
-	#return lerp(player.global_position - global_position, player.global_position - global_position, 1 - exp(-10 * delta)).normalized()
 	return (player.global_position - global_position).normalized()
+	
+	
 func move(delta):
-	if is_alive:
-		velocity = get_player_direction(delta) * SPEED
 	if is_hurt:
 		velocity = lerp(velocity, -get_player_direction(delta) * 5000.0, 1 - exp(-8 * delta))
-	if is_died :
+	elif is_died :
 		velocity = lerp(velocity, Vector2.ZERO, 1 - exp(-5 * delta))
-		
-		
+	else:
+		velocity = get_player_direction(delta) * SPEED
 	move_and_slide()
 
 func hurt():
-	is_alive = false
 	is_hurt = true
-	Engine.time_scale = 0.1
+	GameManager.slow_down.emit()
 	$KnockbackTimer.start()
 
 
 func _on_knockback_timer_timeout() -> void:
-	Engine.time_scale = 1.0
+	GameManager.slow_down_finished.emit()
 	$CollisionShape2D.set_deferred("disabled", true)
 	is_hurt = false
 	is_died = true

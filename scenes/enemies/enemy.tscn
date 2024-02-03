@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=3 uid="uid://ckbf5eqgs5mc5"]
+[gd_scene load_steps=17 format=3 uid="uid://ckbf5eqgs5mc5"]
 
 [ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_4tir8"]
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://scenes/enemies/Bat_Sprite_Sheet.png" id="2_b1qpj"]
+[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/particles/explosion_particles_2d.tscn" id="2_op8ci"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0eoq"]
 atlas = ExtResource("2_b1qpj")
@@ -95,6 +96,7 @@ radius = 23.0
 collision_layer = 4
 collision_mask = 5
 script = ExtResource("1_4tir8")
+fire_particle = ExtResource("2_op8ci")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(5, 5)
@@ -114,5 +116,6 @@ shape = SubResource("CircleShape2D_tbj27")
 
 [node name="KnockbackTimer" type="Timer" parent="."]
 wait_time = 0.05
+one_shot = true
 
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]

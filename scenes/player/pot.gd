@@ -20,7 +20,6 @@ func _on_body_entered(body: Node2D) -> void:
 	if body.has_method("hurt"):
 		body.hurt()
 
-
 func _on_area_entered(area: Area2D) -> void:
 	if area is TrapTrigger and (get_parent().get_is_dashing() or get_parent().get_is_decelerating()):
 		GameManager.slow_down.emit()

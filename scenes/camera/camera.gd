@@ -30,7 +30,7 @@ func zoom_in():
 	if tween:
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(self, "zoom", Vector2(5.0, 5.0), 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT_IN)
+	tween.tween_property(self, "zoom", Vector2(4.0, 4.0), 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT_IN)
 	
 	
 func zoom_out():

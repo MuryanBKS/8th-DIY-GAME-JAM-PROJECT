@@ -58,8 +58,7 @@ func move(delta):
 		dash(input_vector * 3000)
 		
 	if is_dashing:
-		if randf() > 0.1:
-			spawn_fire()
+		spawn_fire()
 			
 	if Engine.time_scale == 0.1:
 		$DashTimer.paused = true
@@ -74,22 +73,32 @@ func move(delta):
 func change_cart_position(direction: int):
 	if direction == UP:
 		cart_pos = UP
-		$Pot.position = %CartUp.position
-		$PotCollisionShape2D.position = %CartUp.position + Vector2(0, -18)
+		var tween = create_tween()
+		tween.tween_property($Pot, "position", %CartUp.position, 0.1).set_trans(Tween.TRANS_CUBIC)
+		#$PotCollisionShape2D.position = %CartUp.position + Vector2(0, -18)
+		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartUp.position + Vector2(0, -18), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == DOWN:
 		cart_pos = DOWN
-		$Pot.position = %CartDown.position
-		$PotCollisionShape2D.position = %CartDown.position + Vector2(0, 24)
+		var tween = create_tween()
+		tween.tween_property($Pot, "position", %CartDown.position, 0.1).set_trans(Tween.TRANS_CUBIC)
+		#$PotCollisionShape2D.position = %CartDown.position + Vector2(0, 24)
+		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartDown.position + Vector2(0, 24), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == RIGHT:
 		cart_pos = RIGHT
-		$Pot.position = %CartRight.position
-		$PotCollisionShape2D.position = %CartRight.position + Vector2(18, 0)
+		var tween = create_tween()
+		tween.tween_property($Pot, "position", %CartRight.position, 0.1).set_trans(Tween.TRANS_CUBIC)
+		#$PotCollisionShape2D.position = %CartRight.position + Vector2(18, 0)
+		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartRight.position + Vector2(18, 0), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == LEFT:
 		cart_pos = LEFT
-		$Pot.position = %CartLeft.position
-		$PotCollisionShape2D.position = %CartLeft.position + Vector2(-18, 0)
+		var tween = create_tween()
+		tween.tween_property($Pot, "position", %CartLeft.position, 0.1).set_trans(Tween.TRANS_CUBIC)
+		#$PotCollisionShape2D.position = %CartLeft.position + Vector2(-18, 0)
+		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartLeft.position + Vector2(-18, 0), 0.3).set_trans(Tween.TRANS_CUBIC)
+		
 		
 func spawn_fire():
+	randomize()
 	var fire_particle_instance = fire_particle.instantiate()
 	var size = randf_range(0.3, 0.8)
 	if is_dashing:

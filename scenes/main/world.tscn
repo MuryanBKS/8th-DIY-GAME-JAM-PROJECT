@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbglov652jnsr"]
+[gd_scene load_steps=24 format=3 uid="uid://cbglov652jnsr"]
 
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_cgrp3"]
 [ext_resource type="Script" path="res://scenes/main/world.gd" id="1_hrmsn"]
@@ -8,6 +8,8 @@
 [ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/enemy.tscn" id="4_diusp"]
 [ext_resource type="PackedScene" uid="uid://dhp1g5kgdmsyx" path="res://scenes/traps/spike_trap.tscn" id="5_kyud8"]
 [ext_resource type="PackedScene" uid="uid://df5hywb5pcxrm" path="res://scenes/objects/torch.tscn" id="8_8uw4c"]
+[ext_resource type="PackedScene" uid="uid://bah2g8g7fdb1c" path="res://scenes/objects/side_torch.tscn" id="9_1epdi"]
+[ext_resource type="Script" path="res://scenes/main/SpawnPoint.gd" id="10_xdt5h"]
 
 [sub_resource type="Environment" id="Environment_7rrmb"]
 background_mode = 3
@@ -1097,7 +1099,6 @@ script = ExtResource("1_hrmsn")
 environment = SubResource("Environment_7rrmb")
 
 [node name="TileMap" type="TileMap" parent="."]
-z_index = -10
 scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_k2n13")
 format = 2
@@ -1210,3 +1211,39 @@ position = Vector2(1248, 960)
 
 [node name="Torch5" parent="." instance=ExtResource("8_8uw4c")]
 position = Vector2(832, 960)
+
+[node name="Torch6" parent="." instance=ExtResource("8_8uw4c")]
+position = Vector2(192, 1728)
+
+[node name="Torch7" parent="." instance=ExtResource("8_8uw4c")]
+position = Vector2(704, 1728)
+
+[node name="Torch8" parent="." instance=ExtResource("8_8uw4c")]
+position = Vector2(1216, 1728)
+
+[node name="Torch9" parent="." instance=ExtResource("8_8uw4c")]
+position = Vector2(1568, 1984)
+
+[node name="Torch10" parent="." instance=ExtResource("8_8uw4c")]
+position = Vector2(1568, 640)
+
+[node name="Torch11" parent="." instance=ExtResource("8_8uw4c")]
+position = Vector2(2016, 640)
+
+[node name="SideTorch" parent="." instance=ExtResource("9_1epdi")]
+y_sort_enabled = true
+position = Vector2(-176, 480)
+
+[node name="SideTorch2" parent="." instance=ExtResource("9_1epdi")]
+y_sort_enabled = true
+position = Vector2(-176, 1008)
+
+[node name="SpawnPoint" type="Node2D" parent="."]
+position = Vector2(1888, 2176)
+script = ExtResource("10_xdt5h")
+enemy_scene = ExtResource("4_diusp")
+
+[node name="Timer" type="Timer" parent="SpawnPoint"]
+autostart = true
+
+[connection signal="timeout" from="SpawnPoint/Timer" to="SpawnPoint" method="_on_timer_timeout"]

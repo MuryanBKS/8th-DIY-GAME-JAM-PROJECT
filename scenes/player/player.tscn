@@ -531,8 +531,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_6hleg"]
 radius = 10.0499
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ogafx"]
-
 [sub_resource type="Animation" id="Animation_do5c3"]
 length = 0.001
 tracks/0/type = "value"
@@ -1069,6 +1067,8 @@ graph_offset = Vector2(-141, 0)
 [sub_resource type="CircleShape2D" id="CircleShape2D_kglci"]
 radius = 25.02
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ogafx"]
+
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
 collision_layer = 2
@@ -1110,10 +1110,6 @@ offset = Vector2(0, -48)
 position = Vector2(2, -5)
 shape = SubResource("CircleShape2D_6hleg")
 
-[node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-76, -38)
-shape = SubResource("CircleShape2D_ogafx")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_jownx")
@@ -1150,6 +1146,11 @@ collision_mask = 0
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBox"]
 position = Vector2(2, -30)
 shape = SubResource("CircleShape2D_kglci")
+
+[node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-76, -38)
+shape = SubResource("CircleShape2D_ogafx")
+debug_color = Color(0.87451, 0.345098, 0, 0.419608)
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DecelerateTimer" to="." method="_on_decelerate_timer_timeout"]

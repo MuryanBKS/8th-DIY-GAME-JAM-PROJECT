@@ -1244,6 +1244,7 @@ script = ExtResource("10_xdt5h")
 enemy_scene = ExtResource("4_diusp")
 
 [node name="Timer" type="Timer" parent="SpawnPoint"]
+wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="SpawnPoint/Timer" to="SpawnPoint" method="_on_timer_timeout"]

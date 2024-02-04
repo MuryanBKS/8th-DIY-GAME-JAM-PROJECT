@@ -2,7 +2,7 @@ extends Camera2D
 
 const  CAMERA_NORMAL_SPEED = 5.0
 const  CAMERA_FAST_SPEED = 30.0
-const CAMERA_DASH_OFFSET = 150
+const CAMERA_DASH_OFFSET = 250
 
 var player: CharacterBody2D
 var camera_speed = CAMERA_NORMAL_SPEED
@@ -30,7 +30,7 @@ func zoom_in():
 	if tween:
 		tween.kill()
 	tween = create_tween()
-	tween.tween_property(self, "zoom", Vector2(4.0, 4.0), 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT_IN)
+	tween.tween_property(self, "zoom", Vector2(3.5, 3.5), 0.1).set_trans(Tween.TRANS_CUBIC).set_ease(Tween.EASE_OUT_IN)
 	
 	
 func zoom_out():

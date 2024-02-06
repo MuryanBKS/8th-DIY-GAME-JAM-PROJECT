@@ -5,7 +5,7 @@ signal press_dash
 signal dash_finished
 signal emote_changed(path: String, rect_size: Rect2)
 
-@export var fire_particle: PackedScene
+
 
 const ACCELERATION := 3000
 const FRICTION = 100
@@ -23,6 +23,7 @@ var is_decelerating = false
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine = animation_tree["parameters/playback"]
+@onready var fire_particle = preload("res://scenes/particles/fire_particles_2d.tscn")
 
 var blend_position: Vector2 = Vector2.ZERO
 var time_scale = 1.0
@@ -39,7 +40,7 @@ var animation_tree_state_keys = [
 func _ready() -> void:
 	emote_changed.connect(on_emote_changed)
 	blend_position = Vector2(0, 0.1)
-
+	spawn_fire()
 
 func _physics_process(delta: float) -> void:
 	move(delta)

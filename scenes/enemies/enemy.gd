@@ -38,17 +38,17 @@ func move(delta):
 
 func hurt():
 	%AudioStreamPlayer2D.play()
+	$CollisionShape2D.set_deferred("disabled", true)
+	%AnimationPlayer.play("hurt")
 	var random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	if random_vector == get_player_direction():
 		randomize()
 		random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	knockback_direction = -get_player_direction() + random_vector
-	$CollisionShape2D.set_deferred("disabled", true)
-	%AnimationPlayer.play("hurt")
 	spawn_explosion()
-	await get_tree().create_timer(0.1).timeout
-	is_hurt = true
+	await %AnimationPlayer.animation_finished
 	GameManager.slow_down.emit()
+	is_hurt = true
 	player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
 	$KnockbackTimer.start()
 	

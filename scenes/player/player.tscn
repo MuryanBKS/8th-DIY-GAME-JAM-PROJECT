@@ -1,8 +1,7 @@
-[gd_scene load_steps=115 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=114 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wk4am"]
-[ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/particles/fire_particles_2d.tscn" id="2_l5dwu"]
 [ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
 [ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot.tscn" id="4_hypyu"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="6_4dfvd"]
@@ -1076,7 +1075,6 @@ collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_wk4am")
-fire_particle = ExtResource("2_l5dwu")
 
 [node name="CartPosition" type="Node2D" parent="."]
 

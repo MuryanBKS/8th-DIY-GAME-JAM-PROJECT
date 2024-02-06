@@ -1,10 +1,11 @@
-[gd_scene load_steps=114 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=115 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wk4am"]
 [ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/particles/fire_particles_2d.tscn" id="2_l5dwu"]
 [ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
 [ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot.tscn" id="4_hypyu"]
+[ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="6_4dfvd"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_phxgj"]
 atlas = ExtResource("1_4mymq")
@@ -1005,7 +1006,7 @@ blend_point_3/pos = Vector2(0, -1)
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_8enhn"]
-graph_offset = Vector2(-96, -2)
+graph_offset = Vector2(222.172, 276.677)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_pl3vk")
 nodes/TimeScale/position = Vector2(1102.47, 392.379)
 nodes/idle_bs2d/node = SubResource("AnimationNodeBlendSpace2D_gx500")
@@ -1062,7 +1063,7 @@ states/idle/position = Vector2(531, 387)
 states/push_cart/node = SubResource("AnimationNodeBlendTree_tjc8v")
 states/push_cart/position = Vector2(259, 387)
 transitions = ["push_cart", "idle", SubResource("AnimationNodeStateMachineTransition_i7q3k"), "idle", "push_cart", SubResource("AnimationNodeStateMachineTransition_fc81q"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x48y8")]
-graph_offset = Vector2(-141, 0)
+graph_offset = Vector2(-121, 201)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_kglci"]
 radius = 25.02
@@ -1081,19 +1082,19 @@ fire_particle = ExtResource("2_l5dwu")
 
 [node name="CartDown" type="Marker2D" parent="CartPosition"]
 unique_name_in_owner = true
-position = Vector2(2, 15)
+position = Vector2(3, 56)
 
 [node name="CartRight" type="Marker2D" parent="CartPosition"]
 unique_name_in_owner = true
-position = Vector2(60, -39)
+position = Vector2(60, 9)
 
 [node name="CartLeft" type="Marker2D" parent="CartPosition"]
 unique_name_in_owner = true
-position = Vector2(-60, -39)
+position = Vector2(-60, 9)
 
 [node name="CartUp" type="Marker2D" parent="CartPosition"]
 unique_name_in_owner = true
-position = Vector2(1, -90)
+position = Vector2(0, -53)
 
 [node name="LargeShadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.415686)
@@ -1122,12 +1123,12 @@ libraries = {
 tree_root = SubResource("AnimationNodeStateMachine_x544q")
 anim_player = NodePath("../AnimationPlayer")
 parameters/idle/TimeScale/scale = 1.0
-parameters/idle/idle_bs2d/blend_position = Vector2(0, 0)
+parameters/idle/idle_bs2d/blend_position = Vector2(0, 0.1)
 parameters/push_cart/TimeScale/scale = 1.0
 parameters/push_cart/push_bs2d/blend_position = Vector2(0, 0)
 
 [node name="Pot" parent="." instance=ExtResource("4_hypyu")]
-position = Vector2(-60, -39)
+position = Vector2(3, 56)
 disable_mode = 2
 
 [node name="DashTimer" type="Timer" parent="."]
@@ -1136,7 +1137,7 @@ one_shot = true
 
 [node name="DecelerateTimer" type="Timer" parent="."]
 unique_name_in_owner = true
-wait_time = 0.7
+wait_time = 0.2
 one_shot = true
 
 [node name="HurtBox" type="Area2D" parent="."]
@@ -1147,10 +1148,18 @@ collision_mask = 0
 position = Vector2(2, -30)
 shape = SubResource("CircleShape2D_kglci")
 
+[node name="ThinkingEmote" parent="." instance=ExtResource("6_4dfvd")]
+unique_name_in_owner = true
+position = Vector2(29, -75)
+
 [node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-76, -38)
+position = Vector2(3, 56)
 shape = SubResource("CircleShape2D_ogafx")
 debug_color = Color(0.87451, 0.345098, 0, 0.419608)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+pitch_scale = 1.3
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DecelerateTimer" to="." method="_on_decelerate_timer_timeout"]

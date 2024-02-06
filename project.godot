@@ -74,6 +74,8 @@ push={
 2d_physics/layer_4="trap"
 2d_physics/layer_5="trap_trigger"
 2d_physics/layer_6="hurt"
+2d_physics/layer_7="npc"
+2d_physics/layer_8="pot"
 
 [rendering]
 

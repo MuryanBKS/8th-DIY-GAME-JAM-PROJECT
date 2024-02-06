@@ -5,4 +5,5 @@ func trigger_trap():
 
 
 func _on_area_entered(area: Area2D) -> void:
-	print("hurt")
+	if area.get_parent() is Player:
+		print("hurt")

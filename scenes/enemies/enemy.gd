@@ -13,7 +13,8 @@ var is_died = false
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
-
+	
+	
 func _physics_process(delta: float) -> void:
 	move(delta)
 
@@ -22,6 +23,11 @@ func get_player_direction() -> Vector2:
 	
 	
 func move(delta):
+	if get_player_direction().x > 0:
+		%Visual.scale.x = 1
+	elif get_player_direction().x < 0:
+		%Visual.scale.x = -1
+		
 	if is_hurt:
 		velocity = lerp(velocity, knockback_direction.normalized() * 4000.0, 1 - exp(-8 * delta))
 	elif is_died :
@@ -31,6 +37,7 @@ func move(delta):
 	move_and_slide()
 
 func hurt():
+	%AudioStreamPlayer2D.play()
 	var random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	if random_vector == get_player_direction():
 		randomize()
@@ -42,6 +49,7 @@ func hurt():
 	await get_tree().create_timer(0.1).timeout
 	is_hurt = true
 	GameManager.slow_down.emit()
+	player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
 	$KnockbackTimer.start()
 	
 func spawn_explosion():
@@ -56,6 +64,4 @@ func _on_knockback_timer_timeout() -> void:
 	GameManager.slow_down_finished.emit()
 	is_hurt = false
 	is_died = true
-	$AnimatedSprite2D.play("died")
-	await $AnimatedSprite2D.animation_finished
-	queue_free()
+	%AnimationPlayer.play("die")

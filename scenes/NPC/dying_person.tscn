@@ -1,0 +1,38 @@
+[gd_scene load_steps=6 format=3 uid="uid://3y8nu7cdclv0"]
+
+[ext_resource type="Texture2D" uid="uid://dghofl3450x35" path="res://assets/Cook_01.png" id="1_dmpxb"]
+[ext_resource type="Script" path="res://scenes/NPC/dying_person.gd" id="1_xd446"]
+[ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="2_b0be2"]
+[ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="2_ncegb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gyebp"]
+radius = 53.0094
+
+[node name="DyingPerson" type="Area2D"]
+y_sort_enabled = true
+collision_layer = 64
+collision_mask = 128
+script = ExtResource("1_xd446")
+
+[node name="LargeShadow" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(1, 2)
+scale = Vector2(1.715, 1)
+texture = ExtResource("2_b0be2")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-19, -11)
+rotation = -1.5708
+texture = ExtResource("1_dmpxb")
+region_enabled = true
+region_rect = Rect2(0, 384, 48, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_gyebp")
+
+[node name="ThinkingEmote" parent="." instance=ExtResource("2_ncegb")]
+unique_name_in_owner = true
+position = Vector2(3, -38)
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]

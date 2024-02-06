@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 signal press_dash
 signal dash_finished
+signal emote_changed(path: String, rect_size: Rect2)
 
 @export var fire_particle: PackedScene
 
@@ -35,6 +36,11 @@ var animation_tree_state_keys = [
 	"push_cart"
 ]
 
+func _ready() -> void:
+	emote_changed.connect(on_emote_changed)
+	blend_position = Vector2(0, 0.1)
+
+
 func _physics_process(delta: float) -> void:
 	move(delta)
 	animate()
@@ -50,14 +56,13 @@ func move(delta):
 			state = PUSH_CART
 			apply_movement(input_vector * ACCELERATION * delta, delta)
 			blend_position = input_vector
-			if randf() > 0.95:
-				spawn_fire()
 			
 	if not is_dashing and Input.is_action_just_pressed("dash") and input_vector != Vector2.ZERO:
+		#emote_changed.emit("res://scenes/emotes/16x16-Emoji-Pack_v1.1/16x16_emoji_asset_pack_v1.1.png", Rect2(3*16, 4*16, 16, 16))
 		press_dash.emit(input_vector)
 		dash(input_vector * 3000)
 		
-	if is_dashing:
+	if is_dashing or is_decelerating:
 		spawn_fire()
 			
 	if Engine.time_scale == 0.1:
@@ -75,32 +80,28 @@ func change_cart_position(direction: int):
 		cart_pos = UP
 		var tween = create_tween()
 		tween.tween_property($Pot, "position", %CartUp.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		#$PotCollisionShape2D.position = %CartUp.position + Vector2(0, -18)
 		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartUp.position + Vector2(0, -18), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == DOWN:
 		cart_pos = DOWN
 		var tween = create_tween()
 		tween.tween_property($Pot, "position", %CartDown.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		#$PotCollisionShape2D.position = %CartDown.position + Vector2(0, 24)
-		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartDown.position + Vector2(0, 24), 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartDown.position, 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == RIGHT:
 		cart_pos = RIGHT
 		var tween = create_tween()
 		tween.tween_property($Pot, "position", %CartRight.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		#$PotCollisionShape2D.position = %CartRight.position + Vector2(18, 0)
 		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartRight.position + Vector2(18, 0), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == LEFT:
 		cart_pos = LEFT
 		var tween = create_tween()
 		tween.tween_property($Pot, "position", %CartLeft.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		#$PotCollisionShape2D.position = %CartLeft.position + Vector2(-18, 0)
 		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartLeft.position + Vector2(-18, 0), 0.3).set_trans(Tween.TRANS_CUBIC)
 		
 		
 func spawn_fire():
 	randomize()
 	var fire_particle_instance = fire_particle.instantiate()
-	var size = randf_range(0.3, 0.8)
+	var size = randf_range(1.0, 2.0)
 	if is_dashing:
 		size = randf_range(0.5, 4.0)
 	fire_particle_instance.scale = Vector2(size, size)
@@ -109,9 +110,9 @@ func spawn_fire():
 	if cart_pos == DOWN:
 		fire_particle_instance.global_position = %CartDown.global_position
 	if cart_pos == RIGHT:
-		fire_particle_instance.global_position = %CartRight.global_position + Vector2(0, 45)
+		fire_particle_instance.global_position = %CartRight.global_position
 	if cart_pos == LEFT:
-		fire_particle_instance.global_position = %CartLeft.global_position + Vector2(0, 45)
+		fire_particle_instance.global_position = %CartLeft.global_position
 	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)
 		
 func apply_friction(delta) -> void:
@@ -124,7 +125,7 @@ func apply_friction(delta) -> void:
 func apply_movement(amount, delta) -> void:
 	velocity += amount
 	if velocity.length() > MAX_SPEED and is_decelerating:
-		velocity = lerp(velocity, velocity.limit_length(MAX_SPEED), 1 - exp(-10 * delta))
+		velocity = lerp(velocity, velocity.limit_length(MAX_SPEED), 1 - exp(-1 * delta))
 	else:
 		velocity = velocity.limit_length(MAX_SPEED)
 			
@@ -150,11 +151,14 @@ func get_is_decelerating() -> bool:
 
 
 func _on_dash_timer_timeout() -> void:
-	GameManager.slow_down_finished.emit()
 	is_dashing = false
 	dash_finished.emit()
 	
 
 func _on_decelerate_timer_timeout() -> void:
 	is_decelerating = false
-	GameManager.slow_down_finished.emit()
+
+
+func on_emote_changed(path, rect2):
+	%ThinkingEmote.change_emote(path, rect2)
+	%ThinkingEmote.think()

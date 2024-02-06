@@ -1,6 +1,6 @@
 extends Node
 
-signal slow_down
+signal slow_down()
 signal slow_down_finished
 
 

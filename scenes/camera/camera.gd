@@ -2,7 +2,7 @@ extends Camera2D
 
 const  CAMERA_NORMAL_SPEED = 5.0
 const  CAMERA_FAST_SPEED = 30.0
-const CAMERA_DASH_OFFSET = 250
+const CAMERA_DASH_OFFSET = 150
 
 var player: CharacterBody2D
 var camera_speed = CAMERA_NORMAL_SPEED

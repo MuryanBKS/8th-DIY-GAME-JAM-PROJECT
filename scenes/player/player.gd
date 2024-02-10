@@ -17,7 +17,7 @@ enum {IDLE, PUSH_CART}
 enum {UP, DOWN, RIGHT, LEFT}
 
 var state = IDLE
-var cart_pos: int
+var cart_pos: int = 1
 var is_dashing = false
 var is_decelerating = false
 
@@ -27,6 +27,7 @@ var is_decelerating = false
 
 var blend_position: Vector2 = Vector2.ZERO
 var time_scale = 1.0
+var is_hurt = false
 
 var blend_pos_paths = [
 	"parameters/idle/idle_bs2d/blend_position",
@@ -59,7 +60,6 @@ func move(delta):
 			blend_position = input_vector
 			
 	if not is_dashing and Input.is_action_just_pressed("dash") and input_vector != Vector2.ZERO:
-		#emote_changed.emit("res://scenes/emotes/16x16-Emoji-Pack_v1.1/16x16_emoji_asset_pack_v1.1.png", Rect2(3*16, 4*16, 16, 16))
 		press_dash.emit(input_vector)
 		dash(input_vector * 3000)
 		
@@ -140,9 +140,20 @@ func dash(amount):
 	%DecelerateTimer.start()
 	
 func animate() -> void:
+	if is_hurt:
+		return
 	state_machine.travel(animation_tree_state_keys[state])
 	animation_tree.set(blend_pos_paths[state], blend_position)
-	
+
+func hurt():
+	is_hurt = true
+	state_machine.travel("hurt")
+	animation_tree.set("parameters/hurt/blend_position", Vector2(0, 1))
+	await get_tree().create_timer(0.2).timeout
+	is_hurt = false
+
+func die():
+	print("die")
 
 func get_is_dashing() -> bool:
 	return is_dashing

@@ -307,7 +307,7 @@ tracks/7/keys = {
 
 [sub_resource type="Animation" id="Animation_m3x34"]
 resource_name = "think"
-length = 2.0
+length = 3.0
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -316,7 +316,7 @@ tracks/0/path = NodePath("AnimatedSprite2D:frame")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 1.5, 1.55, 1.6, 1.7, 1.8, 1.9),
+"times": PackedFloat32Array(0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 2.55, 2.6, 2.65, 2.75, 2.85, 2.95),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 3, 4, 5, 2, 1, 0]
@@ -328,7 +328,7 @@ tracks/1/path = NodePath("AnimatedSprite2D2:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0.1, 0.2, 0.3, 0.4, 0.45, 0.5, 1.5, 1.6, 1.7, 1.8),
+"times": PackedFloat32Array(0.05, 0.15, 0.25, 0.35, 0.45, 0.55, 2.55, 2.65, 2.75, 2.85),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 5, 4, 3, 2]
@@ -340,7 +340,7 @@ tracks/2/path = NodePath("AnimatedSprite2D:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 1.5, 2),
+"times": PackedFloat32Array(0, 0.15, 2.55, 3.05),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -352,7 +352,7 @@ tracks/3/path = NodePath("AnimatedSprite2D2:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0.3, 0.5, 1.5, 1.8),
+"times": PackedFloat32Array(0.25, 0.5, 2.55, 2.85),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
@@ -364,7 +364,7 @@ tracks/4/path = NodePath("Sprite2D:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0, 0.3, 0.4, 1.65, 1.75, 2),
+"times": PackedFloat32Array(0, 0.25, 0.35, 2.7, 2.8, 3.05),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 0.968627), Color(1, 1, 1, 0.968627), Color(1, 1, 1, 0), Color(1, 1, 1, 0)]
@@ -376,7 +376,7 @@ tracks/5/path = NodePath("Sprite2D:position")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0.4, 0.5, 0.55, 0.75, 1, 1.25, 1.5),
+"times": PackedFloat32Array(0.35, 0.5, 0.6, 0.7, 1.25, 1.9, 2.55),
 "transitions": PackedFloat32Array(0, 0, 0.5, 0.5, 0.5, 0.5, 0.5),
 "update": 0,
 "values": [Vector2(0, -43.8462), Vector2(0, -46.1538), Vector2(0, -44.6154), Vector2(0, -47.6923), Vector2(0, -44.6154), Vector2(0, -47.6923), Vector2(0, -46.1538)]
@@ -388,7 +388,7 @@ tracks/6/path = NodePath("Sprite2D:scale")
 tracks/6/interp = 2
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0.4, 0.5, 0.55, 0.75, 1, 1.25, 1.5),
+"times": PackedFloat32Array(0.35, 0.5, 0.6, 0.7, 1.25, 1.9, 2.55),
 "transitions": PackedFloat32Array(0, 0, 1, 1, 1, 1, 1),
 "update": 0,
 "values": [Vector2(2, 1.1), Vector2(2, 2), Vector2(2, 2), Vector2(2, 2), Vector2(2, 2), Vector2(2, 2), Vector2(2, 2)]

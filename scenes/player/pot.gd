@@ -1,5 +1,5 @@
 class_name Pot
-extends Area2D
+extends Node2D
 
 func _ready() -> void:
 	var player = get_tree().get_first_node_in_group("player")
@@ -15,17 +15,3 @@ func on_dash_finished():
 	$AnimationPlayer.speed_scale = 1.0
 	$PotSprite.speed_scale = 1.0
 	
-
-func _on_body_entered(body: Node2D) -> void:
-	if body.has_method("hurt"):
-		body.hurt()
-
-func _on_area_entered(area: Area2D) -> void:
-	if area is TrapTrigger and (get_parent().get_is_dashing() or get_parent().get_is_decelerating()):
-		GameManager.slow_down.emit()
-		get_parent().emote_changed.emit("res://scenes/emotes/16x16-Emoji-Pack_v1.1/16x16_emoji_asset_pack_v1.1.png", Rect2(5*16, 4*16, 16, 16))
-
-
-func _on_area_exited(area: Area2D) -> void:
-	if area is TrapTrigger:
-		GameManager.slow_down_finished.emit()

@@ -37,8 +37,7 @@ func move(delta):
 	move_and_slide()
 
 func hurt():
-	%AudioStreamPlayer2D.play()
-	$CollisionShape2D.set_deferred("disabled", true)
+	$HitboxComponent.set_deferred("monitorable", false)
 	%AnimationPlayer.play("hurt")
 	var random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	if random_vector == get_player_direction():
@@ -47,9 +46,8 @@ func hurt():
 	knockback_direction = -get_player_direction() + random_vector
 	spawn_explosion()
 	await %AnimationPlayer.animation_finished
-	GameManager.slow_down.emit()
+	#GameManager.slow_down.emit()
 	is_hurt = true
-	player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
 	$KnockbackTimer.start()
 	
 func spawn_explosion():
@@ -62,6 +60,10 @@ func spawn_explosion():
 	
 func _on_knockback_timer_timeout() -> void:
 	GameManager.slow_down_finished.emit()
+	%AnimationPlayer.play("fly")
 	is_hurt = false
+	player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
+	
+func die():
 	is_died = true
 	%AnimationPlayer.play("die")

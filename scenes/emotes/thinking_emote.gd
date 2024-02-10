@@ -12,7 +12,7 @@ func change_emote(path: String, rect2: Rect2):
 func think():
 	if animation_player.is_playing():
 		animation_player.play("think")
-		animation_player.seek(0.5)
+		animation_player.seek(0.55)
 	else:
 		animation_player.play("think")
 	await animation_player.animation_finished

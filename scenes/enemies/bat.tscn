@@ -1,10 +1,14 @@
-[gd_scene load_steps=26 format=3 uid="uid://ckbf5eqgs5mc5"]
+[gd_scene load_steps=32 format=3 uid="uid://ckbf5eqgs5mc5"]
 
-[ext_resource type="Script" path="res://scenes/enemies/enemy.gd" id="1_4tir8"]
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://scenes/enemies/Bat_Sprite_Sheet.png" id="2_b1qpj"]
-[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/particles/explosion_particles_2d.tscn" id="2_op8ci"]
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="4_160yl"]
-[ext_resource type="AudioStream" uid="uid://0jbvh43y8nrx" path="res://scenes/enemies/Explosion.wav" id="5_mfulm"]
+[ext_resource type="Script" path="res://scenes/components/health_component.gd" id="5_65u4c"]
+[ext_resource type="PackedScene" uid="uid://b4lroi6b3ifmf" path="res://scenes/components/hurt_component.tscn" id="6_5hyu5"]
+[ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="6_nlfm7"]
+[ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="8_6tj8j"]
+[ext_resource type="Script" path="res://scenes/enemies/IdleState.gd" id="9_d8706"]
+[ext_resource type="Script" path="res://scenes/enemies/HurtState.gd" id="9_ijdca"]
+[ext_resource type="Script" path="res://scenes/enemies/ChaseState.gd" id="10_whr3e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0eoq"]
 atlas = ExtResource("2_b1qpj")
@@ -101,9 +105,6 @@ fill_to = Vector2(0.632479, 0.371795)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6asw"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_tbj27"]
-radius = 23.0
-
 [sub_resource type="Animation" id="Animation_k6ax5"]
 length = 0.001
 tracks/0/type = "value"
@@ -140,7 +141,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"default"]
+"values": [&"died"]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -152,7 +153,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [0]
+"values": [2]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -169,7 +170,7 @@ tracks/4/keys = {
 tracks/5/type = "value"
 tracks/5/imported = false
 tracks/5/enabled = true
-tracks/5/path = NodePath("MediumShadow:modulate")
+tracks/5/path = NodePath("Visual/MediumShadow:modulate")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
@@ -208,7 +209,7 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("MediumShadow:modulate")
+tracks/2/path = NodePath("Visual/MediumShadow:modulate")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
@@ -334,28 +335,42 @@ _data = {
 "hurt": SubResource("Animation_10neg")
 }
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="CircleShape2D" id="CircleShape2D_qui56"]
+radius = 20.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ce74e"]
+radius = 16.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_hblm1"]
+radius = 284.396
+
+[node name="Bat" type="CharacterBody2D"]
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 5
-script = ExtResource("1_4tir8")
-fire_particle = ExtResource("2_op8ci")
 
-[node name="MediumShadow" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 1, 0.301961)
-position = Vector2(0, -5)
-scale = Vector2(1.5, 1.5)
-texture = ExtResource("4_160yl")
+[node name="HealthComponent" type="Node" parent="."]
+script = ExtResource("5_65u4c")
+health = 100
 
 [node name="Visual" type="Node2D" parent="."]
 unique_name_in_owner = true
 y_sort_enabled = true
+rotation = 1.5708
+
+[node name="MediumShadow" type="Sprite2D" parent="Visual"]
+modulate = Color(1, 1, 1, 0.301961)
+position = Vector2(0, -5)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("4_160yl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual"]
 unique_name_in_owner = true
 position = Vector2(0, -28)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_icdt3")
+animation = &"died"
+frame = 2
 
 [node name="EyeLight" type="Node2D" parent="Visual"]
 visible = false
@@ -376,15 +391,8 @@ visible = false
 position = Vector2(0, -42)
 shape = SubResource("CircleShape2D_m6asw")
 
-[node name="Area2D" type="Area2D" parent="."]
-visible = false
-position = Vector2(0, -43)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
-shape = SubResource("CircleShape2D_tbj27")
-
 [node name="KnockbackTimer" type="Timer" parent="."]
-wait_time = 0.05
+wait_time = 0.1
 one_shot = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
@@ -392,12 +400,53 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_dpm84")
 }
-autoplay = "fly"
 speed_scale = 0.8
 
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-stream = ExtResource("5_mfulm")
-volume_db = -8.0
+[node name="HurtComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_5hyu5")]
+visible = false
+collision_mask = 16
+health_component = NodePath("../HealthComponent")
+is_enemy = true
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
+position = Vector2(0, -47)
+shape = SubResource("CircleShape2D_qui56")
+
+[node name="HitboxComponent" type="Area2D" parent="."]
+visible = false
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("6_nlfm7")
+damage = 10
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+position = Vector2(0, -47)
+shape = SubResource("CircleShape2D_ce74e")
+
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+script = ExtResource("8_6tj8j")
+initial_state = NodePath("IdleState")
+
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_area")]
+script = ExtResource("9_d8706")
+chase_area = NodePath("../../ChaseArea2D")
+
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("visual", "bat")]
+script = ExtResource("10_whr3e")
+visual = NodePath("../../Visual")
+bat = NodePath("../..")
+
+[node name="HurtState" type="Node" parent="StateMachine"]
+script = ExtResource("9_ijdca")
+
+[node name="ChaseArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea2D"]
+visible = false
+position = Vector2(0, -47)
+shape = SubResource("CircleShape2D_hblm1")
+debug_color = Color(0.992157, 0, 0.270588, 0.419608)
 
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]

@@ -25,7 +25,6 @@ func on_area_entered(area: Area2D):
 func on_timer_timeout():
 	var areas = get_overlapping_areas()
 	if not areas.is_empty():
-		print(areas)
 		for area in areas:
 			health_component.hurt(area.damage)
 			invincibility_timer.start()

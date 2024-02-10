@@ -1115,7 +1115,15 @@ script = ExtResource("1_kt6uq")
 position = Vector2(64, 198)
 
 [node name="Enemy" parent="." instance=ExtResource("4_diusp")]
-position = Vector2(-208, 1136)
+position = Vector2(-80, 1088)
+rotation = -0.00872665
+
+[node name="Enemy2" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(192, 1136)
+rotation = -0.00872665
+
+[node name="Enemy3" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(112, 928)
 rotation = -0.00872665
 
 [node name="Torch" parent="." instance=ExtResource("8_8uw4c")]

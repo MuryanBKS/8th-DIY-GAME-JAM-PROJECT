@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ckbf5eqgs5mc5"]
+[gd_scene load_steps=33 format=3 uid="uid://ckbf5eqgs5mc5"]
 
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://scenes/enemies/Bat_Sprite_Sheet.png" id="2_b1qpj"]
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="4_160yl"]
@@ -141,7 +141,7 @@ tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"died"]
+"values": [&"default"]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -153,7 +153,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [2]
+"values": [0]
 }
 tracks/4/type = "value"
 tracks/4/imported = false
@@ -182,6 +182,7 @@ tracks/5/keys = {
 
 [sub_resource type="Animation" id="Animation_uhg7w"]
 resource_name = "die"
+length = 0.3
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -225,12 +226,9 @@ tracks/3/path = NodePath(".")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [],
-"method": &"queue_free"
-}]
+"times": PackedFloat32Array(),
+"transitions": PackedFloat32Array(),
+"values": []
 }
 
 [sub_resource type="Animation" id="Animation_srk7f"]
@@ -327,12 +325,41 @@ tracks/2/keys = {
 "values": [false]
 }
 
+[sub_resource type="Animation" id="Animation_ytthl"]
+resource_name = "idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visual/AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"died"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visual/AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [4]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dpm84"]
 _data = {
 "RESET": SubResource("Animation_k6ax5"),
 "die": SubResource("Animation_uhg7w"),
 "fly": SubResource("Animation_srk7f"),
-"hurt": SubResource("Animation_10neg")
+"hurt": SubResource("Animation_10neg"),
+"idle": SubResource("Animation_ytthl")
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qui56"]
@@ -342,7 +369,7 @@ radius = 20.0
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hblm1"]
-radius = 284.396
+radius = 82.28
 
 [node name="Bat" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -356,7 +383,6 @@ health = 100
 [node name="Visual" type="Node2D" parent="."]
 unique_name_in_owner = true
 y_sort_enabled = true
-rotation = 1.5708
 
 [node name="MediumShadow" type="Sprite2D" parent="Visual"]
 modulate = Color(1, 1, 1, 0.301961)
@@ -369,8 +395,6 @@ unique_name_in_owner = true
 position = Vector2(0, -28)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_icdt3")
-animation = &"died"
-frame = 2
 
 [node name="EyeLight" type="Node2D" parent="Visual"]
 visible = false
@@ -427,14 +451,17 @@ shape = SubResource("CircleShape2D_ce74e")
 script = ExtResource("8_6tj8j")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_area")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("chase_area", "animation_player")]
 script = ExtResource("9_d8706")
 chase_area = NodePath("../../ChaseArea2D")
+animation_player = NodePath("../../AnimationPlayer")
 
-[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("visual", "bat")]
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("visual", "eye_light", "bat", "animation_player")]
 script = ExtResource("10_whr3e")
 visual = NodePath("../../Visual")
+eye_light = NodePath("../../Visual/EyeLight")
 bat = NodePath("../..")
+animation_player = NodePath("../../AnimationPlayer")
 
 [node name="HurtState" type="Node" parent="StateMachine"]
 script = ExtResource("9_ijdca")
@@ -444,7 +471,6 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea2D"]
-visible = false
 position = Vector2(0, -47)
 shape = SubResource("CircleShape2D_hblm1")
 debug_color = Color(0.992157, 0, 0.270588, 0.419608)

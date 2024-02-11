@@ -98,7 +98,10 @@ func change_cart_position(direction: int):
 		tween.tween_property($Pot, "position", %CartLeft.position, 0.1).set_trans(Tween.TRANS_CUBIC)
 		tween.parallel().tween_property($PotCollisionShape2D, "position", %CartLeft.position + Vector2(-18, 0), 0.3).set_trans(Tween.TRANS_CUBIC)
 		
-		
+
+func get_cart_position() -> Vector2:
+	return $Pot.get_pot_center_position()
+
 func spawn_fire():
 	randomize()
 	var fire_particle_instance = fire_particle.instantiate()

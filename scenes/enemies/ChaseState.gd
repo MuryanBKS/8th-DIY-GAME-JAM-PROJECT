@@ -12,18 +12,20 @@ const SPEED = 200.0
 
 var player: CharacterBody2D
 var can_move = false
+var is_active = false
+
 
 func enter():
 	health_component.health_changed.connect(on_health_changed)
 	player = get_tree().get_first_node_in_group("player")
-	visual.rotation = 0
-	animation_player.play_backwards("die")
-	await animation_player.animation_finished
+	if not is_active:
+		animation_player.play("die", -1, -2.0, true)
+		await animation_player.animation_finished
 	can_move = true
-	animation_player.play("fly")
+	animation_player.play("fly", -1, 2.0)
 	await get_tree().create_timer(0.5).timeout
 	eye_light.visible = true
-	
+	is_active = true
 	
 func physics_update(delta: float) -> void:
 	if not can_move:
@@ -32,7 +34,7 @@ func physics_update(delta: float) -> void:
 	
 	
 func exit():
-	pass
+	bat.velocity = Vector2.ZERO
 	
 	
 func get_player_direction() -> Vector2:
@@ -45,9 +47,11 @@ func move(delta):
 	elif get_player_direction().x < 0:
 		%Visual.scale.x = -1
 		
-	bat.velocity = get_player_direction() * SPEED
+	bat.velocity = lerp(bat.velocity, get_player_direction() * SPEED, 1 - exp(-5 * delta))
 	bat.move_and_slide()
 
 
 func on_health_changed():
+	is_active = true
 	transitioned.emit(self, "HurtState")
+	health_component.health_changed.disconnect(on_health_changed)

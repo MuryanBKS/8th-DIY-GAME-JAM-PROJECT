@@ -7,6 +7,10 @@ func _ready() -> void:
 	player.dash_finished.connect(on_dash_finished)
 	
 	
+func get_pot_center_position() -> Vector2:
+	return %PotCenter.global_position
+	
+	
 func on_dash(input_vector):
 	$AnimationPlayer.speed_scale = 5.0
 	$PotSprite.speed_scale = 5.0

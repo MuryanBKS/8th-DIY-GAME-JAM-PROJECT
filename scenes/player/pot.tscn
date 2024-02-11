@@ -304,7 +304,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2l6ui"]
-radius = 44.0
+radius = 28.0
 
 [sub_resource type="Gradient" id="Gradient_jmpxr"]
 offsets = PackedFloat32Array(0.0025, 0.075, 0.6225)
@@ -381,3 +381,7 @@ color = Color(0.988235, 0.560784, 0.105882, 1)
 energy = 0.5
 texture = SubResource("GradientTexture2D_7pa3b")
 texture_scale = 7.63
+
+[node name="PotCenter" type="Marker2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(-1, -49)

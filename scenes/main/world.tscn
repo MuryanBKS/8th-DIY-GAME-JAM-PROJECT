@@ -1,8 +1,8 @@
 [gd_scene load_steps=22 format=3 uid="uid://cbglov652jnsr"]
 
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_cgrp3"]
-[ext_resource type="Script" path="res://scenes/main/world.gd" id="1_hrmsn"]
 [ext_resource type="Script" path="res://scenes/camera/camera.gd" id="1_kt6uq"]
+[ext_resource type="Script" path="res://scenes/main/SpawnPoint.gd" id="1_p4u54"]
 [ext_resource type="PackedScene" uid="uid://cn38ud11gvhsv" path="res://scenes/player/player.tscn" id="1_qyi1p"]
 [ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/bat.tscn" id="4_diusp"]
 [ext_resource type="PackedScene" uid="uid://df5hywb5pcxrm" path="res://scenes/objects/torch.tscn" id="8_8uw4c"]
@@ -22,6 +22,7 @@ ssao_detail = 1.85
 ssao_horizon = 1.0
 ssao_light_affect = 0.28
 ssao_ao_channel_affect = 1.0
+glow_enabled = true
 glow_intensity = 1.54
 glow_strength = 1.22
 glow_blend_mode = 0
@@ -33,7 +34,8 @@ fog_sun_scatter = 0.14
 fog_density = 0.347
 fog_height = -22.02
 fog_height_density = 4.2437
-adjustment_brightness = 0.45
+adjustment_enabled = true
+adjustment_brightness = 0.6
 adjustment_contrast = 1.4
 adjustment_saturation = 1.2
 
@@ -1087,7 +1089,7 @@ pattern_7 = SubResource("TileMapPattern_fgles")
 
 [node name="World" type="Node2D"]
 y_sort_enabled = true
-script = ExtResource("1_hrmsn")
+script = ExtResource("1_p4u54")
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_7rrmb")
@@ -1115,15 +1117,23 @@ script = ExtResource("1_kt6uq")
 position = Vector2(64, 198)
 
 [node name="Enemy" parent="." instance=ExtResource("4_diusp")]
-position = Vector2(-80, 1088)
+position = Vector2(960, 2256)
 rotation = -0.00872665
 
 [node name="Enemy2" parent="." instance=ExtResource("4_diusp")]
-position = Vector2(192, 1136)
+position = Vector2(1248, 2400)
 rotation = -0.00872665
 
 [node name="Enemy3" parent="." instance=ExtResource("4_diusp")]
-position = Vector2(112, 928)
+position = Vector2(1168, 1856)
+rotation = -0.00872665
+
+[node name="Enemy4" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(352, 2384)
+rotation = -0.00872665
+
+[node name="Enemy5" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(688, 1840)
 rotation = -0.00872665
 
 [node name="Torch" parent="." instance=ExtResource("8_8uw4c")]
@@ -1171,3 +1181,4 @@ autoplay = true
 position = Vector2(32, 288)
 scale = Vector2(2, 2)
 texture = ExtResource("12_bbpmi")
+script = ExtResource("1_p4u54")

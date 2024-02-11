@@ -6,7 +6,6 @@ const SPEED = 200.0
 @export var fire_particle: PackedScene
 
 var player: CharacterBody2D
-var knockback_velocity: Vector2
 var knockback_direction: Vector2
 var is_hurt = false
 var is_died = false

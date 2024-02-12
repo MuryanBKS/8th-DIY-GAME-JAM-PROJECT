@@ -1,4 +1,4 @@
-[gd_scene load_steps=141 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=142 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wk4am"]
@@ -6,7 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
 [ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot.tscn" id="4_hypyu"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="6_4dfvd"]
-[ext_resource type="PackedScene" uid="uid://b4lroi6b3ifmf" path="res://scenes/components/hurt_component.tscn" id="7_spk63"]
+[ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="7_mmhg7"]
+[ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="8_n36ec"]
 
 [sub_resource type="Animation" id="Animation_do5c3"]
 length = 0.001
@@ -1315,7 +1316,7 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_wk4am")
 
-[node name="HealthComponent" type="Node2D" parent="."]
+[node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_28wlh")
 health = 100
 
@@ -1394,7 +1395,8 @@ position = Vector2(3, 56)
 unique_name_in_owner = true
 position = Vector2(29, -75)
 
-[node name="HurtComponent" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer") instance=ExtResource("7_spk63")]
+[node name="HurtComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer")]
+script = ExtResource("7_mmhg7")
 health_component = NodePath("../HealthComponent")
 invincibility_timer = NodePath("Timer")
 
@@ -1405,6 +1407,19 @@ shape = SubResource("CircleShape2D_kglci")
 [node name="Timer" type="Timer" parent="HurtComponent"]
 wait_time = 0.5
 one_shot = true
+
+[node name="StateMachine" type="Node" parent="."]
+script = ExtResource("8_n36ec")
+
+[node name="IdleState" type="Node" parent="StateMachine"]
+
+[node name="MoveState" type="Node" parent="StateMachine"]
+
+[node name="DashState" type="Node" parent="StateMachine"]
+
+[node name="HurtState" type="Node" parent="StateMachine"]
+
+[node name="DiedState" type="Node" parent="StateMachine"]
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DecelerateTimer" to="." method="_on_decelerate_timer_timeout"]

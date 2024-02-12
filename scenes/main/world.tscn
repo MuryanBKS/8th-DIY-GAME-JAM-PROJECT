@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/camera/camera.gd" id="1_kt6uq"]
 [ext_resource type="Script" path="res://scenes/main/SpawnPoint.gd" id="1_p4u54"]
 [ext_resource type="PackedScene" uid="uid://cn38ud11gvhsv" path="res://scenes/player/player.tscn" id="1_qyi1p"]
-[ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/bat.tscn" id="4_diusp"]
+[ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/bat/bat.tscn" id="4_diusp"]
 [ext_resource type="PackedScene" uid="uid://df5hywb5pcxrm" path="res://scenes/objects/torch.tscn" id="8_8uw4c"]
 [ext_resource type="PackedScene" uid="uid://bah2g8g7fdb1c" path="res://scenes/objects/side_torch.tscn" id="9_1epdi"]
 [ext_resource type="PackedScene" uid="uid://3y8nu7cdclv0" path="res://scenes/NPC/dying_person.tscn" id="11_ap6na"]

@@ -1,13 +1,17 @@
-[gd_scene load_steps=142 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=146 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/Premade_Character_48x48_11.png" id="1_4mymq"]
-[ext_resource type="Script" path="res://scenes/player/player.gd" id="1_wk4am"]
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="2_28wlh"]
 [ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
 [ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot.tscn" id="4_hypyu"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="6_4dfvd"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="7_mmhg7"]
 [ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="8_n36ec"]
+[ext_resource type="Script" path="res://scenes/player/IdleState.gd" id="9_srs8y"]
+[ext_resource type="Script" path="res://scenes/player/MoveState.gd" id="10_snj71"]
+[ext_resource type="Script" path="res://scenes/player/DashState.gd" id="11_edrqs"]
+[ext_resource type="Script" path="res://scenes/player/HurtState.gd" id="12_xrppd"]
+[ext_resource type="Script" path="res://scenes/player/DiedState.gd" id="13_cbeu7"]
 
 [sub_resource type="Animation" id="Animation_do5c3"]
 length = 0.001
@@ -1314,7 +1318,6 @@ y_sort_enabled = true
 collision_layer = 2
 collision_mask = 5
 motion_mode = 1
-script = ExtResource("1_wk4am")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_28wlh")
@@ -1408,18 +1411,26 @@ shape = SubResource("CircleShape2D_kglci")
 wait_time = 0.5
 one_shot = true
 
-[node name="StateMachine" type="Node" parent="."]
+[node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_n36ec")
+initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine"]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("9_srs8y")
+player = NodePath("../..")
 
-[node name="MoveState" type="Node" parent="StateMachine"]
+[node name="MoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player")]
+script = ExtResource("10_snj71")
+player = NodePath("../..")
 
 [node name="DashState" type="Node" parent="StateMachine"]
+script = ExtResource("11_edrqs")
 
 [node name="HurtState" type="Node" parent="StateMachine"]
+script = ExtResource("12_xrppd")
 
 [node name="DiedState" type="Node" parent="StateMachine"]
+script = ExtResource("13_cbeu7")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
 [connection signal="timeout" from="DecelerateTimer" to="." method="_on_decelerate_timer_timeout"]

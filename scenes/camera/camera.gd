@@ -12,8 +12,8 @@ var is_dashing = false
 
 func _ready() -> void:
 	player = get_tree().get_first_node_in_group("player")
-	player.press_dash.connect(on_press_dash)
-	player.dash_finished.connect(on_dash_finished)
+	#player.press_dash.connect(on_press_dash)
+	#player.dash_finished.connect(on_dash_finished)
 	GameManager.slow_down.connect(on_slow_down)
 	GameManager.slow_down_finished.connect(on_slow_down_finished)
 	
@@ -46,10 +46,10 @@ func on_slow_down():
 func on_slow_down_finished():
 	zoom_out()
 
-func on_press_dash(input_vector):
-	is_dashing = true
-	dash_vector = input_vector
-
-func on_dash_finished():
-	is_dashing = false
+#func on_press_dash(input_vector):
+	#is_dashing = true
+	#dash_vector = input_vector
+#
+#func on_dash_finished():
+	#is_dashing = false
 	

@@ -8,7 +8,6 @@ signal emote_changed(path: String, rect_size: Rect2)
 
 
 const ACCELERATION := 3000
-const FRICTION = 100
 const MAX_SPEED = 450
 const MAX_DASH_SPEED = 1500
 
@@ -102,6 +101,7 @@ func change_cart_position(direction: int):
 func get_cart_position() -> Vector2:
 	return $Pot.get_pot_center_position()
 
+
 func spawn_fire():
 	randomize()
 	var fire_particle_instance = fire_particle.instantiate()
@@ -118,6 +118,7 @@ func spawn_fire():
 	if cart_pos == LEFT:
 		fire_particle_instance.global_position = %CartLeft.global_position
 	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)
+		
 		
 func apply_friction(delta) -> void:
 	if velocity.length() > 50:

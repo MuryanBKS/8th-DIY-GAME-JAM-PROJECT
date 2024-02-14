@@ -6,10 +6,10 @@
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="5_65u4c"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="6_nlfm7"]
 [ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="8_6tj8j"]
-[ext_resource type="Script" path="res://scenes/enemies/bat/IdleState.gd" id="9_d8706"]
-[ext_resource type="Script" path="res://scenes/enemies/bat/HurtState.gd" id="9_ijdca"]
-[ext_resource type="Script" path="res://scenes/enemies/bat/DiedState.gd" id="10_ffd4f"]
-[ext_resource type="Script" path="res://scenes/enemies/bat/ChaseState.gd" id="10_whr3e"]
+[ext_resource type="Script" path="res://scenes/enemies/bat/BatIdleState.gd" id="9_d8706"]
+[ext_resource type="Script" path="res://scenes/enemies/bat/BatHurtState.gd" id="9_ijdca"]
+[ext_resource type="Script" path="res://scenes/enemies/bat/BatDiedState.gd" id="10_ffd4f"]
+[ext_resource type="Script" path="res://scenes/enemies/bat/BatChaseState.gd" id="10_whr3e"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0eoq"]
 atlas = ExtResource("2_b1qpj")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://cbglov652jnsr"]
+[gd_scene load_steps=21 format=3 uid="uid://cbglov652jnsr"]
 
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_cgrp3"]
 [ext_resource type="Script" path="res://scenes/camera/camera.gd" id="1_kt6uq"]
@@ -8,7 +8,6 @@
 [ext_resource type="PackedScene" uid="uid://df5hywb5pcxrm" path="res://scenes/objects/torch.tscn" id="8_8uw4c"]
 [ext_resource type="PackedScene" uid="uid://bah2g8g7fdb1c" path="res://scenes/objects/side_torch.tscn" id="9_1epdi"]
 [ext_resource type="PackedScene" uid="uid://3y8nu7cdclv0" path="res://scenes/NPC/dying_person.tscn" id="11_ap6na"]
-[ext_resource type="AudioStream" uid="uid://bftiu4rh71pm" path="res://scenes/main/13 - Mystical.ogg" id="11_jwepf"]
 [ext_resource type="Texture2D" uid="uid://bn6cnm78nm5u2" path="res://assets/Traps/Pit_Trap_Spikes.png" id="12_bbpmi"]
 
 [sub_resource type="Environment" id="Environment_7rrmb"]
@@ -1171,11 +1170,6 @@ flip_h = true
 
 [node name="DyingPerson" parent="." instance=ExtResource("11_ap6na")]
 position = Vector2(3580, 2922)
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("11_jwepf")
-volume_db = -12.0
-autoplay = true
 
 [node name="PitTrapSpikes" type="Sprite2D" parent="."]
 position = Vector2(32, 288)

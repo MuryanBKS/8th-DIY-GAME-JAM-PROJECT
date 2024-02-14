@@ -1,5 +1,5 @@
 extends State
-class_name DiedState
+class_name BatDiedState
 
 const SPEED = 800.0
 

@@ -109,14 +109,7 @@ func spawn_fire():
 	if is_dashing:
 		size = randf_range(0.5, 4.0)
 	fire_particle_instance.scale = Vector2(size, size)
-	if cart_pos == UP:
-		fire_particle_instance.global_position = %CartUp.global_position
-	if cart_pos == DOWN:
-		fire_particle_instance.global_position = %CartDown.global_position
-	if cart_pos == RIGHT:
-		fire_particle_instance.global_position = %CartRight.global_position
-	if cart_pos == LEFT:
-		fire_particle_instance.global_position = %CartLeft.global_position
+	fire_particle_instance.global_position = $Pot.global_position
 	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)
 		
 		

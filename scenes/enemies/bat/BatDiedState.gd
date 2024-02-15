@@ -5,14 +5,14 @@ const SPEED = 800.0
 
 @export var animation_player: AnimationPlayer
 @export var bat_collision: CollisionShape2D
-@export var light: Node2D
 @export var bat: CharacterBody2D
+@export var hit_collision: CollisionShape2D
 
 var player: CharacterBody2D
 
 func enter():
+	hit_collision.set_deferred("disabled", true)
 	bat.z_index = 100
-	light.hide()
 	player = get_tree().get_first_node_in_group("player")
 	bat_collision.set_deferred("disabled", true)
 	animation_player.play("die")

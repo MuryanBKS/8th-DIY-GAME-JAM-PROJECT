@@ -2,7 +2,6 @@ class_name HurtComponent
 extends Area2D
 
 
-
 @export var health_component: HealthComponent
 @export var invincibility_timer: Timer
 @export var is_enemy: bool

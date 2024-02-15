@@ -1,12 +1,13 @@
-[gd_scene load_steps=21 format=3 uid="uid://cbglov652jnsr"]
+[gd_scene load_steps=22 format=3 uid="uid://cbglov652jnsr"]
 
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_cgrp3"]
 [ext_resource type="Script" path="res://scenes/camera/camera.gd" id="1_kt6uq"]
 [ext_resource type="Script" path="res://scenes/main/SpawnPoint.gd" id="1_p4u54"]
-[ext_resource type="PackedScene" uid="uid://cn38ud11gvhsv" path="res://scenes/player/player.tscn" id="1_qyi1p"]
+[ext_resource type="PackedScene" uid="uid://cn38ud11gvhsv" path="res://scenes/player/pot/player.tscn" id="1_qyi1p"]
 [ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/bat/bat.tscn" id="4_diusp"]
 [ext_resource type="PackedScene" uid="uid://df5hywb5pcxrm" path="res://scenes/objects/torch.tscn" id="8_8uw4c"]
 [ext_resource type="PackedScene" uid="uid://bah2g8g7fdb1c" path="res://scenes/objects/side_torch.tscn" id="9_1epdi"]
+[ext_resource type="PackedScene" uid="uid://brhggke2fu4n4" path="res://scenes/player/warrior/warrior.tscn" id="10_lxb1a"]
 [ext_resource type="PackedScene" uid="uid://3y8nu7cdclv0" path="res://scenes/NPC/dying_person.tscn" id="11_ap6na"]
 [ext_resource type="Texture2D" uid="uid://bn6cnm78nm5u2" path="res://assets/Traps/Pit_Trap_Spikes.png" id="12_bbpmi"]
 
@@ -21,7 +22,6 @@ ssao_detail = 1.85
 ssao_horizon = 1.0
 ssao_light_affect = 0.28
 ssao_ao_channel_affect = 1.0
-glow_enabled = true
 glow_intensity = 1.54
 glow_strength = 1.22
 glow_blend_mode = 0
@@ -33,7 +33,6 @@ fog_sun_scatter = 0.14
 fog_density = 0.347
 fog_height = -22.02
 fog_height_density = 4.2437
-adjustment_enabled = true
 adjustment_brightness = 0.6
 adjustment_contrast = 1.4
 adjustment_saturation = 1.2
@@ -1106,14 +1105,15 @@ layer_2/tile_data = PackedInt32Array(65532, 196608, 1, 131068, 131072, 1, 196604
 layer_3/name = "decoration"
 layer_3/tile_data = PackedInt32Array()
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="MainCamera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["camera"]]
 zoom = Vector2(1.5, 1.5)
 script = ExtResource("1_kt6uq")
+player = NodePath("../Player")
 
 [node name="Fire" type="Node2D" parent="." groups=["fire"]]
 
 [node name="Player" parent="." instance=ExtResource("1_qyi1p")]
-position = Vector2(64, 198)
+position = Vector2(-72, 958)
 
 [node name="Enemy" parent="." instance=ExtResource("4_diusp")]
 position = Vector2(960, 2256)
@@ -1176,3 +1176,6 @@ position = Vector2(32, 288)
 scale = Vector2(2, 2)
 texture = ExtResource("12_bbpmi")
 script = ExtResource("1_p4u54")
+
+[node name="Warrior" parent="." instance=ExtResource("10_lxb1a")]
+position = Vector2(190, 1026)

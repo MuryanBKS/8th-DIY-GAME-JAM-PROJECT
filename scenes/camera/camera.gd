@@ -4,16 +4,14 @@ const  CAMERA_NORMAL_SPEED = 5.0
 const  CAMERA_FAST_SPEED = 30.0
 const CAMERA_DASH_OFFSET = 150
 
-var player: CharacterBody2D
+@export var player: CharacterBody2D
 var camera_speed = CAMERA_NORMAL_SPEED
 var tween: Tween
 var dash_vector: Vector2
 var is_dashing = false
 
 func _ready() -> void:
-	player = get_tree().get_first_node_in_group("player")
-	#player.press_dash.connect(on_press_dash)
-	#player.dash_finished.connect(on_dash_finished)
+	#player = get_tree().get_first_node_in_group("player")
 	GameManager.slow_down.connect(on_slow_down)
 	GameManager.slow_down_finished.connect(on_slow_down_finished)
 	

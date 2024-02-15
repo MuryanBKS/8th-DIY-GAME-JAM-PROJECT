@@ -1,18 +1,20 @@
-[gd_scene load_steps=147 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=149 format=3 uid="uid://cn38ud11gvhsv"]
 
-[ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/Premade_Character_48x48_11.png" id="1_4mymq"]
-[ext_resource type="Script" path="res://scenes/player/player_new.gd" id="1_xdb85"]
+[ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/pot/Premade_Character_48x48_11.png" id="1_4mymq"]
+[ext_resource type="Script" path="res://scenes/player/pot/player_new.gd" id="1_xdb85"]
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="2_28wlh"]
 [ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
-[ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot.tscn" id="4_hypyu"]
+[ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot/pot.tscn" id="4_hypyu"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="6_4dfvd"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="7_mmhg7"]
 [ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="8_n36ec"]
-[ext_resource type="Script" path="res://scenes/player/PlayerIdleState.gd" id="9_srs8y"]
-[ext_resource type="Script" path="res://scenes/player/PlayerMoveState.gd" id="10_snj71"]
-[ext_resource type="Script" path="res://scenes/player/PlayerDashState.gd" id="11_edrqs"]
-[ext_resource type="Script" path="res://scenes/player/PlayerHurtState.gd" id="12_xrppd"]
-[ext_resource type="Script" path="res://scenes/player/PlayerDiedState.gd" id="13_cbeu7"]
+[ext_resource type="Script" path="res://scenes/player/pot/PlayerIdleState.gd" id="9_srs8y"]
+[ext_resource type="Script" path="res://scenes/player/pot/PlayerMoveState.gd" id="10_snj71"]
+[ext_resource type="Script" path="res://scenes/player/pot/PlayerDashState.gd" id="11_edrqs"]
+[ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/particles/fire_particles_2d.tscn" id="12_tgo6r"]
+[ext_resource type="Script" path="res://scenes/player/pot/PlayerHurtState.gd" id="12_xrppd"]
+[ext_resource type="Script" path="res://scenes/player/pot/PlayerDiedState.gd" id="13_cbeu7"]
+[ext_resource type="Script" path="res://scenes/player/pot/PlayerNpcState.gd" id="15_yxqfo"]
 
 [sub_resource type="Animation" id="Animation_do5c3"]
 length = 0.001
@@ -1309,10 +1311,11 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_6hleg"]
 radius = 10.0499
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_ogafx"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_kglci"]
 radius = 25.02
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_muog5"]
+radius = 29.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 y_sort_enabled = true
@@ -1340,7 +1343,7 @@ libraries = {
 }
 tree_root = SubResource("AnimationNodeStateMachine_x544q")
 anim_player = NodePath("../AnimationPlayer")
-parameters/hurt/blend_position = Vector2(-0.408204, 0.238095)
+parameters/hurt/blend_position = Vector2(-0.232653, 0.222222)
 parameters/idle/TimeScale/scale = 1.0
 parameters/idle/idle_bs2d/blend_position = Vector2(0, 0.1)
 parameters/push_cart/TimeScale/scale = 1.0
@@ -1388,11 +1391,6 @@ offset = Vector2(0, -48)
 position = Vector2(2, -5)
 shape = SubResource("CircleShape2D_6hleg")
 
-[node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(3, 56)
-shape = SubResource("CircleShape2D_ogafx")
-debug_color = Color(0.87451, 0.345098, 0, 0.419608)
-
 [node name="Pot" parent="." instance=ExtResource("4_hypyu")]
 position = Vector2(3, 56)
 
@@ -1403,40 +1401,63 @@ position = Vector2(29, -75)
 [node name="HurtComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer")]
 script = ExtResource("7_mmhg7")
 health_component = NodePath("../HealthComponent")
-invincibility_timer = NodePath("Timer")
+invincibility_timer = NodePath("InvincibilityTimer")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
 position = Vector2(2, -30)
 shape = SubResource("CircleShape2D_kglci")
 
-[node name="Timer" type="Timer" parent="HurtComponent"]
-wait_time = 0.5
+[node name="InvincibilityTimer" type="Timer" parent="HurtComponent"]
 one_shot = true
 
+[node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
+z_index = 100
+position = Vector2(2, 24)
+shape = SubResource("CircleShape2D_muog5")
+debug_color = Color(0.87451, 0.345098, 0, 0.419608)
+
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
 script = ExtResource("8_n36ec")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "health_component", "pot")]
 script = ExtResource("9_srs8y")
 player = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
+health_component = NodePath("../../HealthComponent")
+pot = NodePath("../../Pot")
 
-[node name="MoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "pot", "pot_collision")]
+[node name="MoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "pot", "pot_collision", "health_component")]
 script = ExtResource("10_snj71")
 player = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 pot = NodePath("../../Pot")
 pot_collision = NodePath("../../PotCollisionShape2D")
+health_component = NodePath("../../HealthComponent")
 
-[node name="DashState" type="Node" parent="StateMachine"]
+[node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "dash_timer", "invincibility_timer", "pot", "pot_collision")]
 script = ExtResource("11_edrqs")
+player = NodePath("../..")
+dash_timer = NodePath("../../DashTimer")
+invincibility_timer = NodePath("../../HurtComponent/InvincibilityTimer")
+pot = NodePath("../../Pot")
+pot_collision = NodePath("../../PotCollisionShape2D")
+fire_particle = ExtResource("12_tgo6r")
 
-[node name="HurtState" type="Node" parent="StateMachine"]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "health_component", "animation_tree", "pot")]
 script = ExtResource("12_xrppd")
+player = NodePath("../..")
+health_component = NodePath("../../HealthComponent")
+animation_tree = NodePath("../../AnimationTree")
+pot = NodePath("../../Pot")
 
 [node name="DiedState" type="Node" parent="StateMachine"]
 script = ExtResource("13_cbeu7")
 
+[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree")]
+script = ExtResource("15_yxqfo")
+player = NodePath("../..")
+animation_tree = NodePath("../../AnimationTree")
+
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]
-[connection signal="timeout" from="DecelerateTimer" to="." method="_on_decelerate_timer_timeout"]

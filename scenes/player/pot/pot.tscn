@@ -1,9 +1,9 @@
 [gd_scene load_steps=29 format=3 uid="uid://cblaytvi5tp5m"]
 
-[ext_resource type="Script" path="res://scenes/player/pot.gd" id="1_gclxe"]
-[ext_resource type="Texture2D" uid="uid://chdwb4flsrq85" path="res://assets/animated_witch_cauldron_48x48.png" id="2_qb81h"]
-[ext_resource type="Texture2D" uid="uid://cy8idvganejbm" path="res://assets/Fire_Spreadsheet.png" id="3_3djgb"]
-[ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="4_7xte0"]
+[ext_resource type="Script" path="res://scenes/player/pot/pot.gd" id="1_7u0vp"]
+[ext_resource type="Texture2D" uid="uid://chdwb4flsrq85" path="res://assets/animated_witch_cauldron_48x48.png" id="2_kbj6c"]
+[ext_resource type="Texture2D" uid="uid://cy8idvganejbm" path="res://assets/Fire_Spreadsheet.png" id="3_5y35o"]
+[ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="4_r1o25"]
 
 [sub_resource type="Animation" id="Animation_pjg2c"]
 length = 0.001
@@ -176,51 +176,51 @@ _data = {
 }
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kc1jj"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(0, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_38tew"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(96, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fvne4"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(192, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_3dolc"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(288, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jhqui"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(384, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_aph4h"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(480, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_16wxx"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(576, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d5cy5"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(672, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_gb8ic"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(768, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1igga"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(864, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ifm1i"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(960, 0, 96, 96)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_droni"]
-atlas = ExtResource("2_qb81h")
+atlas = ExtResource("2_kbj6c")
 region = Rect2(1056, 0, 96, 96)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_myrvp"]
@@ -268,19 +268,19 @@ animations = [{
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hawyc"]
-atlas = ExtResource("3_3djgb")
+atlas = ExtResource("3_5y35o")
 region = Rect2(0, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_qb7hv"]
-atlas = ExtResource("3_3djgb")
+atlas = ExtResource("3_5y35o")
 region = Rect2(512, 0, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_amdhx"]
-atlas = ExtResource("3_3djgb")
+atlas = ExtResource("3_5y35o")
 region = Rect2(0, 512, 512, 512)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_apg2h"]
-atlas = ExtResource("3_3djgb")
+atlas = ExtResource("3_5y35o")
 region = Rect2(512, 512, 512, 512)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_hcudi"]
@@ -304,7 +304,7 @@ animations = [{
 }]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_2l6ui"]
-radius = 28.0
+radius = 60.075
 
 [sub_resource type="Gradient" id="Gradient_jmpxr"]
 offsets = PackedFloat32Array(0.0025, 0.075, 0.6225)
@@ -316,7 +316,7 @@ fill = 1
 fill_from = Vector2(0.5, 0.5)
 
 [node name="Pot" type="Node2D"]
-script = ExtResource("1_gclxe")
+script = ExtResource("1_7u0vp")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -368,10 +368,11 @@ frame_progress = 0.0486798
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 16
 collision_mask = 0
-script = ExtResource("4_7xte0")
+script = ExtResource("4_r1o25")
 damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+unique_name_in_owner = true
 position = Vector2(-1, -32)
 shape = SubResource("CircleShape2D_2l6ui")
 

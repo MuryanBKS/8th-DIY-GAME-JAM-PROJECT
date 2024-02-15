@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ckbf5eqgs5mc5"]
+[gd_scene load_steps=32 format=3 uid="uid://ckbf5eqgs5mc5"]
 
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://scenes/enemies/bat/Bat_Sprite_Sheet.png" id="2_b1qpj"]
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="4_160yl"]
@@ -94,16 +94,6 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="Gradient" id="Gradient_oqqwf"]
-offsets = PackedFloat32Array(0, 0.134304, 0.354369, 0.412621)
-colors = PackedColorArray(1, 0, 0, 0.392157, 1, 0, 0, 0.392157, 0.258824, 0, 0.247059, 0.341176, 0, 0, 0, 0.607843)
-
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_yilhq"]
-gradient = SubResource("Gradient_oqqwf")
-fill = 1
-fill_from = Vector2(0.5, 0.5)
-fill_to = Vector2(0.632479, 0.371795)
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_m6asw"]
 
 [sub_resource type="Animation" id="Animation_k6ax5"]
@@ -159,22 +149,10 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("Visual/EyeLight:position")
+tracks/4/path = NodePath("Visual/MediumShadow:modulate")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(2, -24)]
-}
-tracks/5/type = "value"
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/path = NodePath("Visual/MediumShadow:modulate")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -252,34 +230,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual/EyeLight:position")
-tracks/2/interp = 2
+tracks/2/path = NodePath("Visual/MediumShadow:visible")
+tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.075, 0.1, 0.175, 0.2, 0.275, 0.3, 0.375, 0.4),
-"transitions": PackedFloat32Array(0, 1, 0, 1, 0, 1, 0, 1, 0),
-"update": 0,
-"values": [Vector2(2, -52), Vector2(2, -52), Vector2(2, -47), Vector2(2, -47), Vector2(2, -57), Vector2(2, -57), Vector2(2, -62), Vector2(2, -62), Vector2(2, -52)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("Visual/EyeLight:visible")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Visual/MediumShadow:visible")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -313,18 +267,6 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(0.5, 0.5, 0.5, 1),
 "update": 0,
 "values": [Vector2(5, 5), Vector2(6, 6), Vector2(4.2, 4.2), Vector2(5, 5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Visual/EyeLight:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_ytthl"]
@@ -411,20 +353,6 @@ position = Vector2(0, -28)
 scale = Vector2(5, 5)
 sprite_frames = SubResource("SpriteFrames_icdt3")
 
-[node name="EyeLight" type="Node2D" parent="Visual"]
-visible = false
-position = Vector2(2, -24)
-
-[node name="PointLight2D" type="PointLight2D" parent="Visual/EyeLight"]
-position = Vector2(-4, 1)
-energy = 7.0
-texture = SubResource("GradientTexture2D_yilhq")
-
-[node name="PointLight2D2" type="PointLight2D" parent="Visual/EyeLight"]
-position = Vector2(5, 1)
-energy = 7.0
-texture = SubResource("GradientTexture2D_yilhq")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 visible = false
 position = Vector2(0, -42)
@@ -452,12 +380,10 @@ wait_time = 0.5
 one_shot = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtComponent"]
-visible = false
 position = Vector2(0, -47)
 shape = SubResource("CircleShape2D_qui56")
 
 [node name="HitboxComponent" type="Area2D" parent="."]
-visible = false
 collision_layer = 32
 collision_mask = 0
 script = ExtResource("6_nlfm7")
@@ -476,27 +402,27 @@ script = ExtResource("9_d8706")
 chase_area = NodePath("../../ChaseArea2D")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("visual", "eye_light", "bat", "animation_player", "health_component")]
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("visual", "bat", "animation_player", "health_component")]
 script = ExtResource("10_whr3e")
 visual = NodePath("../../Visual")
-eye_light = NodePath("../../Visual/EyeLight")
 bat = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 health_component = NodePath("../../HealthComponent")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("bat", "health_component", "animation_player", "hit_collision")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("bat", "health_component", "hurt_component", "animation_player", "hit_collision")]
 script = ExtResource("9_ijdca")
 bat = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
+hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 
-[node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "bat_collision", "light", "bat")]
+[node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "bat_collision", "bat", "hit_collision")]
 script = ExtResource("10_ffd4f")
 animation_player = NodePath("../../AnimationPlayer")
 bat_collision = NodePath("../../CollisionShape2D")
-light = NodePath("../../Visual/EyeLight")
 bat = NodePath("../..")
+hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 
 [node name="ChaseArea2D" type="Area2D" parent="."]
 collision_layer = 0

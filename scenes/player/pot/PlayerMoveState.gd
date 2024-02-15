@@ -1,16 +1,16 @@
 extends State
 class_name PlayerMoveState
 
-const MAX_SPEED = 1000
+const MAX_SPEED = 700
 
 @export var player: CharacterBody2D
 @export var animation_tree: AnimationTree
 @export var pot: Node2D
 @export var pot_collision: CollisionShape2D
+@export var health_component: HealthComponent
 
 enum {UP, DOWN, RIGHT, LEFT}
 
-var blend_position: Vector2 = Vector2.ZERO
 var blend_pos_path = "parameters/push_cart/push_bs2d/blend_position"
 
 @onready var state_machine = animation_tree["parameters/playback"]
@@ -18,15 +18,19 @@ var blend_pos_path = "parameters/push_cart/push_bs2d/blend_position"
 
 func enter() -> void:
 	state_machine.travel("push_cart")
-
+	health_component.health_changed.connect(on_health_changed)
+	pot.switch_pot_collision(false)
+	
 func exit() -> void:
-	pass
+	health_component.health_changed.disconnect(on_health_changed)
 	
 func update(delta: float) -> void:
 	animate()
 	
 func physics_update(delta: float) -> void:
 	move(delta)
+	if Input.is_action_just_pressed("dash"):
+		transitioned.emit(self, "DashState")
 
 
 func move(delta):
@@ -38,7 +42,7 @@ func move(delta):
 
 func apply_movement(amount, delta) -> void:
 	if player.velocity.length() < MAX_SPEED:
-		player.velocity = lerp(player.velocity, amount, 1 - exp(-2 * delta))
+		player.velocity = lerp(player.velocity, amount, 1 - exp(-5 * delta))
 	else:
 		player.velocity = player.velocity.limit_length(MAX_SPEED)
 
@@ -47,19 +51,23 @@ func change_cart_position(direction: int):
 	if direction == UP:
 		var tween = create_tween()
 		tween.tween_property(pot, "position", %CartUp.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(pot_collision, "position", %CartUp.position + Vector2(0, -18), 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(pot_collision, "position", %CartUp.position + Vector2(-1, -20), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == DOWN:
 		var tween = create_tween()
 		tween.tween_property(pot, "position", %CartDown.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(pot_collision, "position", %CartDown.position, 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(pot_collision, "position", %CartDown.position + Vector2(-1, -40), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == RIGHT:
 		var tween = create_tween()
 		tween.tween_property(pot, "position", %CartRight.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(pot_collision, "position", %CartRight.position + Vector2(18, 0), 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(pot_collision, "position", %CartRight.position + Vector2(-1, -49), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == LEFT:
 		var tween = create_tween()
 		tween.tween_property(pot, "position", %CartLeft.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(pot_collision, "position", %CartLeft.position + Vector2(-18, 0), 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(pot_collision, "position", %CartLeft.position + Vector2(-1, -49), 0.3).set_trans(Tween.TRANS_CUBIC)
 		
 func animate() -> void:
 	animation_tree.set(blend_pos_path, player.blend_position)
+	
+	
+func on_health_changed():
+	transitioned.emit(self, "HurtState")

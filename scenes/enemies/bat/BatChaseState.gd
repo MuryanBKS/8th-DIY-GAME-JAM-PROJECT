@@ -24,8 +24,8 @@ func enter():
 	can_move = true
 	animation_player.play("fly", -1, 2.0)
 	await get_tree().create_timer(0.5).timeout
-	eye_light.visible = true
 	is_active = true
+	
 	
 func physics_update(delta: float) -> void:
 	if not can_move:
@@ -35,6 +35,7 @@ func physics_update(delta: float) -> void:
 	
 func exit():
 	bat.velocity = Vector2.ZERO
+	health_component.health_changed.disconnect(on_health_changed)
 	
 	
 func get_player_direction() -> Vector2:
@@ -54,4 +55,3 @@ func move(delta):
 func on_health_changed():
 	is_active = true
 	transitioned.emit(self, "HurtState")
-	health_component.health_changed.disconnect(on_health_changed)

@@ -1399,6 +1399,7 @@ unique_name_in_owner = true
 position = Vector2(29, -75)
 
 [node name="HurtComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer")]
+collision_layer = 0
 script = ExtResource("7_mmhg7")
 health_component = NodePath("../HealthComponent")
 invincibility_timer = NodePath("InvincibilityTimer")

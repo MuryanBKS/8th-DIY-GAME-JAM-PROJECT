@@ -18,6 +18,7 @@ func enter() -> void:
 func exit() -> void:
 	pass
 	
+	
 func update(delta: float) -> void:
 	animate()
 	
@@ -25,7 +26,7 @@ func physics_update(delta: float) -> void:
 	if warrior.input_vector != Vector2.ZERO:
 		transitioned.emit(self, "MoveState")
 	apply_friction(delta)
-	if Input.is_action_just_pressed("push"):
+	if Input.is_action_just_pressed("dash"):
 		transitioned.emit(self, "AttackState")
 
 func apply_friction(delta) -> void:

@@ -1,5 +1,6 @@
-[gd_scene load_steps=32 format=3 uid="uid://ckbf5eqgs5mc5"]
+[gd_scene load_steps=33 format=3 uid="uid://ckbf5eqgs5mc5"]
 
+[ext_resource type="Script" path="res://scenes/enemies/bat/bat_new.gd" id="1_hbnp0"]
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://scenes/enemies/bat/Bat_Sprite_Sheet.png" id="2_b1qpj"]
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="4_160yl"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="4_ydfs3"]
@@ -331,6 +332,7 @@ radius = 403.0
 y_sort_enabled = true
 collision_layer = 4
 collision_mask = 5
+script = ExtResource("1_hbnp0")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("5_65u4c")
@@ -370,6 +372,7 @@ libraries = {
 speed_scale = 0.8
 
 [node name="HurtComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer")]
+collision_layer = 0
 script = ExtResource("4_ydfs3")
 health_component = NodePath("../HealthComponent")
 invincibility_timer = NodePath("InvincibilityTimer")
@@ -402,9 +405,8 @@ script = ExtResource("9_d8706")
 chase_area = NodePath("../../ChaseArea2D")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("visual", "bat", "animation_player", "health_component")]
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("bat", "animation_player", "health_component")]
 script = ExtResource("10_whr3e")
-visual = NodePath("../../Visual")
 bat = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 health_component = NodePath("../../HealthComponent")

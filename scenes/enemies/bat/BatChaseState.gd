@@ -4,20 +4,17 @@ class_name BatChaseState
 const SPEED = 200.0
 
 
-@export var visual: Node2D
-@export var eye_light: Node2D
 @export var bat: CharacterBody2D
 @export var animation_player: AnimationPlayer
 @export var health_component: HealthComponent
 
-var player: CharacterBody2D
+
 var can_move = false
 var is_active = false
 
 
 func enter():
 	health_component.health_changed.connect(on_health_changed)
-	player = get_tree().get_first_node_in_group("player")
 	if not is_active:
 		animation_player.play("die", -1, -2.0, true)
 		await animation_player.animation_finished
@@ -39,7 +36,7 @@ func exit():
 	
 	
 func get_player_direction() -> Vector2:
-	return (player.global_position - bat.global_position).normalized()
+	return (bat.target.global_position - bat.global_position).normalized()
 	
 	
 func move(delta):

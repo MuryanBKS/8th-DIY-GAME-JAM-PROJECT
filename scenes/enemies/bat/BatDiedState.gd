@@ -28,6 +28,7 @@ func physics_update(delta: float) -> void:
 func get_player_direction() -> Vector2:
 	return (player.get_cart_position() - bat.global_position).normalized()
 	
+	
 func absorbed_to_player(delta):
 	if get_player_direction().x > 0:
 		%Visual.scale.x = 1

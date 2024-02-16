@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Warrior
 
 var input_vector: Vector2
 var blend_position: Vector2

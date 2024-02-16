@@ -21,6 +21,8 @@ func update(delta: float) -> void:
 	
 func physics_update(delta: float) -> void:
 	move(delta)
+	if Input.is_action_just_pressed("dash"):
+		transitioned.emit(self, "AttackState")
 
 func move(delta):
 	if warrior.input_vector == Vector2.ZERO:

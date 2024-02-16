@@ -1,6 +1,7 @@
 extends State
 class_name BatIdleState
 
+
 @export var chase_area: Area2D
 @export var animation_player: AnimationPlayer
 
@@ -11,4 +12,5 @@ func enter():
 	
 	
 func on_body_entered(body: Node2D):
+	owner.target = body
 	transitioned.emit(self, "ChaseState")

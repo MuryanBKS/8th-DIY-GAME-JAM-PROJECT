@@ -695,7 +695,7 @@ states/idle/position = Vector2(531, 387)
 states/push_cart/node = SubResource("AnimationNodeBlendTree_tjc8v")
 states/push_cart/position = Vector2(259, 387)
 transitions = ["push_cart", "idle", SubResource("AnimationNodeStateMachineTransition_i7q3k"), "idle", "push_cart", SubResource("AnimationNodeStateMachineTransition_fc81q"), "Start", "idle", SubResource("AnimationNodeStateMachineTransition_x48y8"), "push_cart", "hurt", SubResource("AnimationNodeStateMachineTransition_bbfo2"), "hurt", "push_cart", SubResource("AnimationNodeStateMachineTransition_tmt2o"), "hurt", "idle", SubResource("AnimationNodeStateMachineTransition_h444q"), "idle", "hurt", SubResource("AnimationNodeStateMachineTransition_dmfp3")]
-graph_offset = Vector2(-301, 212)
+graph_offset = Vector2(-205.645, 148.378)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_63vu5"]
 atlas = ExtResource("1_4mymq")

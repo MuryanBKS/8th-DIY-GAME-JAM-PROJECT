@@ -10,23 +10,30 @@ var blend_pos_paths = [
 	"parameters/attack_01/attack_02_bs2d/blend_position"
 ]
 
-var second_attack = true
+var attack_finished = false
 
 @onready var state_machine = animation_tree["parameters/playback"]
 
 func enter() -> void:
-	pass
+	attack_finished = false
+	attack_animate()
 	
 func exit() -> void:
 	pass
 	
 func update(delta: float) -> void:
-	attack_animate()
+	pass
 	
 func physics_update(delta: float) -> void:
-	pass
+	if !attack_finished:
+		return
+	if warrior.input_vector != Vector2.ZERO:
+		transitioned.emit(self, "MoveState")
+	else:
+		transitioned.emit(self, "IdleState")
 
 func attack_animate():
-	second_attack = !second_attack
 	state_machine.travel("attack_01")
 	animation_tree.set(blend_pos_paths[0], warrior.blend_position)
+	await animation_tree.animation_finished
+	attack_finished = true

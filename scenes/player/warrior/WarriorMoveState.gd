@@ -39,5 +39,8 @@ func apply_movement(amount, delta) -> void:
 
 
 func animate() -> void:
-	animation_tree.set(blend_pos_path, warrior.blend_position.x)
-	
+	if warrior.input_vector == Vector2.UP:
+		animation_tree.set(blend_pos_path, 1)
+	else:
+		animation_tree.set(blend_pos_path, warrior.blend_position.x)
+		

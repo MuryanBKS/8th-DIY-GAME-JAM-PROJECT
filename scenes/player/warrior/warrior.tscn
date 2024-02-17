@@ -1299,7 +1299,7 @@ blend_point_1/pos = 1.0
 blend_mode = 1
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_tp0kj"]
-graph_offset = Vector2(-103.062, 37.3325)
+graph_offset = Vector2(202.56, 201.6)
 nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_weucm")
 nodes/TimeScale/position = Vector2(875, 171)
 nodes/output/position = Vector2(1260, 180)
@@ -1360,7 +1360,6 @@ shape = SubResource("CircleShape2D_5q05u")
 sprite_frames = SubResource("SpriteFrames_mk7vn")
 animation = &"idle"
 autoplay = "idle"
-flip_h = true
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("3_3dv8y")
@@ -1422,5 +1421,5 @@ damage = 20
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(-59, 0)
-rotation = 1.5708
 shape = SubResource("CapsuleShape2D_26s4e")
+disabled = true

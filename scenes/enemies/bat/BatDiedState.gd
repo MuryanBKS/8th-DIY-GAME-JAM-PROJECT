@@ -19,9 +19,13 @@ func enter():
 
 
 func physics_update(delta: float) -> void:
-	absorbed_to_player(delta)
-	if (player.get_cart_position() - bat.global_position).length() < 10:
-		player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
+	if bat.target is Player:
+		absorbed_to_player(delta)
+		if (player.get_cart_position() - bat.global_position).length() < 10:
+			player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
+			owner.queue_free()
+	else:
+		await animation_player.animation_finished
 		owner.queue_free()
 		
 

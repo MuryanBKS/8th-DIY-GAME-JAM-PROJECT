@@ -11,7 +11,7 @@
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerIdleState.gd" id="9_srs8y"]
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerMoveState.gd" id="10_snj71"]
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerDashState.gd" id="11_edrqs"]
-[ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/particles/fire_particles_2d.tscn" id="12_tgo6r"]
+[ext_resource type="PackedScene" uid="uid://dfq1o55mrsj2j" path="res://scenes/Effects/particles/fire_particles_2d.tscn" id="12_tgo6r"]
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerHurtState.gd" id="12_xrppd"]
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerDiedState.gd" id="13_cbeu7"]
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerNpcState.gd" id="15_yxqfo"]

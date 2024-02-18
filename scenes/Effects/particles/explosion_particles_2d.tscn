@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://b3pd1lb5w77i"]
 
-[ext_resource type="Script" path="res://scenes/particles/fire_particles_2d.gd" id="1_sn5b0"]
+[ext_resource type="Script" path="res://scenes/Effects/particles/fire_particles_2d.gd" id="1_sn5b0"]
 
 [sub_resource type="Curve" id="Curve_gvq5c"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.924658, 1), 0.0, 0.0, 0, 0, Vector2(1, 0.0291361), 0.0, 0.0, 0, 0]

@@ -6,6 +6,9 @@ signal slow_down_finished
 signal enemy_collected(bonus_type: String, bonus_value: int)
 signal player_changed(next_character: String)
 
+var character_now: CharacterBody2D
+
+
 @onready var pot_status = preload("res://scenes/resources/pot_status_now.tres")
 
 func _ready() -> void:
@@ -13,7 +16,7 @@ func _ready() -> void:
 	slow_down_finished.connect(on_slow_down_finished)
 	enemy_collected.connect(on_enemy_collected)
 	player_changed.connect(on_player_changed)
-	
+	character_now = get_tree().get_first_node_in_group("player")
 	
 func on_slow_down(scale = 0.1):
 	Engine.time_scale = scale
@@ -31,4 +34,5 @@ func on_player_changed(next_character: String):
 	var characters = get_tree().get_nodes_in_group("characters")
 	for character in characters:
 		if next_character == character.name:
+			character_now = character
 			character.get_buff(pot_status.bonus_types["Attack"])

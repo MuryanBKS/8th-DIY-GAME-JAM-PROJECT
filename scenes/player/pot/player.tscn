@@ -1456,9 +1456,10 @@ pot = NodePath("../../Pot")
 [node name="DiedState" type="Node" parent="StateMachine"]
 script = ExtResource("13_cbeu7")
 
-[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree")]
+[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "pot")]
 script = ExtResource("15_yxqfo")
 player = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
+pot = NodePath("../../Pot")
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

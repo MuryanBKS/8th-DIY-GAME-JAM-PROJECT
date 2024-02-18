@@ -1,7 +1,8 @@
-[gd_scene load_steps=29 format=3 uid="uid://cblaytvi5tp5m"]
+[gd_scene load_steps=31 format=3 uid="uid://cblaytvi5tp5m"]
 
 [ext_resource type="Script" path="res://scenes/player/pot/pot.gd" id="1_7u0vp"]
 [ext_resource type="Texture2D" uid="uid://chdwb4flsrq85" path="res://assets/animated_witch_cauldron_48x48.png" id="2_kbj6c"]
+[ext_resource type="Texture2D" uid="uid://ctr0eaxnlafh8" path="res://assets/Halloween_Shadow_Singles_48x48_53.png" id="3_2v253"]
 [ext_resource type="Texture2D" uid="uid://cy8idvganejbm" path="res://assets/Fire_Spreadsheet.png" id="3_5y35o"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="4_r1o25"]
 
@@ -223,6 +224,10 @@ region = Rect2(960, 0, 96, 96)
 atlas = ExtResource("2_kbj6c")
 region = Rect2(1056, 0, 96, 96)
 
+[sub_resource type="AtlasTexture" id="AtlasTexture_wjrku"]
+atlas = ExtResource("3_2v253")
+region = Rect2(0, 0, 96, 96)
+
 [sub_resource type="SpriteFrames" id="SpriteFrames_myrvp"]
 animations = [{
 "frames": [{
@@ -265,6 +270,14 @@ animations = [{
 "loop": true,
 "name": &"default",
 "speed": 12.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wjrku")
+}],
+"loop": true,
+"name": &"empty",
+"speed": 5.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_hawyc"]
@@ -327,8 +340,8 @@ autoplay = "burn"
 [node name="PotSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -39)
 sprite_frames = SubResource("SpriteFrames_myrvp")
+animation = &"empty"
 autoplay = "default"
-frame_progress = 0.0212083
 
 [node name="Fire" type="Node2D" parent="."]
 position = Vector2(-2, -38)

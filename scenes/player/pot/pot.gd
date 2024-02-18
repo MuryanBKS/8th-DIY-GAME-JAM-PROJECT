@@ -14,3 +14,6 @@ func get_pot_center_position() -> Vector2:
 	
 func switch_pot_collision(value: bool):
 	%CollisionShape2D.set_deferred("disabled", !value)
+
+func become_empty():
+	$PotSprite.play("empty")

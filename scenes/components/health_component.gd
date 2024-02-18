@@ -2,7 +2,7 @@ class_name HealthComponent
 extends Node
 
 signal health_changed
-signal died
+
 
 @export var health: int
 

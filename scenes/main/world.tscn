@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://cbglov652jnsr"]
+[gd_scene load_steps=22 format=3 uid="uid://cbglov652jnsr"]
 
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_cgrp3"]
 [ext_resource type="Script" path="res://scenes/camera/camera.gd" id="1_kt6uq"]
@@ -10,7 +10,6 @@
 [ext_resource type="PackedScene" uid="uid://brhggke2fu4n4" path="res://scenes/player/warrior/warrior.tscn" id="10_lxb1a"]
 [ext_resource type="PackedScene" uid="uid://c56sxv1i8mgrm" path="res://scenes/enemies/barrel_goblin/barrel_goblin.tscn" id="11_amj1o"]
 [ext_resource type="PackedScene" uid="uid://3y8nu7cdclv0" path="res://scenes/NPC/dying_person.tscn" id="11_ap6na"]
-[ext_resource type="Texture2D" uid="uid://bn6cnm78nm5u2" path="res://assets/Traps/Pit_Trap_Spikes.png" id="12_bbpmi"]
 
 [sub_resource type="Environment" id="Environment_7rrmb"]
 background_mode = 3
@@ -1114,7 +1113,7 @@ player = NodePath("../Player")
 [node name="Fire" type="Node2D" parent="." groups=["fire"]]
 
 [node name="Player" parent="." instance=ExtResource("1_qyi1p")]
-position = Vector2(-72, 958)
+position = Vector2(-118, 159)
 
 [node name="Enemy" parent="." instance=ExtResource("4_diusp")]
 position = Vector2(960, 2256)
@@ -1192,14 +1191,8 @@ flip_h = true
 [node name="DyingPerson" parent="." instance=ExtResource("11_ap6na")]
 position = Vector2(3580, 2922)
 
-[node name="PitTrapSpikes" type="Sprite2D" parent="."]
-position = Vector2(32, 288)
-scale = Vector2(2, 2)
-texture = ExtResource("12_bbpmi")
-script = ExtResource("1_p4u54")
-
 [node name="Warrior" parent="." instance=ExtResource("10_lxb1a")]
-position = Vector2(190, 1026)
+position = Vector2(1472, 795)
 
 [node name="BarrelGoblin" parent="." instance=ExtResource("11_amj1o")]
 position = Vector2(90, 2376)

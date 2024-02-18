@@ -13,6 +13,7 @@ var random_vector: Vector2
 
 func enter():
 	hit_collision.set_deferred("disabled", true)
+	bat.collision_mask = 1
 	random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	if random_vector == get_target_direction():
 		randomize()
@@ -28,6 +29,7 @@ func physics_update(delta: float) -> void:
 		
 func exit():
 	hit_collision.set_deferred("disabled", false)
+	bat.collision_mask = 7
 	
 	
 func get_target_direction() -> Vector2:

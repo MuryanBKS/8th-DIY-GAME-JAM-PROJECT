@@ -4,8 +4,8 @@ class_name BatDiedState
 const SPEED = 800.0
 
 @export var animation_player: AnimationPlayer
-@export var bat_collision: CollisionShape2D
 @export var bat: CharacterBody2D
+@export var bat_collision: CollisionShape2D
 @export var hit_collision: CollisionShape2D
 
 var player: CharacterBody2D

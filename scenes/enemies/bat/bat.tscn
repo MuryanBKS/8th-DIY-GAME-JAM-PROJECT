@@ -419,11 +419,11 @@ hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 
-[node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "bat_collision", "bat", "hit_collision")]
+[node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "bat", "bat_collision", "hit_collision")]
 script = ExtResource("10_ffd4f")
 animation_player = NodePath("../../AnimationPlayer")
-bat_collision = NodePath("../../CollisionShape2D")
 bat = NodePath("../..")
+bat_collision = NodePath("../../CollisionShape2D")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 
 [node name="ChaseArea2D" type="Area2D" parent="."]

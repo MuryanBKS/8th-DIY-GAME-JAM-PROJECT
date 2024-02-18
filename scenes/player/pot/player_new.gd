@@ -9,9 +9,7 @@ var blend_position := Vector2(0, 0.1)
 
 func _ready() -> void:
 	emote_changed.connect(on_emote_changed)
-	for character in get_tree().get_nodes_in_group("characters"):
-		character.player_changed.connect(on_player_changed)
-	
+	GameManager.player_changed.connect(on_player_changed)
 	
 func _physics_process(delta: float) -> void:
 	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -27,5 +25,5 @@ func on_emote_changed(path, rect2):
 	%ThinkingEmote.change_emote(path, rect2)
 	%ThinkingEmote.think()
 
-func on_player_changed():
+func on_player_changed(value):
 	%StateMachine.current_state.transitioned.emit(%StateMachine.current_state, "NpcState")

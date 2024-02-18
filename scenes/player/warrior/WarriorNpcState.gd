@@ -1,7 +1,6 @@
 extends State
 class_name WarriorNpcState
 
-signal player_changed
 
 @export var switch_area: Area2D
 
@@ -23,5 +22,5 @@ func physics_update(delta: float) -> void:
 
 func on_body_entered(body: Node2D):
 	if body is Player:
-		player_changed.emit()
-		transitioned.emit(self, "MoveState")
+		GameManager.player_changed.emit("Warrior")
+		transitioned.emit(self, "IdleState")

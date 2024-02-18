@@ -2,6 +2,7 @@ extends State
 
 @export var warrior: CharacterBody2D
 @export var animation_tree: AnimationTree
+@export var health_component: HealthComponent
 
 var blend_pos_path = "parameters/idle/idle_bs1d/blend_position"
 var is_active = false
@@ -9,6 +10,7 @@ var is_active = false
 @onready var state_machine = animation_tree["parameters/playback"]
 
 func enter() -> void:
+	health_component.health_changed.connect(on_health_changed)
 	state_machine.travel("idle")
 	if not is_active:
 		var camera = get_tree().get_first_node_in_group("camera")
@@ -16,7 +18,7 @@ func enter() -> void:
 	is_active = true
 	
 func exit() -> void:
-	pass
+	health_component.health_changed.disconnect(on_health_changed)
 	
 	
 func update(delta: float) -> void:
@@ -39,3 +41,7 @@ func apply_friction(delta) -> void:
 
 func animate() -> void:
 	animation_tree.set(blend_pos_path, warrior.blend_position.x)
+
+
+func on_health_changed():
+	transitioned.emit(self, "HurtState")

@@ -22,6 +22,7 @@ func physics_update(delta: float) -> void:
 	if bat.target is Player:
 		absorbed_to_player(delta)
 		if (player.get_cart_position() - bat.global_position).length() < 10:
+			GameManager.enemy_collected.emit("Attack", 10)
 			player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
 			owner.queue_free()
 	else:
@@ -41,3 +42,5 @@ func absorbed_to_player(delta):
 		
 	bat.velocity = lerp(bat.velocity, get_player_direction() * SPEED, 1 - exp(-30 * delta))
 	bat.move_and_slide()
+
+

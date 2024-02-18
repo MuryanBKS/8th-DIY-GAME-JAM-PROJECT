@@ -1,0 +1,6 @@
+[gd_resource type="Resource" script_class="PotStaus" load_steps=2 format=3 uid="uid://bjdy6ucbad1l2"]
+
+[ext_resource type="Script" path="res://scenes/resources/pot_status.gd" id="1_ucc88"]
+
+[resource]
+script = ExtResource("1_ucc88")

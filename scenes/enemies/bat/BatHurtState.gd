@@ -38,10 +38,10 @@ func get_player_direction() -> Vector2:
 	
 func knock_back(delta):
 	bat.velocity = lerp(bat.velocity, Vector2.ZERO, 1 - exp(-8 * delta))
-	if bat.velocity.length() < 30 and animation_player.animation_finished:
+	if bat.velocity.length() < 30:
 		bat.velocity = Vector2.ZERO
 		if health_component.get_health() <= 0:
 			transitioned.emit(self, "DiedState")
 		transitioned.emit(self, "ChaseState")
 	bat.move_and_slide()
-	
+

@@ -25,8 +25,8 @@ ssao_ao_channel_affect = 1.0
 glow_intensity = 1.54
 glow_strength = 1.22
 glow_blend_mode = 0
-glow_hdr_threshold = 0.85
-glow_hdr_scale = 1.52
+glow_hdr_threshold = 1.03
+glow_hdr_scale = 1.4
 fog_light_color = Color(0.870588, 0, 0.929412, 1)
 fog_light_energy = 3.7
 fog_sun_scatter = 0.14
@@ -1106,7 +1106,7 @@ layer_3/name = "decoration"
 layer_3/tile_data = PackedInt32Array()
 
 [node name="MainCamera2D" type="Camera2D" parent="." node_paths=PackedStringArray("player") groups=["camera"]]
-zoom = Vector2(1.5, 1.5)
+zoom = Vector2(2, 2)
 script = ExtResource("1_kt6uq")
 player = NodePath("../Player")
 
@@ -1121,6 +1121,26 @@ rotation = -0.00872665
 
 [node name="Enemy2" parent="." instance=ExtResource("4_diusp")]
 position = Vector2(1248, 2400)
+rotation = -0.00872665
+
+[node name="Enemy6" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(3127, 3026)
+rotation = -0.00872665
+
+[node name="Enemy7" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(3374, 3039)
+rotation = -0.00872665
+
+[node name="Enemy8" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(3230, 3275)
+rotation = -0.00872665
+
+[node name="Enemy9" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(3596, 3228)
+rotation = -0.00872665
+
+[node name="Enemy10" parent="." instance=ExtResource("4_diusp")]
+position = Vector2(3441, 3401)
 rotation = -0.00872665
 
 [node name="Enemy3" parent="." instance=ExtResource("4_diusp")]

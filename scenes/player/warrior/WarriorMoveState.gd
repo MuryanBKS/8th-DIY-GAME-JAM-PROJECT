@@ -5,16 +5,20 @@ const MAX_SPEED = 700
 
 @export var warrior: CharacterBody2D
 @export var animation_tree: AnimationTree
+@export var health_component: HealthComponent
 
 var blend_pos_path = "parameters/run/run_bs1d/blend_position"
+var previous_x_direction: float
 
 @onready var state_machine = animation_tree["parameters/playback"]
 
 func enter() -> void:
+	health_component.health_changed.connect(on_health_changed)
 	state_machine.travel("run")
 	
 func exit() -> void:
-	pass
+	health_component.health_changed.disconnect(on_health_changed)
+	warrior.blend_position.x = previous_x_direction
 	
 func update(delta: float) -> void:
 	animate()
@@ -39,8 +43,14 @@ func apply_movement(amount, delta) -> void:
 
 
 func animate() -> void:
-	if warrior.input_vector == Vector2.UP:
-		animation_tree.set(blend_pos_path, 1)
+	if warrior.input_vector.x != 0:
+		previous_x_direction = warrior.input_vector.x
+		
+	if warrior.input_vector.y > 0 or warrior.input_vector.y < 0:
+		animation_tree.set(blend_pos_path, previous_x_direction)
 	else:
 		animation_tree.set(blend_pos_path, warrior.blend_position.x)
 		
+
+func on_health_changed():
+	transitioned.emit(self, "HurtState")

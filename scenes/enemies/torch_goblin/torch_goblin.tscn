@@ -1,4 +1,4 @@
-[gd_scene load_steps=57 format=3 uid="uid://bj5hrt234asvg"]
+[gd_scene load_steps=58 format=3 uid="uid://bj5hrt234asvg"]
 
 [ext_resource type="Script" path="res://scenes/enemies/torch_goblin/torch_goblin.gd" id="1_0q5me"]
 [ext_resource type="Texture2D" uid="uid://cglhvp8ik32js" path="res://scenes/enemies/torch_goblin/Torch_Red.png" id="1_mbccc"]
@@ -495,6 +495,9 @@ radius = 29.0
 radius = 34.0
 height = 104.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_ffffn"]
+radius = 315.002
+
 [node name="TorchGoblin" type="CharacterBody2D"]
 script = ExtResource("1_0q5me")
 
@@ -516,21 +519,27 @@ libraries = {
 script = ExtResource("2_vff5u")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "sprite_2d", "idle_timer")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "sprite_2d", "idle_timer", "chase_area")]
 script = ExtResource("3_8xv2y")
 animation_player = NodePath("../../AnimationPlayer")
 sprite_2d = NodePath("../../AnimatedSprite2D")
 idle_timer = NodePath("../../IdleTimer")
+chase_area = NodePath("../../ChaseArea2D")
 
-[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "wander_timer", "animated_sprite_2d", "health_component")]
+[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "wander_timer", "animated_sprite_2d", "health_component", "chase_area")]
 script = ExtResource("5_k6qka")
 animation_player = NodePath("../../AnimationPlayer")
 wander_timer = NodePath("../../WanderTimer")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 health_component = NodePath("../../HealthComponent")
+chase_area = NodePath("../../ChaseArea2D")
 
-[node name="ChaseState" type="Node" parent="StateMachine"]
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "animated_sprite_2d", "chase_area")]
 script = ExtResource("4_jaup3")
+animation_player = NodePath("../../AnimationPlayer")
+health_component = NodePath("../../HealthComponent")
+animated_sprite_2d = NodePath("../../AnimatedSprite2D")
+chase_area = NodePath("../../ChaseArea2D")
 
 [node name="AttackState" type="Node" parent="StateMachine"]
 script = ExtResource("5_k4efk")
@@ -590,3 +599,14 @@ collision_mask = 2
 position = Vector2(58, -32)
 shape = SubResource("CapsuleShape2D_cetjj")
 debug_color = Color(0.623529, 0.533333, 0.0823529, 0.419608)
+
+[node name="ChaseArea2D" type="Area2D" parent="."]
+light_mask = 0
+visibility_layer = 2
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea2D"]
+position = Vector2(1, -37)
+shape = SubResource("CircleShape2D_ffffn")
+debug_color = Color(0.694118, 0.494118, 0, 0.419608)

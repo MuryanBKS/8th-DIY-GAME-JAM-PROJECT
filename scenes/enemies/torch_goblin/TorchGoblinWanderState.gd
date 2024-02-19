@@ -7,6 +7,7 @@ const SPEED := 100
 @export var wander_timer: Timer
 @export var animated_sprite_2d: AnimatedSprite2D
 @export var health_component: HealthComponent
+@export var chase_area: Area2D
 
 var random_vector: Vector2
 
@@ -14,6 +15,7 @@ var random_vector: Vector2
 func enter() -> void:
 	wander_timer.timeout.connect(on_wander_timer_timeout)
 	health_component.health_changed.connect(on_health_changed)
+	chase_area.body_entered.connect(on_body_entered)
 	wander_timer.wait_time = randf_range(1.0, 3.0)
 	wander_timer.start()
 	random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
@@ -22,6 +24,7 @@ func enter() -> void:
 func exit() -> void:
 	wander_timer.timeout.disconnect(on_wander_timer_timeout)
 	health_component.health_changed.disconnect(on_health_changed)
+	chase_area.body_entered.disconnect(on_body_entered)
 	
 func update(delta: float) -> void:
 	animate()
@@ -53,3 +56,6 @@ func on_wander_timer_timeout():
 	
 func on_health_changed():
 	transitioned.emit(self, "DiedState")
+
+func on_body_entered(body: Node2D):
+	transitioned.emit(self, "ChaseState")

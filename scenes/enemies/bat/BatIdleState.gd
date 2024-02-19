@@ -11,10 +11,11 @@ func enter():
 	animation_player.play("idle")
 	
 	
-func on_body_entered(body: Node2D):
-	owner.target = body
-	transitioned.emit(self, "ChaseState")
 
 func exit():
 	chase_area.body_entered.disconnect(on_body_entered)
 	
+
+func on_body_entered(body: Node2D):
+	owner.target = body
+	transitioned.emit(self, "ChaseState")

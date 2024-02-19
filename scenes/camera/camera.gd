@@ -16,6 +16,8 @@ func _ready() -> void:
 	GameManager.slow_down_finished.connect(on_slow_down_finished)
 	
 func _physics_process(delta: float) -> void:
+	if !player:
+		return
 	if is_dashing:
 		global_position = lerp(global_position, player.global_position + dash_vector * CAMERA_DASH_OFFSET, 1 - exp(-camera_speed * delta))
 	else :

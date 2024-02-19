@@ -35,4 +35,6 @@ func hurt():
 	state_machine.travel("hurt")
 	animation_tree.set("parameters/hurt/blend_position", Vector2(0, 1))
 	await animation_tree.animation_finished
+	if health_component.get_health() <= 0:
+		transitioned.emit(self, "DiedState")
 	hurt_finished = true

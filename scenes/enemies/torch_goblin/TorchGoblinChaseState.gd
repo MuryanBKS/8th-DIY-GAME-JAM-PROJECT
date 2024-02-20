@@ -7,12 +7,14 @@ const SPEED = 200.0
 @export var health_component: HealthComponent
 @export var animated_sprite_2d: AnimatedSprite2D
 @export var chase_area: Area2D
-
+@export var attack_area: Area2D
+@export var hit_area: Area2D
 
 func enter():
 	health_component.health_changed.connect(on_health_changed)
 	chase_area.body_exited.connect(on_body_exited)
-	
+	attack_area.area_entered.connect(on_attack_area_entered)
+	hit_area.set_deferred("monitorable", false)
 	
 func physics_update(delta: float) -> void:
 	move(delta)
@@ -23,6 +25,7 @@ func exit():
 	owner.velocity = Vector2.ZERO
 	health_component.health_changed.disconnect(on_health_changed)
 	chase_area.body_exited.disconnect(on_body_exited)
+	attack_area.area_entered.disconnect(on_attack_area_entered)
 	
 	
 func get_player_direction() -> Vector2:
@@ -32,6 +35,20 @@ func get_player_direction() -> Vector2:
 func move(delta):
 	owner.move_direction = get_player_direction()
 	owner.velocity = lerp(owner.velocity, get_player_direction() * SPEED, 1 - exp(-5 * delta))
+	if abs(owner.move_direction.x) >= abs(owner.move_direction.y):
+		if owner.move_direction.x > 0:
+			attack_area.position = Vector2(58, -31)
+			attack_area.rotation_degrees = 0
+		else :
+			attack_area.position = Vector2(-58, -31)
+			attack_area.rotation_degrees = 0
+	else :
+		if owner.move_direction.y > 0:
+			attack_area.position = Vector2(0, 11)
+			attack_area.rotation_degrees = 90
+		else :
+			attack_area.position = Vector2(0, -74)
+			attack_area.rotation_degrees = 90
 	owner.move_and_slide()
 
 
@@ -49,3 +66,7 @@ func on_health_changed():
 
 func on_body_exited(body: Node2D):
 	transitioned.emit(self, "IdleState")
+
+
+func on_attack_area_entered(area: Area2D):
+	transitioned.emit(self, "AttackState")

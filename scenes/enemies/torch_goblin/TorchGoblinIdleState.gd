@@ -4,10 +4,12 @@ extends State
 @export var sprite_2d: AnimatedSprite2D
 @export var idle_timer: Timer
 @export var chase_area: Area2D
+@export var hit_area: Area2D
 
 func enter() -> void:
 	idle_timer.timeout.connect(on_idle_timer_timeout)
 	chase_area.body_entered.connect(on_body_entered)
+	hit_area.set_deferred("monitorable", false)
 	if owner.move_direction.x > 0:
 		sprite_2d.flip_h = false
 	elif owner.move_direction.x < 0:

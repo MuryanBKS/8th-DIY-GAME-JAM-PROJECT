@@ -75,7 +75,7 @@ push={
 2d_physics/layer_5="player_hitbox"
 2d_physics/layer_6="enemy_hitbox"
 2d_physics/layer_7="npc"
-2d_physics/layer_8="pot"
+2d_physics/layer_8="player_hurt"
 
 [rendering]
 

@@ -1913,7 +1913,7 @@ disabled = true
 
 [node name="HurtComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer")]
 position = Vector2(0, -33)
-collision_layer = 0
+collision_layer = 128
 collision_mask = 0
 script = ExtResource("11_m25rq")
 health_component = NodePath("../HealthComponent")

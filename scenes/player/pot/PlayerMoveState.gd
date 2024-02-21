@@ -8,6 +8,7 @@ const MAX_SPEED = 700
 @export var pot: Node2D
 @export var pot_collision: CollisionShape2D
 @export var health_component: HealthComponent
+@export var dash_cooldown_timer: Timer
 
 enum {UP, DOWN, RIGHT, LEFT}
 
@@ -19,19 +20,26 @@ var blend_pos_path = "parameters/push_cart/push_bs2d/blend_position"
 func enter() -> void:
 	state_machine.travel("push_cart")
 	health_component.health_changed.connect(on_health_changed)
+	dash_cooldown_timer.timeout.connect(on_dash_cooldown_timer_timeout)
 	pot.switch_pot_collision(false)
+	
 	
 func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)
+	dash_cooldown_timer.timeout.disconnect(on_dash_cooldown_timer_timeout)
+	
 	
 func update(delta: float) -> void:
 	animate()
 	
+	
 func physics_update(delta: float) -> void:
 	move(delta)
-	if Input.is_action_just_pressed("dash"):
+	if Input.is_action_just_pressed("dash") and dash_cooldown_timer.is_stopped():
 		transitioned.emit(self, "DashState")
-
+		dash_cooldown_timer.start()
+		pot.hide_pot_fire()
+		pot.burn()
 
 func move(delta):
 	if player.input_vector == Vector2.ZERO:
@@ -65,9 +73,14 @@ func change_cart_position(direction: int):
 		tween.tween_property(pot, "position", %CartLeft.position, 0.1).set_trans(Tween.TRANS_CUBIC)
 		tween.parallel().tween_property(pot_collision, "position", %CartLeft.position + Vector2(-1, -49), 0.3).set_trans(Tween.TRANS_CUBIC)
 		
+		
 func animate() -> void:
 	animation_tree.set(blend_pos_path, player.blend_position)
 	
 	
 func on_health_changed():
 	transitioned.emit(self, "HurtState")
+
+func on_dash_cooldown_timer_timeout():
+	pot.show_pot_fire()
+	pot.burn()

@@ -1517,9 +1517,8 @@ parameters/push_cart/push_bs2d/blend_position = Vector2(0, 0)
 wait_time = 0.2
 one_shot = true
 
-[node name="DecelerateTimer" type="Timer" parent="."]
-unique_name_in_owner = true
-wait_time = 0.2
+[node name="DashCooldownTimer" type="Timer" parent="."]
+wait_time = 3.0
 one_shot = true
 
 [node name="CartPosition" type="Node2D" parent="."]
@@ -1587,20 +1586,22 @@ unique_name_in_owner = true
 script = ExtResource("8_n36ec")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "health_component", "pot")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "health_component", "pot", "dash_cooldown_timer")]
 script = ExtResource("9_srs8y")
 player = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 health_component = NodePath("../../HealthComponent")
 pot = NodePath("../../Pot")
+dash_cooldown_timer = NodePath("../../DashCooldownTimer")
 
-[node name="MoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "pot", "pot_collision", "health_component")]
+[node name="MoveState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "pot", "pot_collision", "health_component", "dash_cooldown_timer")]
 script = ExtResource("10_snj71")
 player = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 pot = NodePath("../../Pot")
 pot_collision = NodePath("../../PotCollisionShape2D")
 health_component = NodePath("../../HealthComponent")
+dash_cooldown_timer = NodePath("../../DashCooldownTimer")
 
 [node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "dash_timer", "invincibility_timer", "pot", "pot_collision")]
 script = ExtResource("11_edrqs")

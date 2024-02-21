@@ -21,7 +21,7 @@ var is_decelerating = false
 
 @onready var animation_tree: AnimationTree = $AnimationTree
 @onready var state_machine = animation_tree["parameters/playback"]
-@onready var fire_particle = preload("res://scenes/particles/fire_particles_2d.tscn")
+@onready var fire_particle = preload("res://scenes/Effects/particles/fire_particles_2d.tscn")
 
 var blend_position: Vector2 = Vector2.ZERO
 var time_scale = 1.0

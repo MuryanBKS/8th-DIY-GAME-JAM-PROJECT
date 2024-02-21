@@ -35,7 +35,7 @@ func knock_back(delta):
 	owner.velocity = lerp(owner.velocity, Vector2.ZERO, 1 - exp(-8 * delta))
 	if owner.velocity.length() < 30:
 		owner.velocity = Vector2.ZERO
-		owner.move_and_slide()
+	owner.move_and_slide()
 	
 	
 func explode_animate():
@@ -47,3 +47,4 @@ func explode_animate():
 	explosion_area.set_deferred("disabled", false)
 	await animation_player.animation_finished
 	owner.queue_free()
+

@@ -1203,4 +1203,10 @@ position = Vector2(1302, 1834)
 position = Vector2(1321, 2378)
 
 [node name="TorchGoblin" parent="." instance=ExtResource("11_l6bib")]
-position = Vector2(188, 859)
+position = Vector2(448, 1939)
+
+[node name="TorchGoblin2" parent="." instance=ExtResource("11_l6bib")]
+position = Vector2(1121, 2067)
+
+[node name="TorchGoblin3" parent="." instance=ExtResource("11_l6bib")]
+position = Vector2(742, 2375)

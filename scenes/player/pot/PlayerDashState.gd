@@ -1,7 +1,7 @@
 extends State
 class_name PlayerDashState
 
-const MAX_DASH_SPEED = 1500
+const MAX_DASH_SPEED = 1200
 
 @export var player: CharacterBody2D
 @export var dash_timer: Timer
@@ -30,7 +30,7 @@ func exit() -> void:
 	dash_timer.timeout.disconnect(on_dash_timer_timeout)
 	player.collision_mask = 5
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	spawn_fire()
 	
 func physics_update(delta: float) -> void:

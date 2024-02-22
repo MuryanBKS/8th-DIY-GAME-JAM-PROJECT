@@ -64,9 +64,9 @@ func on_health_changed():
 	transitioned.emit(self, "HurtState")
 
 
-func on_body_exited(body: Node2D):
+func on_body_exited(_body: Node2D):
 	transitioned.emit(self, "IdleState")
 
 
-func on_attack_area_entered(area: Area2D):
+func on_attack_area_entered(_area: Area2D):
 	transitioned.emit(self, "AttackState")

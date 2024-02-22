@@ -28,16 +28,22 @@ func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)
 	chase_area.body_entered.disconnect(on_body_entered)
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	animate()
 	
 func physics_update(delta: float) -> void:
-	player_ray_cast.target_position = owner.move_direction * 300
+	player_ray_cast.target_position = get_target_direction() * 300
 	wall_ray_cast.target_position = owner.move_direction * 100
-	if wall_ray_cast.get_collider():
+	move()
+	if chase_area.get_overlapping_bodies().is_empty() or player_ray_cast.get_collider():
+		return
+	else:
+		transitioned.emit(self, "ChaseState")
+		
+	if wall_ray_cast.get_collider() and not chase_area.get_overlapping_bodies().is_empty():
 		wander_timer.stop()
 		transitioned.emit(self, "IdleState")
-	move(delta)
+	
 
 func get_target_direction() -> Vector2:
 	return (GameManager.character_now.global_position - owner.global_position).normalized()
@@ -45,7 +51,7 @@ func get_target_direction() -> Vector2:
 func randomize_wander() -> void:
 	owner.move_direction = random_vector
 
-func move(delta):
+func move():
 	owner.velocity = owner.move_direction * SPEED
 	owner.move_and_slide()
 
@@ -64,8 +70,7 @@ func on_wander_timer_timeout():
 func on_health_changed():
 	transitioned.emit(self, "DiedState")
 
-func on_body_entered(body: Node2D):
-	player_ray_cast.target_position = get_target_direction() * 300
+func on_body_entered(_body: Node2D):
 	if player_ray_cast.get_collider():
 		return
 	transitioned.emit(self, "ChaseState")

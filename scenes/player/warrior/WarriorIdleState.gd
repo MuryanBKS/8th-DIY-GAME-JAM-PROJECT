@@ -21,7 +21,7 @@ func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)
 	
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	animate()
 	
 func physics_update(delta: float) -> void:

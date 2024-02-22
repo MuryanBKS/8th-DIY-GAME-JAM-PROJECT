@@ -1045,12 +1045,13 @@ health_component = NodePath("../../HealthComponent")
 hit_area = NodePath("../../HitboxComponent")
 attack_area = NodePath("../../CanAttackArea2D")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player", "hit_collision")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player", "hit_collision", "sprite")]
 script = ExtResource("6_c7yqf")
 health_component = NodePath("../../HealthComponent")
 hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
+sprite = NodePath("../../AnimatedSprite2D")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "goblin_collision", "hit_collision")]
 script = ExtResource("7_xqhrw")

@@ -29,7 +29,7 @@ func exit() -> void:
 	dash_cooldown_timer.timeout.disconnect(on_dash_cooldown_timer_timeout)
 	
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	animate()
 	
 	

@@ -18,7 +18,7 @@ func enter():
 	hurt()
 	
 	
-func physics_update(delta: float) -> void:
+func physics_update(_delta: float) -> void:
 	if !hurt_finished:
 		return
 	if player.input_vector != Vector2.ZERO:

@@ -5,6 +5,7 @@ extends State
 @export var hurt_component: HurtComponent
 @export var animation_player: AnimationPlayer
 @export var hit_collision: CollisionShape2D
+@export var sprite: AnimatedSprite2D
 
 var knockback_direction: Vector2
 var random_vector: Vector2
@@ -18,7 +19,7 @@ func enter():
 		randomize()
 		random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	knockback_direction = -get_target_direction() + random_vector
-	owner.velocity = knockback_direction.normalized() * 1800.0
+	owner.velocity = knockback_direction.normalized() * randi_range(800, 1800)
 	hurt_animate()
 	
 func physics_update(delta: float) -> void:
@@ -28,7 +29,7 @@ func physics_update(delta: float) -> void:
 func exit():
 	hit_collision.set_deferred("disabled", false)
 	owner.collision_mask = 7
-	
+	sprite.modulate = Color.WHITE
 	
 func get_target_direction() -> Vector2:
 	return (GameManager.character_now.global_position - owner.global_position).normalized()

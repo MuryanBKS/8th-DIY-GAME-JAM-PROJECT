@@ -1,7 +1,7 @@
 extends State
 class_name WarriorMoveState
 
-const MAX_SPEED = 700
+const MAX_SPEED = 360
 
 @export var warrior: CharacterBody2D
 @export var animation_tree: AnimationTree
@@ -20,7 +20,7 @@ func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)
 	warrior.blend_position.x = previous_x_direction
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	animate()
 	
 func physics_update(delta: float) -> void:

@@ -326,7 +326,7 @@ radius = 20.0
 radius = 16.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_hblm1"]
-radius = 403.0
+radius = 249.05
 
 [node name="Bat" type="CharacterBody2D"]
 y_sort_enabled = true
@@ -411,13 +411,14 @@ bat = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 health_component = NodePath("../../HealthComponent")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("bat", "health_component", "hurt_component", "animation_player", "hit_collision")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("bat", "health_component", "hurt_component", "animation_player", "hit_collision", "sprite")]
 script = ExtResource("9_ijdca")
 bat = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
+sprite = NodePath("../../Visual/AnimatedSprite2D")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "bat", "bat_collision", "hit_collision")]
 script = ExtResource("10_ffd4f")

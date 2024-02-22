@@ -15,12 +15,12 @@ func enter() -> void:
 		randomize()
 		random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	knockback_direction = -get_target_direction() + random_vector
-	owner.velocity = knockback_direction.normalized() * 1000.0
+	owner.velocity = knockback_direction.normalized() * randi_range(500, 1000)
 	
 func exit() -> void:
 	pass
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	if is_exploding:
 		return
 	explode_animate()

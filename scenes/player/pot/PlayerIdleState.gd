@@ -19,7 +19,7 @@ func enter():
 	health_component.health_changed.connect(on_health_changed)
 	dash_cooldown_timer.timeout.connect(on_dash_cooldown_timer_timeout)
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	animate()
 	
 func physics_update(delta: float) -> void:

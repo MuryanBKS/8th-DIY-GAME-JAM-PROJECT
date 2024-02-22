@@ -28,11 +28,11 @@ func exit() -> void:
 	wander_timer.timeout.disconnect(on_wander_timer_timeout)
 	health_component.health_changed.disconnect(on_health_changed)
 	
-func update(delta: float) -> void:
+func update(_delta: float) -> void:
 	animate()
 	
-func physics_update(delta: float) -> void:
-	move(delta)
+func physics_update(_delta: float) -> void:
+	move()
 
 func get_target_direction() -> Vector2:
 	return (GameManager.character_now.global_position - owner.global_position).normalized()
@@ -40,7 +40,7 @@ func get_target_direction() -> Vector2:
 func randomize_wander() -> void:
 	owner.move_direction = (get_target_direction() + random_vector).normalized()
 
-func move(delta):
+func move():
 	if can_move:
 		owner.velocity = owner.move_direction * SPEED
 	owner.move_and_slide()

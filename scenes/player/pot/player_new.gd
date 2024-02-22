@@ -12,7 +12,7 @@ func _ready() -> void:
 	GameManager.player_changed.connect(on_player_changed)
 	
 	
-func _physics_process(delta: float) -> void:
+func _physics_process(_delta: float) -> void:
 	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
 	if input_vector != Vector2.ZERO:
 		blend_position = input_vector
@@ -26,5 +26,5 @@ func on_emote_changed(path, rect2):
 	%ThinkingEmote.change_emote(path, rect2)
 	%ThinkingEmote.think()
 
-func on_player_changed(value):
+func on_player_changed(_value):
 	%StateMachine.current_state.transitioned.emit(%StateMachine.current_state, "NpcState")

@@ -1514,7 +1514,7 @@ parameters/push_cart/TimeScale/scale = 1.0
 parameters/push_cart/push_bs2d/blend_position = Vector2(0, 0)
 
 [node name="DashTimer" type="Timer" parent="."]
-wait_time = 0.2
+wait_time = 0.1
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="."]

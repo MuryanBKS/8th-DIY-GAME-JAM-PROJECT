@@ -28,15 +28,22 @@ func exit() -> void:
 func update(delta: float) -> void:
 	pass
 	
-func physics_update(delta: float) -> void:
-	player_ray_cast.target_position = owner.move_direction * 300
+func physics_update(_delta: float) -> void:
+	player_ray_cast.target_position = get_target_direction() * 300
+	if chase_area.get_overlapping_bodies().is_empty() or player_ray_cast.get_collider():
+		return
+	else:
+		transitioned.emit(self, "ChaseState")
+
+func get_target_direction() -> Vector2:
+	return (GameManager.character_now.global_position - owner.global_position).normalized()
+
 
 func on_idle_timer_timeout():
 	transitioned.emit(self, "WanderState")
 
 
-func on_body_entered(body: Node2D):
-	player_ray_cast.target_position = owner.move_direction * 300
+func on_body_entered(_body: Node2D):
 	if player_ray_cast.get_collider():
 		return
 	transitioned.emit(self, "ChaseState")

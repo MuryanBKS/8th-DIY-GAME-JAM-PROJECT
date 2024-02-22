@@ -1,0 +1,58 @@
+[gd_scene load_steps=9 format=3 uid="uid://bx01njplkmciw"]
+
+[ext_resource type="Texture2D" uid="uid://k2gdhnle8ieh" path="res://assets/torch/candlestick_1_1.png" id="1_3nnea"]
+[ext_resource type="Texture2D" uid="uid://1m7im7o2fok2" path="res://assets/torch/candlestick_1_2.png" id="2_0f6bj"]
+[ext_resource type="Texture2D" uid="uid://blrrf5qaxbg3r" path="res://assets/torch/candlestick_1_3.png" id="3_l7f1r"]
+[ext_resource type="Texture2D" uid="uid://cv31r71c8nc0p" path="res://assets/torch/candlestick_1_4.png" id="4_c6tuh"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_r6hqy"]
+size = Vector2(5, 9)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_uwybr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_3nnea")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_0f6bj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_l7f1r")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_c6tuh")
+}],
+"loop": true,
+"name": &"default",
+"speed": 8.0
+}]
+
+[sub_resource type="Gradient" id="Gradient_atfky"]
+offsets = PackedFloat32Array(0, 0.6825)
+colors = PackedColorArray(1, 0.886275, 0.65098, 0.521569, 0.00392157, 0, 0, 0.823529)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_gyyh4"]
+gradient = SubResource("Gradient_atfky")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+
+[node name="CandleStick" type="StaticBody2D"]
+scale = Vector2(4, 4)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -4.5)
+shape = SubResource("RectangleShape2D_r6hqy")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(1, -8)
+sprite_frames = SubResource("SpriteFrames_uwybr")
+autoplay = "default"
+frame_progress = 0.456707
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+position = Vector2(0.25, -8.25)
+color = Color(0.776471, 0.407843, 0.105882, 1)
+energy = 0.7
+texture = SubResource("GradientTexture2D_gyyh4")
+texture_scale = 1.66

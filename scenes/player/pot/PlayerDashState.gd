@@ -40,7 +40,7 @@ func physics_update(delta: float) -> void:
 	
 	
 func apply_friction(delta) -> void:
-	if player.velocity.length() > 500:
+	if player.velocity.length() > 300:
 		player.velocity = lerp(player.velocity, Vector2.ZERO, 1 - exp(-10 * delta))
 	else:
 		if player.input_vector != Vector2.ZERO:

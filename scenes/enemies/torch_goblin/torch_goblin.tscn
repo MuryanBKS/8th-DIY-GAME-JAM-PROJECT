@@ -1010,21 +1010,24 @@ libraries = {
 script = ExtResource("2_vff5u")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "sprite_2d", "idle_timer", "chase_area", "hit_area")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "sprite_2d", "idle_timer", "chase_area", "hit_area", "player_ray_cast")]
 script = ExtResource("3_8xv2y")
 animation_player = NodePath("../../AnimationPlayer")
 sprite_2d = NodePath("../../AnimatedSprite2D")
 idle_timer = NodePath("../../IdleTimer")
 chase_area = NodePath("../../ChaseArea2D")
 hit_area = NodePath("../../HitboxComponent")
+player_ray_cast = NodePath("../../PlayerRayCast2D")
 
-[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "wander_timer", "animated_sprite_2d", "health_component", "chase_area")]
+[node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "wander_timer", "animated_sprite_2d", "health_component", "chase_area", "player_ray_cast", "wall_ray_cast")]
 script = ExtResource("5_k6qka")
 animation_player = NodePath("../../AnimationPlayer")
 wander_timer = NodePath("../../WanderTimer")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 health_component = NodePath("../../HealthComponent")
 chase_area = NodePath("../../ChaseArea2D")
+player_ray_cast = NodePath("../../PlayerRayCast2D")
+wall_ray_cast = NodePath("../../WallRayCast2D")
 
 [node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "animated_sprite_2d", "chase_area", "attack_area", "hit_area")]
 script = ExtResource("4_jaup3")
@@ -1108,7 +1111,6 @@ shape = SubResource("CapsuleShape2D_cetjj")
 debug_color = Color(0.623529, 0.533333, 0.0823529, 0.419608)
 
 [node name="ChaseArea2D" type="Area2D" parent="."]
-visible = false
 light_mask = 0
 visibility_layer = 2
 position = Vector2(1, -37)
@@ -1118,3 +1120,7 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea2D"]
 shape = SubResource("CircleShape2D_ffffn")
 debug_color = Color(0.694118, 0.494118, 0, 0.419608)
+
+[node name="PlayerRayCast2D" type="RayCast2D" parent="."]
+
+[node name="WallRayCast2D" type="RayCast2D" parent="."]

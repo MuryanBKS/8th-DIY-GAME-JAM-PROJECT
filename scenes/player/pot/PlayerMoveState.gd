@@ -1,7 +1,7 @@
 extends State
 class_name PlayerMoveState
 
-const MAX_SPEED = 700
+const MAX_SPEED = 450
 
 @export var player: CharacterBody2D
 @export var animation_tree: AnimationTree

@@ -8,6 +8,8 @@ const SPEED := 100
 @export var animated_sprite_2d: AnimatedSprite2D
 @export var health_component: HealthComponent
 @export var chase_area: Area2D
+@export var player_ray_cast: RayCast2D
+@export var wall_ray_cast: RayCast2D
 
 var random_vector: Vector2
 
@@ -30,13 +32,18 @@ func update(delta: float) -> void:
 	animate()
 	
 func physics_update(delta: float) -> void:
+	player_ray_cast.target_position = owner.move_direction * 300
+	wall_ray_cast.target_position = owner.move_direction * 100
+	if wall_ray_cast.get_collider():
+		wander_timer.stop()
+		transitioned.emit(self, "IdleState")
 	move(delta)
 
 func get_target_direction() -> Vector2:
 	return (GameManager.character_now.global_position - owner.global_position).normalized()
 
 func randomize_wander() -> void:
-	owner.move_direction = (get_target_direction() + random_vector).normalized()
+	owner.move_direction = random_vector
 
 func move(delta):
 	owner.velocity = owner.move_direction * SPEED
@@ -58,4 +65,7 @@ func on_health_changed():
 	transitioned.emit(self, "DiedState")
 
 func on_body_entered(body: Node2D):
+	player_ray_cast.target_position = get_target_direction() * 300
+	if player_ray_cast.get_collider():
+		return
 	transitioned.emit(self, "ChaseState")

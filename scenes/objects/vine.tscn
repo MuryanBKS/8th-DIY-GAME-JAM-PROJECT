@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://jl73wchpuypi"]
+
+[ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_jlcp0"]
+
+[node name="Vine" type="Sprite2D"]
+scale = Vector2(2, 2)
+texture = ExtResource("1_jlcp0")
+hframes = 2
+region_enabled = true
+region_rect = Rect2(0, 528, 64, 48)

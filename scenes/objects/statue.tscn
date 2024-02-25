@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://blg2fj7citin5"]
+
+[ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_fra8j"]
+[ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="2_tr0ty"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1pg3s"]
+radius = 12.0
+height = 36.0
+
+[node name="Statue" type="StaticBody2D"]
+modulate = Color(0.870588, 0.870588, 0.870588, 1)
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(1, -36)
+texture = ExtResource("1_fra8j")
+region_enabled = true
+region_rect = Rect2(445, 20, 39, 74)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -36)
+texture = ExtResource("2_tr0ty")
+region_enabled = true
+region_rect = Rect2(445, 20, 37, 74)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13)
+rotation = 1.5708
+shape = SubResource("CapsuleShape2D_1pg3s")

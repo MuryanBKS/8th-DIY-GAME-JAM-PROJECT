@@ -3,8 +3,11 @@
 [ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_jlcp0"]
 
 [node name="Vine" type="Sprite2D"]
+modulate = Color(0.894118, 0.894118, 0.894118, 1)
 scale = Vector2(2, 2)
 texture = ExtResource("1_jlcp0")
+centered = false
+offset = Vector2(-16, -48)
 hframes = 2
 region_enabled = true
 region_rect = Rect2(0, 528, 64, 48)

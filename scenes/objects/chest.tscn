@@ -1,0 +1,31 @@
+[gd_scene load_steps=4 format=3 uid="uid://djrimcfovr2rv"]
+
+[ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_wjqn5"]
+[ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="2_tvir2"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_emgf2"]
+size = Vector2(30, 24.5)
+
+[node name="Chest" type="StaticBody2D"]
+modulate = Color(0.854902, 0.866667, 0.866667, 1)
+scale = Vector2(1.5, 1.5)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(15, -29)
+texture = ExtResource("1_wjqn5")
+vframes = 2
+frame = 1
+region_enabled = true
+region_rect = Rect2(96, 0, 64, 128)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -29)
+texture = ExtResource("2_tvir2")
+vframes = 2
+region_enabled = true
+region_rect = Rect2(96, 0, 32, 128)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -13.25)
+shape = SubResource("RectangleShape2D_emgf2")

@@ -63,15 +63,15 @@ func change_cart_position(direction: int):
 	if direction == DOWN:
 		var tween = create_tween()
 		tween.tween_property(pot, "position", %CartDown.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(pot_collision, "position", %CartDown.position + Vector2(-1, -40), 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(pot_collision, "position", %CartDown.position + Vector2(-1, -30), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == RIGHT:
 		var tween = create_tween()
 		tween.tween_property(pot, "position", %CartRight.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(pot_collision, "position", %CartRight.position + Vector2(-1, -49), 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(pot_collision, "position", %CartRight.position + Vector2(-1, -29), 0.3).set_trans(Tween.TRANS_CUBIC)
 	if direction == LEFT:
 		var tween = create_tween()
 		tween.tween_property(pot, "position", %CartLeft.position, 0.1).set_trans(Tween.TRANS_CUBIC)
-		tween.parallel().tween_property(pot_collision, "position", %CartLeft.position + Vector2(-1, -49), 0.3).set_trans(Tween.TRANS_CUBIC)
+		tween.parallel().tween_property(pot_collision, "position", %CartLeft.position + Vector2(-1, -29), 0.3).set_trans(Tween.TRANS_CUBIC)
 		
 		
 func animate() -> void:

@@ -23,7 +23,7 @@ func physics_update(delta: float) -> void:
 		absorbed_to_player(delta)
 		if (player.get_cart_position() - bat.global_position).length() < 10:
 			GameManager.enemy_collected.emit("Attack", 10)
-			player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0, 0, 16, 16))
+			player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0 * 16, 0 * 16, 16, 16))
 			owner.queue_free()
 	else:
 		await animation_player.animation_finished

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://bh07jirc3ox0o"]
+
+[ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="1_6nygy"]
+[ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_l5rwv"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_m6ch4"]
+radius = 9.0
+
+[node name="Board" type="StaticBody2D"]
+modulate = Color(0.788235, 0.788235, 0.788235, 1)
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(0, -16)
+texture = ExtResource("1_l5rwv")
+region_enabled = true
+region_rect = Rect2(96, 160, 32, 32)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -16)
+texture = ExtResource("1_6nygy")
+region_enabled = true
+region_rect = Rect2(96, 160, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, -9)
+shape = SubResource("CircleShape2D_m6ch4")

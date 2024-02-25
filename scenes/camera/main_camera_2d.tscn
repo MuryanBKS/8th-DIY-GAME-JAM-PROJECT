@@ -2,7 +2,12 @@
 
 [ext_resource type="Script" path="res://scenes/camera/camera.gd" id="1_5qs4w"]
 
-[node name="MainCamera2D" type="Camera2D" node_paths=PackedStringArray("player") groups=["camera"]]
+[node name="MainCamera2D" type="Camera2D" groups=["camera"]]
 zoom = Vector2(2, 2)
 script = ExtResource("1_5qs4w")
-player = NodePath("")
+
+[node name="Timer" type="Timer" parent="."]
+unique_name_in_owner = true
+one_shot = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

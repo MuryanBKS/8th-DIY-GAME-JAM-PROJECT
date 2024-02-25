@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://bbpubu1jrf4f4"]
+
+[ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_8vocy"]
+[ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="2_gwhqk"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_xx821"]
+size = Vector2(54.5, 19.5)
+
+[node name="ChairDown" type="StaticBody2D"]
+scale = Vector2(2, 2)
+
+[node name="SpriteShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(0, -28)
+texture = ExtResource("1_8vocy")
+region_enabled = true
+region_rect = Rect2(288, 0, 64, 64)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -28)
+texture = ExtResource("2_gwhqk")
+region_enabled = true
+region_rect = Rect2(288, 0, 64, 64)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-0.25, -11.25)
+shape = SubResource("RectangleShape2D_xx821")

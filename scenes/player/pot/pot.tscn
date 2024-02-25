@@ -195,7 +195,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(0.5, 1),
 "update": 0,
-"values": [Color(1, 1, 1, 1), Color(0.329412, 0.329412, 0.329412, 0.968627)]
+"values": [Color(1, 1, 1, 1), Color(0.588235, 0.588235, 0.588235, 0.780392)]
 }
 
 [sub_resource type="Animation" id="Animation_qbp2n"]
@@ -387,7 +387,6 @@ autoplay = "burn"
 [node name="PotSprite" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -39)
 sprite_frames = SubResource("SpriteFrames_myrvp")
-animation = &"empty"
 autoplay = "default"
 
 [node name="Fire" type="Node2D" parent="."]
@@ -427,6 +426,7 @@ autoplay = "default"
 frame_progress = 0.0486798
 
 [node name="HitboxComponent" type="Area2D" parent="."]
+visible = false
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("4_r1o25")

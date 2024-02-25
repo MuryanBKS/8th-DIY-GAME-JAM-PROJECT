@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://krji00wv3cb0"]
+
+[ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_c6u8t"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_66vyy"]
+radius = 7.5
+
+[node name="Skeleton" type="StaticBody2D"]
+modulate = Color(0.686275, 0.768627, 0.752941, 1)
+scale = Vector2(2, 2)
+
+[node name="SpriteShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_c6u8t")
+region_enabled = true
+region_rect = Rect2(0, 480, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+visible = false
+shape = SubResource("CircleShape2D_66vyy")

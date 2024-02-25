@@ -1,0 +1,21 @@
+[gd_scene load_steps=3 format=3 uid="uid://dqsbd71afai7l"]
+
+[ext_resource type="Texture2D" uid="uid://sqekeo1ktk58" path="res://assets/map/Dungeon_Tileset.png" id="1_bonu0"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_44kh7"]
+radius = 5.5
+
+[node name="Mushroom_01" type="StaticBody2D"]
+modulate = Color(0.886275, 0.886275, 0.886275, 1)
+scale = Vector2(2, 2)
+
+[node name="SpriteShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_bonu0")
+region_enabled = true
+region_rect = Rect2(64, 512, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_44kh7")

@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://jf5oslcqsycp"]
+
+[ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_34rjf"]
+[ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="2_g6545"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_sbp2f"]
+
+[node name="DecoratedPot" type="StaticBody2D"]
+modulate = Color(0.882353, 0.882353, 0.882353, 1)
+scale = Vector2(2, 2)
+collision_mask = 0
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(1, -10)
+texture = ExtResource("1_34rjf")
+region_enabled = true
+region_rect = Rect2(165, 231, 23, 21)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0, -17)
+texture = ExtResource("2_g6545")
+region_enabled = true
+region_rect = Rect2(165, 216, 21, 36)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -10)
+shape = SubResource("CircleShape2D_sbp2f")

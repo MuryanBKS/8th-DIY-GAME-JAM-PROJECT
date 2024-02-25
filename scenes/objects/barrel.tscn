@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c2pblf73c5byp"]
+
+[ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_008yr"]
+[ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="2_q03ap"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_kfc60"]
+radius = 14.0
+
+[node name="Barrel" type="StaticBody2D"]
+modulate = Color(0.839216, 0.862745, 0.85098, 1)
+scale = Vector2(2, 2)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(2, -15)
+texture = ExtResource("1_008yr")
+region_enabled = true
+region_rect = Rect2(163, 164, 30, 28)
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(0, -18)
+texture = ExtResource("2_q03ap")
+region_enabled = true
+region_rect = Rect2(162, 152, 28, 38)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -14)
+shape = SubResource("CircleShape2D_kfc60")

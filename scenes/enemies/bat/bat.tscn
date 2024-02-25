@@ -114,46 +114,34 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visual/AnimatedSprite2D:scale")
+tracks/1/path = NodePath("Visual/AnimatedSprite2D:animation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(5, 5)]
+"update": 1,
+"values": [&"default"]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual/AnimatedSprite2D:animation")
+tracks/2/path = NodePath("Visual/AnimatedSprite2D:frame")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"default"]
+"values": [0]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
 tracks/3/enabled = true
-tracks/3/path = NodePath("Visual/AnimatedSprite2D:frame")
+tracks/3/path = NodePath("Visual/MediumShadow:modulate")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [0]
-}
-tracks/4/type = "value"
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/path = NodePath("Visual/MediumShadow:modulate")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -257,18 +245,6 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 1), Color(1, 0.368627, 0.419608, 1), Color(1, 1, 1, 1)]
 }
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Visual/AnimatedSprite2D:scale")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.08, 0.09, 0.1),
-"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 1),
-"update": 0,
-"values": [Vector2(5, 5), Vector2(6, 6), Vector2(4.2, 4.2), Vector2(5, 5)]
-}
 
 [sub_resource type="Animation" id="Animation_ytthl"]
 resource_name = "idle"
@@ -320,7 +296,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qui56"]
-radius = 20.0
+radius = 13.0384
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ce74e"]
 radius = 16.0
@@ -343,7 +319,6 @@ unique_name_in_owner = true
 y_sort_enabled = true
 
 [node name="MediumShadow" type="Sprite2D" parent="Visual"]
-visible = false
 modulate = Color(1, 1, 1, 0.301961)
 position = Vector2(0, -5)
 scale = Vector2(1.5, 1.5)
@@ -351,8 +326,8 @@ texture = ExtResource("4_160yl")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visual"]
 unique_name_in_owner = true
-position = Vector2(0, -28)
-scale = Vector2(5, 5)
+position = Vector2(1, -48)
+scale = Vector2(4, 4)
 sprite_frames = SubResource("SpriteFrames_icdt3")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -383,8 +358,9 @@ wait_time = 0.5
 one_shot = true
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="HurtComponent"]
-position = Vector2(0, -47)
+position = Vector2(0, -56)
 shape = SubResource("CircleShape2D_qui56")
+debug_color = Color(0.607843, 0.364706, 1, 0.419608)
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 32
@@ -393,8 +369,9 @@ script = ExtResource("6_nlfm7")
 damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-position = Vector2(0, -47)
+position = Vector2(0, -56)
 shape = SubResource("CircleShape2D_ce74e")
+debug_color = Color(0.944949, 0.189268, 0.362157, 0.42)
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 script = ExtResource("8_6tj8j")
@@ -434,6 +411,6 @@ collision_mask = 2
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ChaseArea2D"]
 position = Vector2(0, -47)
 shape = SubResource("CircleShape2D_hblm1")
-debug_color = Color(1, 0.576471, 0.584314, 0.223529)
+debug_color = Color(0.94902, 0.643137, 0.25098, 0.223529)
 
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]

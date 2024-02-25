@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://c56sxv1i8mgrm"]
+[gd_scene load_steps=52 format=3 uid="uid://c56sxv1i8mgrm"]
 
 [ext_resource type="Texture2D" uid="uid://dkw7u4eadxufq" path="res://scenes/enemies/barrel_goblin/Barrel_Red.png" id="1_dques"]
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/barrel_goblin.gd" id="1_exh1j"]
@@ -459,6 +459,9 @@ radius = 31.0644
 [sub_resource type="CircleShape2D" id="CircleShape2D_8nvl8"]
 radius = 122.037
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_xpf7l"]
+radius = 140.089
+
 [node name="BarrelGoblin" type="CharacterBody2D"]
 collision_layer = 4
 collision_mask = 7
@@ -476,12 +479,13 @@ animation = &"idle"
 script = ExtResource("2_m48un")
 initial_state = NodePath("IdleState")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "animated_sprite_2d", "idle_timer", "health_component")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "animated_sprite_2d", "idle_timer", "health_component", "detect_area")]
 script = ExtResource("3_6hamu")
 animation_player = NodePath("../../AnimationPlayer")
 animated_sprite_2d = NodePath("../../AnimatedSprite2D")
 idle_timer = NodePath("../../IdleTimer")
 health_component = NodePath("../../HealthComponent")
+detect_area = NodePath("../../DetectArea2D")
 
 [node name="WanderState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "wander_timer", "animated_sprite_2d", "health_component")]
 script = ExtResource("4_web2g")
@@ -538,3 +542,10 @@ damage = 30
 shape = SubResource("CircleShape2D_8nvl8")
 disabled = true
 debug_color = Color(0.996078, 0, 0.168627, 0.419608)
+
+[node name="DetectArea2D" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectArea2D"]
+shape = SubResource("CircleShape2D_xpf7l")

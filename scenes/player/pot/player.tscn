@@ -1482,6 +1482,7 @@ radius = 25.02
 radius = 29.0
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+modulate = Color(0.898039, 0.898039, 0.898039, 1)
 y_sort_enabled = true
 collision_layer = 2
 collision_mask = 5
@@ -1518,7 +1519,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
-wait_time = 1.5
+wait_time = 2.5
 one_shot = true
 
 [node name="CartPosition" type="Node2D" parent="."]

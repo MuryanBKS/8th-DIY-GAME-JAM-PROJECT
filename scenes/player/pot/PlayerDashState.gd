@@ -48,6 +48,7 @@ func apply_friction(delta) -> void:
 		else:
 			transitioned.emit(self, "IdleState")
 	
+	
 func spawn_fire():
 	randomize()
 	var fire_particle_instance = fire_particle.instantiate()
@@ -55,6 +56,7 @@ func spawn_fire():
 	fire_particle_instance.scale = Vector2(size, size)
 	fire_particle_instance.global_position = pot.global_position
 	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)
+
 
 func on_dash_timer_timeout():
 	can_apply_friction = true

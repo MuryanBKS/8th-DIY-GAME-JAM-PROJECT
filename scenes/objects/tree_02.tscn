@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=3 uid="uid://crwbvpbom3rsn"]
+
+[ext_resource type="Texture2D" uid="uid://bj363j202q4wi" path="res://scenes/objects/object_assets/TX Shadow Plant.png" id="1_jbwkr"]
+[ext_resource type="Texture2D" uid="uid://cohn6ufo6q1hp" path="res://scenes/objects/object_assets/TX Plant.png" id="2_bkokq"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_a1p1u"]
+
+[node name="Tree_02" type="StaticBody2D"]
+scale = Vector2(2, 2)
+
+[node name="SpriteShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(0.5, -64)
+texture = ExtResource("1_jbwkr")
+region_enabled = true
+region_rect = Rect2(160, 16, 96, 144)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, -64)
+texture = ExtResource("2_bkokq")
+region_enabled = true
+region_rect = Rect2(160, 16, 96, 144)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -5)
+shape = SubResource("CircleShape2D_a1p1u")

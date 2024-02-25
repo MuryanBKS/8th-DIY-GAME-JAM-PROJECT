@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://xf7k3jhuqc6c"]
+
+[ext_resource type="Texture2D" uid="uid://bj363j202q4wi" path="res://scenes/objects/object_assets/TX Shadow Plant.png" id="1_7jifb"]
+[ext_resource type="Texture2D" uid="uid://cohn6ufo6q1hp" path="res://scenes/objects/object_assets/TX Plant.png" id="2_syiqu"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_gca3v"]
+radius = 6.5
+
+[node name="Bush_01" type="StaticBody2D"]
+scale = Vector2(2, 2)
+
+[node name="SpriteShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(0.5, -8)
+texture = ExtResource("1_7jifb")
+region_enabled = true
+region_rect = Rect2(32, 192, 32, 32)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.5, -8)
+texture = ExtResource("2_syiqu")
+region_enabled = true
+region_rect = Rect2(32, 192, 32, 32)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, -5)
+shape = SubResource("CircleShape2D_gca3v")

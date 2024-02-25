@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://cdb8bniutipmp"]
+
+[ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_qgp03"]
+[ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="2_yukmy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_b5ft3"]
+radius = 18.6682
+
+[node name="MagicCircle" type="Area2D"]
+scale = Vector2(2, 2)
+
+[node name="SpriteShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(15.5, -2)
+texture = ExtResource("1_qgp03")
+region_enabled = true
+region_rect = Rect2(352, 256, 112, 96)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_yukmy")
+region_enabled = true
+region_rect = Rect2(352, 256, 96, 96)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CircleShape2D_b5ft3")

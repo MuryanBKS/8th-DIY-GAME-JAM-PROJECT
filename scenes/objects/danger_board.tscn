@@ -1,0 +1,20 @@
+[gd_scene load_steps=3 format=3 uid="uid://ka2wesvvjn7a"]
+
+[ext_resource type="Texture2D" uid="uid://c7ut0ehmixcq6" path="res://scenes/objects/object_assets/16.png" id="1_vav8y"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xjy8i"]
+
+[node name="DangerBoard" type="StaticBody2D"]
+modulate = Color(0.752941, 0.752941, 0.752941, 1)
+
+[node name="SpriteShadow" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.329412)
+position = Vector2(-2, -37)
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(-2, -37)
+texture = ExtResource("1_vav8y")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -8.5)
+shape = SubResource("CircleShape2D_xjy8i")

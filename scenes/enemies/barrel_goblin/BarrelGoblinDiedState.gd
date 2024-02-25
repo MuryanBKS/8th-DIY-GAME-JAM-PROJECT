@@ -41,7 +41,7 @@ func knock_back(delta):
 func explode_animate():
 	is_exploding = true
 	animation_player.play("count_down")
-	await get_tree().create_timer(2).timeout
+	await get_tree().create_timer(0.8).timeout
 	barrel_collision.set_deferred("disabled", true)
 	animation_player.play("explode")
 	explosion_area.set_deferred("disabled", false)

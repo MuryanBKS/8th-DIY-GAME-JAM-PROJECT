@@ -2,8 +2,8 @@ extends Camera2D
 
 const  CAMERA_NORMAL_SPEED = 2.0
 const  CAMERA_SlOW_SPEED = 3.0
-const CAMERA_CLOSE_OFFSET = 300
-const CAMERA_FAR_OFFSET = 600
+const CAMERA_CLOSE_OFFSET = 200
+const CAMERA_FAR_OFFSET = 300
 
 @export var player: CharacterBody2D
 var camera_speed = CAMERA_NORMAL_SPEED
@@ -30,8 +30,10 @@ func _physics_process(delta: float) -> void:
 		camera_point = lerp(camera_point, player.global_position + input_vector * camera_offset, 1 - exp(- camera_speed * delta))
 	else :
 		%Timer.stop()
-		keep_moving = false
 		camera_point = lerp(camera_point, player.global_position, 1 - exp(-5 * delta))
+		if (camera_point - player.global_position).length() < 50:
+			keep_moving = false
+		
 	global_position = lerp(global_position, camera_point, 1 - exp(-3 * delta))
 	
 

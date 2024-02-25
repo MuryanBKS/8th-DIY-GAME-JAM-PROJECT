@@ -1,13 +1,53 @@
-[gd_scene load_steps=4 format=3 uid="uid://cdb8bniutipmp"]
+[gd_scene load_steps=8 format=3 uid="uid://cdb8bniutipmp"]
 
+[ext_resource type="Script" path="res://scenes/objects/magic_circle.gd" id="1_ay2yn"]
 [ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_qgp03"]
 [ext_resource type="Texture2D" uid="uid://4twb60ysy4i7" path="res://scenes/objects/object_assets/TX Props.png" id="2_yukmy"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b5ft3"]
 radius = 18.6682
 
-[node name="MagicCircle" type="Area2D"]
+[sub_resource type="Animation" id="Animation_i5t4t"]
+resource_name = "glow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlowFont:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_wadcc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlowFont:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_scito"]
+_data = {
+"RESET": SubResource("Animation_wadcc"),
+"glow": SubResource("Animation_i5t4t")
+}
+
+[node name="MagicCircle" type="Area2D" groups=["magic_circle"]]
 scale = Vector2(2, 2)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_ay2yn")
 
 [node name="SpriteShadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.329412)
@@ -21,5 +61,51 @@ texture = ExtResource("2_yukmy")
 region_enabled = true
 region_rect = Rect2(352, 256, 96, 96)
 
+[node name="GlowFont" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0)
+
+[node name="Sprite2D" type="Sprite2D" parent="GlowFont"]
+position = Vector2(-39, -3)
+texture = ExtResource("2_yukmy")
+hframes = 2
+vframes = 2
+region_enabled = true
+region_rect = Rect2(328, 264, 16, 16)
+
+[node name="Sprite2D2" type="Sprite2D" parent="GlowFont"]
+position = Vector2(1, -30)
+texture = ExtResource("2_yukmy")
+hframes = 2
+vframes = 2
+frame = 1
+region_enabled = true
+region_rect = Rect2(328, 264, 16, 16)
+
+[node name="Sprite2D3" type="Sprite2D" parent="GlowFont"]
+position = Vector2(0, 25)
+texture = ExtResource("2_yukmy")
+hframes = 2
+vframes = 2
+frame = 2
+region_enabled = true
+region_rect = Rect2(328, 264, 16, 16)
+
+[node name="Sprite2D4" type="Sprite2D" parent="GlowFont"]
+position = Vector2(40, -2)
+texture = ExtResource("2_yukmy")
+hframes = 2
+vframes = 2
+frame = 3
+region_enabled = true
+region_rect = Rect2(328, 264, 16, 16)
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_b5ft3")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+unique_name_in_owner = true
+libraries = {
+"": SubResource("AnimationLibrary_scito")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

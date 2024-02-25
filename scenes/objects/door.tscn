@@ -90,6 +90,46 @@ tracks/6/keys = {
 "values": [0.0]
 }
 
+[sub_resource type="Animation" id="Animation_o1s2t"]
+resource_name = "lock"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("LockSprite:rotation")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [-0.349066, 0.349066, -0.349066, 0.349066, -0.349066, 0.349066, -0.349066, 0.349066, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("LockSprite:position")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2, -2, -2),
+"update": 0,
+"values": [Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(-1, -14.5)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Sprite:position")
+tracks/2/interp = 2
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5),
+"update": 0,
+"values": [Vector2(0, -15.714), Vector2(0, -14.714), Vector2(0, -15.714), Vector2(0, -16.714), Vector2(0, -15.714), Vector2(0, -16.714), Vector2(0, -15.714), Vector2(0, -16.714), Vector2(0, -15.714)]
+}
+
 [sub_resource type="Animation" id="Animation_a4kuh"]
 resource_name = "open"
 length = 0.5
@@ -204,46 +244,6 @@ tracks/8/keys = {
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
 "values": [0.0, -1.5708]
-}
-
-[sub_resource type="Animation" id="Animation_o1s2t"]
-resource_name = "lock"
-length = 0.8
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("LockSprite:rotation")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2, -2, -2),
-"update": 0,
-"values": [-0.349066, 0.349066, -0.349066, 0.349066, -0.349066, 0.349066, -0.349066, 0.349066, 0.0]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("LockSprite:position")
-tracks/1/interp = 2
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(-2, -2, -2, -2, -2, -2, -2, -2, -2),
-"update": 0,
-"values": [Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(1, -14.5), Vector2(-3, -14.5), Vector2(-1, -14.5)]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("Sprite:position")
-tracks/2/interp = 2
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
-"transitions": PackedFloat32Array(0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5, 0.5),
-"update": 0,
-"values": [Vector2(0, -15.714), Vector2(0, -14.714), Vector2(0, -15.714), Vector2(0, -16.714), Vector2(0, -15.714), Vector2(0, -16.714), Vector2(0, -15.714), Vector2(0, -16.714), Vector2(0, -15.714)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ewk5o"]

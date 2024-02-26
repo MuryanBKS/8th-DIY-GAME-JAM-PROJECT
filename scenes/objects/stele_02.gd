@@ -9,3 +9,5 @@ func _ready() -> void:
 	
 func on_glow():
 	%AnimationPlayer.play("glow")
+	await %AnimationPlayer.animation_finished
+	%AnimationPlayer.play("hide")

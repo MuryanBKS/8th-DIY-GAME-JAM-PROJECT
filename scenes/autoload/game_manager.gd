@@ -19,7 +19,7 @@ func _ready() -> void:
 	player_changed.connect(on_player_changed)
 	get_key.connect(on_get_key)
 	character_now = get_tree().get_first_node_in_group("player")
-	DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
+	#DisplayServer.mouse_set_mode(DisplayServer.MOUSE_MODE_HIDDEN)
 	
 	
 func on_slow_down(scale = 0.1):

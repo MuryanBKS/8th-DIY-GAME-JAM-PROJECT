@@ -1,66 +1,135 @@
-[gd_scene load_steps=23 format=3 uid="uid://c3cp1iwe0mqlx"]
+[gd_scene load_steps=33 format=3 uid="uid://c3cp1iwe0mqlx"]
 
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="1_7wngp"]
 [ext_resource type="Texture2D" uid="uid://bmfw8ligkmlxf" path="res://scenes/enemies/golem/GolemSprite/PNG sheet/Character_sheet.png" id="1_foy7h"]
+[ext_resource type="Script" path="res://scenes/enemies/golem/golem.gd" id="1_ype62"]
 [ext_resource type="Texture2D" uid="uid://vnmveuypaeof" path="res://scenes/enemies/golem/GolemSprite/weapon PNG/Laser_sheet.png" id="2_g07tp"]
 [ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="2_yfiqt"]
 [ext_resource type="Texture2D" uid="uid://dbcwrla12b7qk" path="res://scenes/enemies/golem/GolemSprite/weapon PNG/arm_projectile_glowing.png" id="4_kf7x4"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_y1krl"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdqyu"]
 atlas = ExtResource("1_foy7h")
-region = Rect2(0, 500, 100, 100)
+region = Rect2(0, 300, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_amw4p"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_2dqxm"]
 atlas = ExtResource("1_foy7h")
-region = Rect2(100, 500, 100, 100)
+region = Rect2(100, 300, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_aq6ak"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_ex3r2"]
 atlas = ExtResource("1_foy7h")
-region = Rect2(200, 500, 100, 100)
+region = Rect2(200, 300, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5lvo1"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_rga2l"]
 atlas = ExtResource("1_foy7h")
-region = Rect2(300, 500, 100, 100)
+region = Rect2(300, 300, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_tu45x"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_j4xcg"]
 atlas = ExtResource("1_foy7h")
-region = Rect2(400, 500, 100, 100)
+region = Rect2(400, 300, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_nce0r"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_mibbh"]
 atlas = ExtResource("1_foy7h")
-region = Rect2(500, 500, 100, 100)
+region = Rect2(500, 300, 100, 100)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_3h2oi"]
+[sub_resource type="AtlasTexture" id="AtlasTexture_tp5br"]
 atlas = ExtResource("1_foy7h")
-region = Rect2(600, 500, 100, 100)
+region = Rect2(600, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1rqid"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(700, 300, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8dkm3"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(0, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_x03ff"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(100, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iwckt"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(200, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_u5j7u"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(300, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_havan"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(400, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_auhea"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(500, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_58du3"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(600, 100, 100, 100)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_7o0aj"]
+atlas = ExtResource("1_foy7h")
+region = Rect2(700, 100, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_o65lb"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_y1krl")
+"texture": SubResource("AtlasTexture_kdqyu")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_amw4p")
+"texture": SubResource("AtlasTexture_2dqxm")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_aq6ak")
+"texture": SubResource("AtlasTexture_ex3r2")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5lvo1")
+"texture": SubResource("AtlasTexture_rga2l")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_tu45x")
+"texture": SubResource("AtlasTexture_j4xcg")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_nce0r")
+"texture": SubResource("AtlasTexture_mibbh")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_3h2oi")
+"texture": SubResource("AtlasTexture_tp5br")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1rqid")
 }],
 "loop": true,
 "name": &"new_animation",
 "speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8dkm3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_x03ff")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iwckt")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_u5j7u")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_havan")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_auhea")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_58du3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_7o0aj")
+}],
+"loop": false,
+"name": &"test",
+"speed": 8.0
 }]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_frepp"]
@@ -134,6 +203,7 @@ animations = [{
 
 [node name="Golem" type="CharacterBody2D"]
 scale = Vector2(3, 3)
+script = ExtResource("1_ype62")
 
 [node name="MediumShadow" type="Sprite2D" parent="."]
 modulate = Color(1, 1, 1, 0.529412)
@@ -141,13 +211,12 @@ texture = ExtResource("1_7wngp")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(1.33333, -27.6667)
-rotation = 0.0362173
 sprite_frames = SubResource("SpriteFrames_o65lb")
 animation = &"new_animation"
-autoplay = "new_animation"
-frame_progress = 0.682915
+frame = 7
 
 [node name="Laser" type="Node2D" parent="."]
+visible = false
 z_index = 1
 position = Vector2(5.33334, -44.6667)
 rotation = 0.0431467
@@ -185,3 +254,5 @@ script = ExtResource("2_yfiqt")
 [node name="DiedState" type="Node" parent="StateMachine"]
 
 [node name="HurtState" type="Node" parent="StateMachine"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]

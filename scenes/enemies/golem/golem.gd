@@ -1,6 +1,4 @@
-extends StaticBody2D
-
-
+extends CharacterBody2D
 
 func _ready() -> void:
 	var magic_circle = get_tree().get_first_node_in_group("magic_circle")
@@ -8,7 +6,5 @@ func _ready() -> void:
 	
 	
 func on_glow():
-	%AnimationPlayer.play("glow")
-	await %AnimationPlayer.animation_finished
-	%AnimationPlayer.play("shake")
+	$AnimatedSprite2D.play("test")
 	

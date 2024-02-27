@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://cehuvmtdf2132"]
+[gd_scene load_steps=34 format=3 uid="uid://cehuvmtdf2132"]
 
 [ext_resource type="PackedScene" uid="uid://dk22uyksysvne" path="res://scenes/camera/main_camera_2d.tscn" id="1_t00y6"]
 [ext_resource type="TileSet" uid="uid://c74ok67ykxbwx" path="res://scenes/main/world.tres" id="2_gcxn6"]
@@ -30,6 +30,7 @@
 [ext_resource type="PackedScene" uid="uid://crwbvpbom3rsn" path="res://scenes/objects/tree_02.tscn" id="21_sihi3"]
 [ext_resource type="PackedScene" uid="uid://c1y4ixp76isxh" path="res://scenes/objects/tree_03.tscn" id="22_odyqk"]
 [ext_resource type="PackedScene" uid="uid://c0bubymywjub3" path="res://scenes/objects/tree_01.tscn" id="22_v6drf"]
+[ext_resource type="PackedScene" uid="uid://wr6o7524nq6j" path="res://scenes/enemies/golem/small_golem.tscn" id="31_eg41d"]
 [ext_resource type="PackedScene" uid="uid://duevytjridwj7" path="res://scenes/objects/key.tscn" id="31_lpek5"]
 [ext_resource type="PackedScene" uid="uid://c3cp1iwe0mqlx" path="res://scenes/enemies/golem/golem.tscn" id="32_lpvqi"]
 
@@ -480,8 +481,23 @@ position = Vector2(-1777, 659)
 position = Vector2(-1286, 726)
 
 [node name="Golem" parent="Enemies" instance=ExtResource("32_lpvqi")]
-position = Vector2(-668, -2249)
-rotation = 0.321302
+position = Vector2(-127, -2479)
+
+[node name="SmallGolem" parent="Enemies" instance=ExtResource("31_eg41d")]
+modulate = Color(0.835294, 0.835294, 0.835294, 1)
+position = Vector2(-402, -2872)
+
+[node name="SmallGolem4" parent="Enemies" instance=ExtResource("31_eg41d")]
+modulate = Color(0.835294, 0.835294, 0.835294, 1)
+position = Vector2(-645, -2476)
+
+[node name="SmallGolem2" parent="Enemies" instance=ExtResource("31_eg41d")]
+modulate = Color(0.835294, 0.835294, 0.835294, 1)
+position = Vector2(404, -2156)
+
+[node name="SmallGolem3" parent="Enemies" instance=ExtResource("31_eg41d")]
+modulate = Color(0.835294, 0.835294, 0.835294, 1)
+position = Vector2(268, -2750)
 
 [node name="BarrelGoblin" parent="Enemies" instance=ExtResource("19_khhlx")]
 position = Vector2(752, -304)

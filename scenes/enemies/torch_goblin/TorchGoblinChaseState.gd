@@ -1,7 +1,7 @@
 extends State
 
 
-const SPEED = 200.0
+const SPEED = 100.0
 
 @export var animation_player: AnimationPlayer
 @export var health_component: HealthComponent

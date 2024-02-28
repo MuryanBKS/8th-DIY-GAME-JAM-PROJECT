@@ -12,7 +12,7 @@ var attack_finished = false
 
 func enter() -> void:
 	hit_area.set_deferred("monitorable", true)
-	#health_component.health_changed.connect(on_health_changed)
+	health_component.health_changed.connect(on_health_changed)
 	attack_finished = false
 	attack_animate()
 	attack()
@@ -20,7 +20,7 @@ func enter() -> void:
 	
 func exit() -> void:
 	owner.velocity = Vector2.ZERO
-	#health_component.health_changed.disconnect(on_health_changed)
+	health_component.health_changed.disconnect(on_health_changed)
 	
 	
 func update(delta: float) -> void:
@@ -53,5 +53,5 @@ func attack():
 	elif owner.move_direction.x < 0:
 		melee.scale.x = -1
 
-#func on_health_changed():
-	#transitioned.emit(self, "HurtState")
+func on_health_changed():
+	transitioned.emit(self, "HurtState")

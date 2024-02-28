@@ -1604,7 +1604,7 @@ pot_collision = NodePath("../../PotCollisionShape2D")
 health_component = NodePath("../../HealthComponent")
 dash_cooldown_timer = NodePath("../../DashCooldownTimer")
 
-[node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "dash_timer", "invincibility_timer", "pot", "pot_collision")]
+[node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "dash_timer", "invincibility_timer", "pot", "pot_collision", "health_component")]
 script = ExtResource("11_edrqs")
 player = NodePath("../..")
 dash_timer = NodePath("../../DashTimer")
@@ -1612,6 +1612,7 @@ invincibility_timer = NodePath("../../HurtComponent/InvincibilityTimer")
 pot = NodePath("../../Pot")
 pot_collision = NodePath("../../PotCollisionShape2D")
 fire_particle = ExtResource("12_tgo6r")
+health_component = NodePath("../../HealthComponent")
 
 [node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "health_component", "animation_tree", "pot")]
 script = ExtResource("12_xrppd")

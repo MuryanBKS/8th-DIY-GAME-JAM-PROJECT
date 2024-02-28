@@ -25,11 +25,12 @@ func enter() -> void:
 	
 func exit() -> void:
 		laser_timer.timeout.disconnect(on_timer_timeout)
-	
+		animation_player.play("RESET")
 	
 	
 func update(delta: float) -> void:
 	if start:
+		animation_player.play("glow")
 		var target_position = laser.global_position + get_player_direction() * 10
 		laser.rotate(deg_to_rad(direction * 0.15))
 		laser.global_position = lerp(laser.global_position, target_position, 0.01)
@@ -51,5 +52,5 @@ func decide_rotate_direction() -> int:
 
 func on_timer_timeout():
 	start = false
-	transitioned.emit(self, "ChaseState")
+	transitioned.emit(self, "IdleState")
 	laser.hide()

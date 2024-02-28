@@ -8,10 +8,10 @@ func _ready() -> void:
 	
 	
 func on_glow():
-	%AnimationPlayer.play("glow")
-	await %AnimationPlayer.animation_finished
 	%AnimationPlayer.play("shake")
 	await get_tree().create_timer(2).timeout
+	%AnimationPlayer.play("glow")
+	await %AnimationPlayer.animation_finished
 	%AnimationPlayer.play_backwards("glow")
 	await %AnimationPlayer.animation_finished
 	%AnimationPlayer.play("show", -1, -1, true)

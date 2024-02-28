@@ -9,12 +9,14 @@ const MAX_DASH_SPEED = 1200
 @export var pot: Node2D
 @export var pot_collision: CollisionShape2D
 @export var fire_particle: PackedScene
+@export var health_component: HealthComponent
 
 var dash_vector: Vector2
 var can_apply_friction = false
 
 
 func enter() -> void:
+	health_component.health_changed.connect(on_health_changed)
 	pot.switch_pot_collision(true)
 	player.collision_mask = 1
 	can_apply_friction = false
@@ -27,6 +29,7 @@ func enter() -> void:
 	
 	
 func exit() -> void:
+	health_component.health_changed.disconnect(on_health_changed)
 	dash_timer.timeout.disconnect(on_dash_timer_timeout)
 	player.collision_mask = 5
 	
@@ -60,3 +63,7 @@ func spawn_fire():
 
 func on_dash_timer_timeout():
 	can_apply_friction = true
+
+
+func on_health_changed():
+	transitioned.emit(self, "HurtState")

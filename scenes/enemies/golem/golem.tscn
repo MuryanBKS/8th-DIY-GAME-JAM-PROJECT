@@ -1,4 +1,4 @@
-[gd_scene load_steps=114 format=3 uid="uid://c3cp1iwe0mqlx"]
+[gd_scene load_steps=115 format=3 uid="uid://c3cp1iwe0mqlx"]
 
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="1_7wngp"]
 [ext_resource type="Texture2D" uid="uid://bmfw8ligkmlxf" path="res://scenes/enemies/golem/GolemSprite/PNG sheet/Character_sheet.png" id="1_foy7h"]
@@ -80,6 +80,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector2(1.4, 1)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Visuals/Laser:scale")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1.2, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_eh2wk"]
@@ -319,6 +331,23 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
 }
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Melee/MeleeHitboxComponent/CollisionShape2D")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.8, 0.9),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"disabled", false],
+"method": &"set_deferred"
+}, {
+"args": [&"disabled", true],
+"method": &"set_deferred"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_oco17"]
 resource_name = "range_attack"
@@ -413,6 +442,38 @@ tracks/4/keys = {
 "values": [Vector2(1.4, 1), Vector2(1.2, 1), Vector2(1.4, 1)]
 }
 
+[sub_resource type="Animation" id="Animation_yke5d"]
+resource_name = "laser_start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Visuals/Laser:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, -2, 1),
+"update": 0,
+"values": [Vector2(1.2, 1e-05), Vector2(1.2, 0.3), Vector2(1.2, 0.2), Vector2(1.2, 1.4)]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Visuals/Laser/LaserHitboxComponent/CollisionPolygon2D")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"values": [{
+"args": [&"disabled", true],
+"method": &"set_deferred"
+}, {
+"args": [&"disabled", false],
+"method": &"set_deferred"
+}]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_wtteb"]
 _data = {
 "RESET": SubResource("Animation_d7m0k"),
@@ -423,6 +484,7 @@ _data = {
 "idle": SubResource("Animation_0osic"),
 "immune": SubResource("Animation_tf70i"),
 "laser": SubResource("Animation_jofi7"),
+"laser_start": SubResource("Animation_yke5d"),
 "melee": SubResource("Animation_5cuqv"),
 "range_attack": SubResource("Animation_oco17"),
 "seal": SubResource("Animation_254hd")
@@ -1073,12 +1135,13 @@ debug_color = Color(0.643137, 0.52549, 0, 0.0980392)
 [node name="MeleeHitboxComponent" type="Area2D" parent="Melee"]
 collision_layer = 32
 collision_mask = 0
-monitorable = false
 script = ExtResource("12_nlscf")
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee/MeleeHitboxComponent"]
 position = Vector2(25.6667, -14.6667)
 shape = SubResource("CircleShape2D_yldnh")
+disabled = true
 debug_color = Color(1, 0.00784314, 0.0784314, 0.0470588)
 
 [node name="DetectMeleeArea2D" type="Area2D" parent="Melee"]
@@ -1105,12 +1168,10 @@ sprite_frames = SubResource("SpriteFrames_o65lb")
 animation = &"idle"
 
 [node name="Laser" type="Node2D" parent="Visuals"]
-visible = false
 modulate = Color(1, 1, 1, 0.976471)
 z_index = 1
 position = Vector2(0, -45)
-rotation = -0.0244346
-scale = Vector2(1.2, 1.2)
+scale = Vector2(1.2, 1e-05)
 
 [node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Visuals/Laser"]
 position = Vector2(96, 15.6667)
@@ -1130,6 +1191,19 @@ flip_h = true
 [node name="LaserMarker2D" type="Marker2D" parent="Visuals/Laser"]
 position = Vector2(86.3333, 1.00003)
 
+[node name="LaserHitboxComponent" type="Area2D" parent="Visuals/Laser"]
+position = Vector2(-0.916206, 37.4888)
+rotation = 0.0244346
+scale = Vector2(0.833333, 0.833333)
+collision_layer = 32
+collision_mask = 0
+script = ExtResource("12_nlscf")
+damage = 10
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Visuals/Laser/LaserHitboxComponent"]
+polygon = PackedVector2Array(5.0467, -56.7935, 5.99888, -31.4759, 535.881, -42.7587, 535.189, -71.0836)
+disabled = true
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0.666667, -20.6667)
 shape = SubResource("CapsuleShape2D_2bqr3")
@@ -1147,7 +1221,7 @@ script = ExtResource("8_d37ec")
 health_component = NodePath("../../HealthComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "visuals", "range_chase_area", "detect_melee_attack_area", "melee", "melee_hit_area", "laser_hit_area", "range_attack_cooldown_timer")]
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "visuals", "range_chase_area", "detect_melee_attack_area", "melee", "range_attack_cooldown_timer")]
 script = ExtResource("9_4scrs")
 animation_player = NodePath("../../AnimationPlayer")
 health_component = NodePath("../../HealthComponent")
@@ -1155,8 +1229,6 @@ visuals = NodePath("../../Visuals")
 range_chase_area = NodePath("../../RangeAttack/RangeChaseArea2D")
 detect_melee_attack_area = NodePath("../../Melee/DetectMeleeArea2D")
 melee = NodePath("../../Melee")
-melee_hit_area = NodePath("../../Melee/MeleeHitboxComponent")
-laser_hit_area = NodePath("../../LaserHitboxComponent")
 range_attack_cooldown_timer = NodePath("../../RangeAttackCooldownTimer")
 
 [node name="MeleeAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "hit_area", "detect_attack_area", "melee", "visuals")]
@@ -1195,15 +1267,9 @@ animation_player = NodePath("../../AnimationPlayer")
 death_shadow = NodePath("../../DiedShadow")
 default_shadow = NodePath("../../Visuals/ShadowSprite2D")
 
-[node name="SummonState" type="Node" parent="StateMachine"]
-
 [node name="ArmorBuffState" type="Node" parent="StateMachine"]
 
-[node name="LaserHitboxComponent" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 32
-monitorable = false
-script = ExtResource("12_nlscf")
+[node name="SummonState" type="Node" parent="StateMachine"]
 
 [node name="HurtComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer")]
 collision_layer = 0
@@ -1219,6 +1285,7 @@ shape = SubResource("CircleShape2D_udavj")
 debug_color = Color(0.0392157, 0.623529, 0.521569, 0.352941)
 
 [node name="Timer" type="Timer" parent="HurtComponent"]
+wait_time = 1.5
 one_shot = true
 
 [node name="LaserTimer" type="Timer" parent="."]

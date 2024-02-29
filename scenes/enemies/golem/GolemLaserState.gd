@@ -12,15 +12,15 @@ func enter() -> void:
 	laser_timer.timeout.connect(on_timer_timeout)
 	start = false
 	laser.look_at(GameManager.character_now.global_position)
+	direction = decide_rotate_direction()
+	laser.rotate(-direction * 0.5)
 	animation_player.play("laser")
 	await animation_player.animation_finished
-	direction = decide_rotate_direction()
+	laser.show()
+	animation_player.play("laser_start")
 	start = true
 	laser_timer.start()
 	laser.position = Vector2(0, -45)
-	
-	# Laser Start Animation
-	laser.show()
 	
 	
 func exit() -> void:
@@ -30,7 +30,7 @@ func exit() -> void:
 	
 func update(delta: float) -> void:
 	if start:
-		animation_player.play("glow")
+		#animation_player.play("glow")
 		var target_position = laser.global_position + get_player_direction() * 10
 		laser.rotate(deg_to_rad(direction * 0.15))
 		laser.global_position = lerp(laser.global_position, target_position, 0.01)
@@ -53,4 +53,6 @@ func decide_rotate_direction() -> int:
 func on_timer_timeout():
 	start = false
 	transitioned.emit(self, "IdleState")
+	animation_player.play_backwards("laser_start")
+	await animation_player.animation_finished
 	laser.hide()

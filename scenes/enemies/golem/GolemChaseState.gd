@@ -9,8 +9,6 @@ const SPEED = 200.0
 @export var range_chase_area: Area2D
 @export var detect_melee_attack_area: Area2D
 @export var melee: Node2D
-@export var melee_hit_area: Area2D
-@export var laser_hit_area: Area2D
 @export var range_attack_cooldown_timer: Timer
 
 func enter():
@@ -18,8 +16,6 @@ func enter():
 	range_chase_area.body_exited.connect(on_body_exited)
 	detect_melee_attack_area.area_entered.connect(on_melee_attack_area_entered)
 	range_attack_cooldown_timer.timeout.connect(on_timer_timeout)
-	melee_hit_area.set_deferred("monitorable", false)
-	laser_hit_area.set_deferred("monitorable", false)
 	range_attack_cooldown_timer.wait_time = randf_range(3.0, 5.0)
 	range_attack_cooldown_timer.start()
 	

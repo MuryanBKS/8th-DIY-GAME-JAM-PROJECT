@@ -19,7 +19,7 @@ func enter():
 
 
 func physics_update(delta: float) -> void:
-	if bat.target is Player:
+	if GameManager.character_now is Player:
 		absorbed_to_player(delta)
 		if (player.get_cart_position() - bat.global_position).length() < 10:
 			GameManager.enemy_collected.emit("Attack", 10)

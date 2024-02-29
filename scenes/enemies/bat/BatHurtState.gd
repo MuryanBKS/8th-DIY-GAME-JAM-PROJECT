@@ -34,7 +34,7 @@ func exit():
 	sprite.modulate = Color.WHITE
 	
 func get_target_direction() -> Vector2:
-	return (bat.target.global_position - bat.global_position).normalized()
+	return (GameManager.character_now.global_position - bat.global_position).normalized()
 	
 	
 func knock_back(delta):

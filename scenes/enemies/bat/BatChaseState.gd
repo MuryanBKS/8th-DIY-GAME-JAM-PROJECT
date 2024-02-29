@@ -36,7 +36,7 @@ func exit():
 	
 	
 func get_player_direction() -> Vector2:
-	return (bat.target.global_position - bat.global_position).normalized()
+	return (GameManager.character_now.global_position - bat.global_position).normalized()
 	
 	
 func move(delta):

@@ -1,7 +1,8 @@
 extends State
 
 
-const SPEED = 200.0
+const DEFAULT_SPEED = 200.0
+const DASH_SPEED = 700.0
 
 @export var animation_player: AnimationPlayer
 @export var health_component: HealthComponent
@@ -10,6 +11,10 @@ const SPEED = 200.0
 @export var detect_melee_attack_area: Area2D
 @export var melee: Node2D
 @export var range_attack_cooldown_timer: Timer
+
+
+var speed := DEFAULT_SPEED
+
 
 func enter():
 	health_component.health_changed.connect(on_health_changed)
@@ -25,6 +30,7 @@ func physics_update(delta: float) -> void:
 	
 	
 func exit():
+	speed = DEFAULT_SPEED
 	owner.velocity = Vector2.ZERO
 	health_component.health_changed.disconnect(on_health_changed)
 	range_chase_area.body_exited.disconnect(on_body_exited)
@@ -38,7 +44,7 @@ func get_player_direction() -> Vector2:
 	
 func move(delta):
 	owner.move_direction = get_player_direction()
-	owner.velocity = lerp(owner.velocity, get_player_direction() * SPEED, 1 - exp(-5 * delta))
+	owner.velocity = lerp(owner.velocity, get_player_direction() * speed, 1 - exp(-5 * delta))
 	if owner.move_direction.x > 0:
 		melee.scale.x = 1
 	elif owner.move_direction.x < 0:
@@ -66,4 +72,6 @@ func on_body_exited(_body: Node2D):
 #
 #
 func on_melee_attack_area_entered(_area: Area2D):
+	speed = DASH_SPEED
+	await get_tree().create_timer(randf_range(0.3, 0.8)).timeout
 	transitioned.emit(self, "MeleeAttackState")

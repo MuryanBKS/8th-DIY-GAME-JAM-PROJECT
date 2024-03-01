@@ -52,7 +52,7 @@ func decide_rotate_direction() -> int:
 
 func on_timer_timeout():
 	start = false
-	transitioned.emit(self, "IdleState")
 	animation_player.play_backwards("laser_start")
 	await animation_player.animation_finished
 	laser.hide()
+	transitioned.emit(self, "IdleState")

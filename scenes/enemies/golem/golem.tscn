@@ -492,13 +492,13 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vughq"]
-radius = 180.667
+radius = 135.7
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yldnh"]
 radius = 20.6908
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_228to"]
-radius = 13.0171
+radius = 40.668
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6b04"]
 atlas = ExtResource("1_foy7h")
@@ -1150,7 +1150,7 @@ collision_layer = 0
 collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee/DetectMeleeArea2D"]
-position = Vector2(19.6667, -11.3333)
+position = Vector2(44.3333, -21)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_228to")
 debug_color = Color(0.976471, 0, 0.411765, 0.113725)
@@ -1298,7 +1298,7 @@ wait_time = 1.5
 one_shot = true
 
 [node name="LaserTimer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 3.0
 one_shot = true
 
 [node name="RangeAttackCooldownTimer" type="Timer" parent="."]

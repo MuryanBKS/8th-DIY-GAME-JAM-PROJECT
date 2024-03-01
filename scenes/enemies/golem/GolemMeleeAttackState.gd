@@ -30,11 +30,11 @@ func update(delta: float) -> void:
 func physics_update(_delta: float) -> void:
 	if !attack_finished:
 		return
-	if detect_attack_area.get_overlapping_areas().is_empty():
-		transitioned.emit(self, "ChaseState")
-	else :
-		attack_animate()
-		attack()
+	#if detect_attack_area.get_overlapping_areas().is_empty():
+		#transitioned.emit(self, "ChaseState")
+	#else :
+		#attack_animate()
+		#attack()
 	
 	
 func attack_animate():
@@ -45,6 +45,7 @@ func attack_animate():
 	animation_player.play("melee")
 	await animation_player.animation_finished
 	attack_finished = true
+	transitioned.emit(self, "RunAwayState")
 
 
 func attack():

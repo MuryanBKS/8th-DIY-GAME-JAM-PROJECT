@@ -40,5 +40,10 @@ func knock_back(delta):
 		owner.velocity = Vector2.ZERO
 		if health_component.get_health() <= 0:
 			transitioned.emit(self, "DiedState")
-		transitioned.emit(self, "RunAwayState")
+			
+		if randf() > 0.5:
+			transitioned.emit(self, "RunAwayState")
+		else :
+			transitioned.emit(self, "ChaseState")
+			
 	owner.move_and_slide()

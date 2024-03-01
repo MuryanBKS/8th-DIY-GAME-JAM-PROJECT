@@ -17,7 +17,7 @@ var direction_decided = false
 func enter() -> void:
 	health_component.health_changed.connect(on_health_changed)
 	run_away_timer.timeout.connect(on_timer_timeout)
-	run_away_timer.wait_time = randf_range(1.0, 2.0)
+	run_away_timer.wait_time = randf_range(0.5, 2.0)
 	run_away_timer.start()
 	direction_decided = false
 	random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
@@ -64,7 +64,10 @@ func on_timer_timeout():
 	else :
 		owner.move_direction = get_player_direction()
 		animate()
-		transitioned.emit(self, "RangeAttackState")
+		if randf() > 0.5:
+			transitioned.emit(self, "RangeAttackState")
+		else:
+			transitioned.emit(self, "ChaseState")
 
 
 func on_health_changed():

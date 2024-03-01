@@ -1,7 +1,7 @@
 extends State
 class_name WarriorMoveState
 
-const MAX_SPEED = 360
+const MAX_SPEED = 460
 
 @export var warrior: CharacterBody2D
 @export var animation_tree: AnimationTree

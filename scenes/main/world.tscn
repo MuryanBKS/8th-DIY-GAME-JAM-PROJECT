@@ -83,6 +83,9 @@ position = Vector2(-923, -935)
 z_index = -1
 y_sort_enabled = true
 
+[node name="Items" type="Node2D" parent="." groups=["items"]]
+z_index = 1
+
 [node name="Decorations" type="Node2D" parent="."]
 y_sort_enabled = true
 
@@ -341,7 +344,11 @@ position = Vector2(659, -552)
 position = Vector2(-293, -22)
 
 [node name="Chest" parent="Decorations" instance=ExtResource("8_lwjtk")]
-position = Vector2(162, -684)
+position = Vector2(608, -544)
+is_opened = false
+
+[node name="Chest3" parent="Decorations" instance=ExtResource("8_lwjtk")]
+position = Vector2(-2592, -288)
 
 [node name="Box_01" parent="Decorations" instance=ExtResource("9_5mi5d")]
 position = Vector2(304, 289)
@@ -508,7 +515,6 @@ is_locked = false
 
 [node name="Chest2" parent="Decorations" instance=ExtResource("8_lwjtk")]
 position = Vector2(-1587, 376)
-is_opened = true
 
 [node name="TxShadow" type="Sprite2D" parent="Decorations"]
 modulate = Color(0.165656, 0.165656, 0.165656, 0.2)
@@ -553,7 +559,6 @@ region_enabled = true
 region_rect = Rect2(352, 192, 64, 64)
 
 [node name="Enemies" type="Node2D" parent="."]
-visible = false
 y_sort_enabled = true
 
 [node name="Bat" parent="Enemies" instance=ExtResource("13_apsh7")]

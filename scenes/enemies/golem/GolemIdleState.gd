@@ -6,7 +6,7 @@ extends State
 func enter() -> void:
 	health_component.health_changed.connect(on_health_changed)
 	animation_player.play("idle")
-	await get_tree().create_timer(randf_range(1.0, 3.0)).timeout
+	await get_tree().create_timer(randf_range(0.5, 1.0)).timeout
 	transitioned.emit(self, "ChaseState")
 	
 func exit() -> void:

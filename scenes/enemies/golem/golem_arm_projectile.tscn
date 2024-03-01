@@ -1,10 +1,47 @@
-[gd_scene load_steps=19 format=3 uid="uid://bhpslab73d2j1"]
+[gd_scene load_steps=30 format=3 uid="uid://bhpslab73d2j1"]
 
 [ext_resource type="Script" path="res://GolemArmProjectile.gd" id="1_rytyv"]
 [ext_resource type="Texture2D" uid="uid://dbcwrla12b7qk" path="res://scenes/enemies/golem/GolemSprite/weapon PNG/arm_projectile_glowing.png" id="2_kabip"]
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="2_pu38u"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="3_p5lwt"]
+[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/Effects/explosion/Explosions.png" id="3_rtr13"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="5_b8jpv"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2gb72"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(0, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r4kq7"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(192, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_wubgv"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(384, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5tbh"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(576, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nawrl"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(768, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_xdrxn"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(960, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8frjp"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(1152, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_v1o5o"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(1344, 0, 192, 192)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rkwe8"]
+atlas = ExtResource("3_rtr13")
+region = Rect2(1536, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcylq"]
 atlas = ExtResource("2_kabip")
@@ -32,6 +69,38 @@ region = Rect2(200, 100, 100, 100)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_teetk"]
 animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2gb72")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r4kq7")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_wubgv")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5tbh")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nawrl")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_xdrxn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8frjp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_v1o5o")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rkwe8")
+}],
+"loop": true,
+"name": &"explode",
+"speed": 5.0
+}, {
 "frames": [{
 "duration": 1.0,
 "texture": SubResource("AtlasTexture_fcylq")
@@ -87,6 +156,30 @@ tracks/1/keys = {
 "update": 1,
 "values": [0]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-28, 13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
 
 [sub_resource type="Animation" id="Animation_j6hg7"]
 resource_name = "glow"
@@ -116,10 +209,101 @@ tracks/1/keys = {
 "update": 1,
 "values": [0, 2, 3, 4, 5]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(-28, 13)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".:scale")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(3, 3)]
+}
+
+[sub_resource type="Animation" id="Animation_fkib0"]
+resource_name = "explode"
+length = 0.8
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"explode"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("AnimatedSprite2D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(0, 0)]
+}
+tracks/3/type = "method"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath(".")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.8),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath(".:scale")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(2, 2)]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_pgqet"]
 _data = {
 "RESET": SubResource("Animation_k2qs3"),
+"explode": SubResource("Animation_fkib0"),
 "glow": SubResource("Animation_j6hg7")
 }
 
@@ -159,6 +343,7 @@ debug_color = Color(0, 0.6, 0.701961, 0.0862745)
 libraries = {
 "": SubResource("AnimationLibrary_pgqet")
 }
+autoplay = "glow"
 
 [node name="ChaseTimer" type="Timer" parent="."]
 wait_time = 3.0

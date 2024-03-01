@@ -3,7 +3,8 @@ extends Area2D
 var move_direction: Vector2
 var detect_player = false
 var start_chase := false
-var speed = 400
+var speed = 300
+var hit_target = false
 
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
 @onready var health_component: HealthComponent = $HealthComponent
@@ -15,6 +16,8 @@ func _ready() -> void:
 	
 	
 func _physics_process(delta: float) -> void:
+	if hit_target:
+		return
 	if detect_player:
 		move_direction = get_player_direction()
 		look_at(GameManager.character_now.global_position)
@@ -42,7 +45,8 @@ func _on_chase_timer_timeout() -> void:
 
 
 func on_hit_area_entered(_area: Area2D):
-	queue_free()
+	hit_target = true
+	$AnimationPlayer.play("explode")
 
 
 func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
@@ -50,4 +54,5 @@ func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
 
 
 func on_health_changed():
-	queue_free()
+	hit_target = true
+	$AnimationPlayer.play("explode")

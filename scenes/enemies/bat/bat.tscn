@@ -405,6 +405,7 @@ bat_collision = NodePath("../../CollisionShape2D")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 
 [node name="ChaseArea2D" type="Area2D" parent="."]
+visible = false
 collision_layer = 0
 collision_mask = 2
 

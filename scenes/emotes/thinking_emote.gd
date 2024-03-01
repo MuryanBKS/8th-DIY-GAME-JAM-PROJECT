@@ -9,6 +9,7 @@ func change_emote(path: String, rect2: Rect2):
 	sprite_2d.texture = load(path)
 	sprite_2d.region_rect = rect2
 	
+	
 func think():
 	if animation_player.is_playing():
 		animation_player.play("think")

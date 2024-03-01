@@ -13,7 +13,7 @@ func enter() -> void:
 	start = false
 	laser.look_at(GameManager.character_now.global_position)
 	direction = decide_rotate_direction()
-	laser.rotate(-direction * 0.5)
+	laser.rotate(-direction * 0.25)
 	animation_player.play("laser")
 	await animation_player.animation_finished
 	laser.show()

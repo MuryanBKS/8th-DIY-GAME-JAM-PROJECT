@@ -1,4 +1,4 @@
-[gd_scene load_steps=115 format=3 uid="uid://c3cp1iwe0mqlx"]
+[gd_scene load_steps=116 format=3 uid="uid://c3cp1iwe0mqlx"]
 
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="1_7wngp"]
 [ext_resource type="Texture2D" uid="uid://bmfw8ligkmlxf" path="res://scenes/enemies/golem/GolemSprite/PNG sheet/Character_sheet.png" id="1_foy7h"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bhpslab73d2j1" path="res://scenes/enemies/golem/golem_arm_projectile.tscn" id="14_8i212"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemHurtState.gd" id="16_f0w4n"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemDiedState.gd" id="17_v7h78"]
+[ext_resource type="Script" path="res://scenes/enemies/golem/GolemRunAwayState.gd" id="18_uhtht"]
 
 [sub_resource type="Animation" id="Animation_d7m0k"]
 length = 0.001
@@ -491,7 +492,7 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vughq"]
-radius = 131.335
+radius = 180.667
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yldnh"]
 radius = 20.6908
@@ -1123,7 +1124,7 @@ position = Vector2(51.3333, -36.6667)
 
 [node name="RangeChaseArea2D" type="Area2D" parent="RangeAttack"]
 collision_layer = 0
-collision_mask = 2
+collision_mask = 128
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RangeAttack/RangeChaseArea2D"]
 position = Vector2(0.666667, -20.6667)
@@ -1271,6 +1272,14 @@ default_shadow = NodePath("../../Visuals/ShadowSprite2D")
 
 [node name="SummonState" type="Node" parent="StateMachine"]
 
+[node name="RunAwayState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "animation_player", "visuals", "range_attack_area", "run_away_timer")]
+script = ExtResource("18_uhtht")
+health_component = NodePath("../../HealthComponent")
+animation_player = NodePath("../../AnimationPlayer")
+visuals = NodePath("../../Visuals")
+range_attack_area = NodePath("../../RangeAttack/RangeChaseArea2D")
+run_away_timer = NodePath("../../RunAwayTimer")
+
 [node name="HurtComponent" type="Area2D" parent="." node_paths=PackedStringArray("health_component", "invincibility_timer")]
 collision_layer = 0
 collision_mask = 0
@@ -1293,4 +1302,7 @@ wait_time = 2.5
 one_shot = true
 
 [node name="RangeAttackCooldownTimer" type="Timer" parent="."]
+one_shot = true
+
+[node name="RunAwayTimer" type="Timer" parent="."]
 one_shot = true

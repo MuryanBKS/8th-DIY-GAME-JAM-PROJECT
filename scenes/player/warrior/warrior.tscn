@@ -1,4 +1,4 @@
-[gd_scene load_steps=162 format=3 uid="uid://brhggke2fu4n4"]
+[gd_scene load_steps=163 format=3 uid="uid://brhggke2fu4n4"]
 
 [ext_resource type="Script" path="res://scenes/player/warrior/warrior.gd" id="1_bcuvu"]
 [ext_resource type="Texture2D" uid="uid://bpqphcph214le" path="res://scenes/player/warrior/Warrior_Blue.png" id="2_hjbr2"]
@@ -13,6 +13,7 @@
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="8_wo4f8"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="11_m25rq"]
 [ext_resource type="Script" path="res://scenes/player/warrior/WarriorDiedState.gd" id="11_xy3fj"]
+[ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="14_sre8h"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q05u"]
 radius = 25.0799
@@ -1856,9 +1857,10 @@ animation_player = NodePath("../../AnimationPlayer")
 animation_tree = NodePath("../../AnimationTree")
 health_component = NodePath("../../HealthComponent")
 
-[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("switch_area")]
+[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("switch_area", "thinking_emote")]
 script = ExtResource("5_xtxqj")
 switch_area = NodePath("../../SwitchArea2D")
+thinking_emote = NodePath("../../ThinkingEmote")
 
 [node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "animation_tree")]
 script = ExtResource("8_2wedu")
@@ -1921,6 +1923,11 @@ health_component = NodePath("../HealthComponent")
 invincibility_timer = NodePath("Timer")
 
 [node name="Timer" type="Timer" parent="HurtComponent"]
+one_shot = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
 shape = SubResource("CircleShape2D_m4nhd")
+
+[node name="ThinkingEmote" parent="." instance=ExtResource("14_sre8h")]
+unique_name_in_owner = true
+position = Vector2(26, -46)

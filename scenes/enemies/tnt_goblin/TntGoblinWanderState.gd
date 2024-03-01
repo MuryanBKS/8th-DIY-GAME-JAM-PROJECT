@@ -5,7 +5,7 @@ const SPEED := 100
 
 @export var animation_player: AnimationPlayer
 @export var wander_timer: Timer
-@export var animated_sprite_2d: AnimatedSprite2D
+@export var visuals: Node2D
 @export var health_component: HealthComponent
 @export var chase_area: Area2D
 @export var player_ray_cast: RayCast2D
@@ -58,9 +58,9 @@ func move():
 func animate():
 	animation_player.play("move")
 	if owner.move_direction.x > 0:
-		animated_sprite_2d.flip_h = false
+		visuals.scale.x = 1
 	elif owner.move_direction.x < 0:
-		animated_sprite_2d.flip_h = true
+		visuals.scale.x = -1
 		
 		
 func on_wander_timer_timeout():
@@ -69,6 +69,7 @@ func on_wander_timer_timeout():
 	
 func on_health_changed():
 	transitioned.emit(self, "HurtState")
+
 
 func on_body_entered(_body: Node2D):
 	if player_ray_cast.get_collider():

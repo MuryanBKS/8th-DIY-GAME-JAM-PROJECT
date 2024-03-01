@@ -6,7 +6,7 @@
 radius = 7.5
 
 [node name="Skeleton" type="StaticBody2D"]
-modulate = Color(0.686275, 0.768627, 0.752941, 1)
+modulate = Color(0.803922, 0.862745, 0.85098, 1)
 scale = Vector2(2, 2)
 
 [node name="SpriteShadow" type="Sprite2D" parent="."]

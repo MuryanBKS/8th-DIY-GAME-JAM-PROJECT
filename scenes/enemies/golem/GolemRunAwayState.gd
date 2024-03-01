@@ -1,7 +1,7 @@
 extends State
 
 
-const SPEED := 300
+const SPEED := 200
 
 @export var health_component: HealthComponent
 @export var animation_player: AnimationPlayer
@@ -17,7 +17,7 @@ var direction_decided = false
 func enter() -> void:
 	health_component.health_changed.connect(on_health_changed)
 	run_away_timer.timeout.connect(on_timer_timeout)
-	run_away_timer.wait_time = randf_range(0.5, 2.0)
+	run_away_timer.wait_time = randf_range(0.5, 1.0)
 	run_away_timer.start()
 	direction_decided = false
 	random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
@@ -60,6 +60,8 @@ func move():
 
 func on_timer_timeout():
 	if range_attack_area.get_overlapping_areas().is_empty():
+		owner.move_direction = get_player_direction()
+		animate()
 		transitioned.emit(self, "LaserState")
 	else :
 		owner.move_direction = get_player_direction()

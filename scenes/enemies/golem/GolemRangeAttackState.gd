@@ -10,8 +10,6 @@ func enter() -> void:
 	health_component.health_changed.connect(on_health_changed)
 	animation_player.play("range_attack")
 	await animation_player.animation_finished
-	range_attack()
-	await get_tree().create_timer(2).timeout
 	transitioned.emit(self, "IdleState")
 	
 func exit() -> void:

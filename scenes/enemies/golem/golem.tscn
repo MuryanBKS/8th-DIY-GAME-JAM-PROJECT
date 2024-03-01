@@ -1,4 +1,4 @@
-[gd_scene load_steps=116 format=3 uid="uid://c3cp1iwe0mqlx"]
+[gd_scene load_steps=121 format=3 uid="uid://c3cp1iwe0mqlx"]
 
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="1_7wngp"]
 [ext_resource type="Texture2D" uid="uid://bmfw8ligkmlxf" path="res://scenes/enemies/golem/GolemSprite/PNG sheet/Character_sheet.png" id="1_foy7h"]
@@ -19,6 +19,10 @@
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemHurtState.gd" id="16_f0w4n"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemDiedState.gd" id="17_v7h78"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemRunAwayState.gd" id="18_uhtht"]
+[ext_resource type="Script" path="res://scenes/enemies/golem/GolemSummonState.gd" id="18_vyjj1"]
+[ext_resource type="PackedScene" uid="uid://bj5hrt234asvg" path="res://scenes/enemies/torch_goblin/torch_goblin.tscn" id="20_3gngc"]
+[ext_resource type="PackedScene" uid="uid://b8qp1fs2x70mg" path="res://scenes/ui/health_bar.tscn" id="20_y3xsm"]
+[ext_resource type="PackedScene" uid="uid://b4ter3f47cmmq" path="res://scenes/enemies/tnt_goblin/tnt_goblin.tscn" id="21_kk61m"]
 
 [sub_resource type="Animation" id="Animation_d7m0k"]
 length = 0.001
@@ -338,7 +342,7 @@ tracks/1/keys = {
 
 [sub_resource type="Animation" id="Animation_5cuqv"]
 resource_name = "melee"
-length = 0.9
+length = 0.75
 step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -359,7 +363,7 @@ tracks/1/path = NodePath("Visuals/GolemSprite2D:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.8),
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.65),
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6]
@@ -371,7 +375,7 @@ tracks/2/path = NodePath("Melee/MeleeHitboxComponent/CollisionShape2D")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0.8, 0.9),
+"times": PackedFloat32Array(0.65, 0.75),
 "transitions": PackedFloat32Array(1, 1),
 "values": [{
 "args": [&"disabled", false],
@@ -384,7 +388,7 @@ tracks/2/keys = {
 
 [sub_resource type="Animation" id="Animation_oco17"]
 resource_name = "range_attack"
-length = 0.8
+length = 0.9
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -408,6 +412,20 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("StateMachine/RangeAttackState")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.9),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"range_attack"
+}]
 }
 
 [sub_resource type="Animation" id="Animation_254hd"]
@@ -492,13 +510,17 @@ _data = {
 }
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vughq"]
-radius = 135.7
+radius = 159.67
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_8lun6"]
+radius = 32.6666
+height = 67.3333
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_yldnh"]
 radius = 20.6908
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_228to"]
-radius = 40.668
+radius = 15.3333
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_l6b04"]
 atlas = ExtResource("1_foy7h")
@@ -1096,6 +1118,7 @@ height = 23.3333
 radius = 13.3333
 
 [node name="Golem" type="CharacterBody2D"]
+y_sort_enabled = true
 scale = Vector2(3, 3)
 collision_layer = 4
 collision_mask = 7
@@ -1108,7 +1131,7 @@ libraries = {
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_hxywh")
-health = 50
+health = 100.0
 
 [node name="DiedShadow" type="Sprite2D" parent="."]
 visible = false
@@ -1133,6 +1156,15 @@ debug_color = Color(0.643137, 0.52549, 0, 0.0980392)
 
 [node name="Melee" type="Node2D" parent="."]
 
+[node name="DashArea2D" type="Area2D" parent="Melee"]
+position = Vector2(35.6667, -22.6667)
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Melee/DashArea2D"]
+position = Vector2(3.3333, 11.6667)
+shape = SubResource("CapsuleShape2D_8lun6")
+
 [node name="MeleeHitboxComponent" type="Area2D" parent="Melee"]
 collision_layer = 32
 collision_mask = 0
@@ -1150,7 +1182,7 @@ collision_layer = 0
 collision_mask = 130
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Melee/DetectMeleeArea2D"]
-position = Vector2(44.3333, -21)
+position = Vector2(22.6667, -10.6667)
 rotation = 1.5708
 shape = SubResource("CircleShape2D_228to")
 debug_color = Color(0.976471, 0, 0.411765, 0.113725)
@@ -1222,13 +1254,13 @@ script = ExtResource("8_d37ec")
 health_component = NodePath("../../HealthComponent")
 animation_player = NodePath("../../AnimationPlayer")
 
-[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "visuals", "range_chase_area", "detect_melee_attack_area", "melee", "range_attack_cooldown_timer")]
+[node name="ChaseState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "visuals", "range_chase_area", "dash_area", "melee", "range_attack_cooldown_timer")]
 script = ExtResource("9_4scrs")
 animation_player = NodePath("../../AnimationPlayer")
 health_component = NodePath("../../HealthComponent")
 visuals = NodePath("../../Visuals")
 range_chase_area = NodePath("../../RangeAttack/RangeChaseArea2D")
-detect_melee_attack_area = NodePath("../../Melee/DetectMeleeArea2D")
+dash_area = NodePath("../../Melee/DashArea2D")
 melee = NodePath("../../Melee")
 range_attack_cooldown_timer = NodePath("../../RangeAttackCooldownTimer")
 
@@ -1270,7 +1302,12 @@ default_shadow = NodePath("../../Visuals/ShadowSprite2D")
 
 [node name="ArmorBuffState" type="Node" parent="StateMachine"]
 
-[node name="SummonState" type="Node" parent="StateMachine"]
+[node name="SummonState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "summon_timer", "visuals")]
+script = ExtResource("18_vyjj1")
+animation_player = NodePath("../../AnimationPlayer")
+summon_monster = Array[PackedScene]([ExtResource("20_3gngc"), ExtResource("21_kk61m"), ExtResource("20_3gngc")])
+summon_timer = NodePath("../../SummonTimer")
+visuals = NodePath("../../Visuals")
 
 [node name="RunAwayState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "animation_player", "visuals", "range_attack_area", "run_away_timer")]
 script = ExtResource("18_uhtht")
@@ -1306,3 +1343,21 @@ one_shot = true
 
 [node name="RunAwayTimer" type="Timer" parent="."]
 one_shot = true
+
+[node name="SummonTimer" type="Timer" parent="."]
+wait_time = 1.6
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("20_y3xsm")]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1058.0
+offset_top = -1041.0
+offset_right = -25.0
+offset_bottom = -1012.0
+grow_horizontal = 0
+grow_vertical = 0

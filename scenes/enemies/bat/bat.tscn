@@ -312,7 +312,6 @@ script = ExtResource("1_hbnp0")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("5_65u4c")
-health = 30
 
 [node name="Visual" type="Node2D" parent="."]
 unique_name_in_owner = true

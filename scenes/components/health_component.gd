@@ -4,15 +4,15 @@ extends Node
 signal health_changed
 
 
-@export var health: int
+@export var health: float
 
 
-func hurt(damage: int):
-	health_changed.emit()
+func hurt(damage: float):
 	health -= damage
+	health_changed.emit()
 	if health <= 0:
 		health = 0
 		
 		
-func get_health() -> int:
+func get_health() -> float:
 	return health

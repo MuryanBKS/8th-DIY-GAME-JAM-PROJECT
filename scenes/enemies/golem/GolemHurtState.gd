@@ -7,7 +7,7 @@ extends State
 
 var knockback_direction: Vector2
 var random_vector: Vector2
-
+var in_half_hp = false
 
 func enter():
 	owner.collision_mask = 1
@@ -38,12 +38,16 @@ func knock_back(delta):
 	owner.velocity = lerp(owner.velocity, Vector2.ZERO, 1 - exp(-8 * delta))
 	if owner.velocity.length() < 30:
 		owner.velocity = Vector2.ZERO
+		print(health_component.get_health() * 1/2)
 		if health_component.get_health() <= 0:
 			transitioned.emit(self, "DiedState")
-			
-		if randf() > 0.5:
-			transitioned.emit(self, "RunAwayState")
-		else :
-			transitioned.emit(self, "ChaseState")
+		elif health_component.get_health() <= owner.max_health * 1/2 and not in_half_hp:
+			in_half_hp = true
+			transitioned.emit(self, "SummonState")
+		else:
+			if randf() > 0.4:
+				transitioned.emit(self, "RunAwayState")
+			else :
+				transitioned.emit(self, "ChaseState")
 			
 	owner.move_and_slide()

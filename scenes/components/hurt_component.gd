@@ -17,10 +17,10 @@ func _ready() -> void:
 		collision_mask = 32
 	
 func on_area_entered(area: Area2D):
-	if area is HitboxComponent and invincibility_timer.is_stopped():
+	if area is HitboxComponent and invincibility_timer.time_left <= 0:
 		health_component.hurt(area.damage)
 		invincibility_timer.start()
-
+		
 
 func on_timer_timeout():
 	var areas = get_overlapping_areas()

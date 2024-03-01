@@ -3,44 +3,44 @@
 [ext_resource type="Script" path="res://GolemArmProjectile.gd" id="1_rytyv"]
 [ext_resource type="Texture2D" uid="uid://dbcwrla12b7qk" path="res://scenes/enemies/golem/GolemSprite/weapon PNG/arm_projectile_glowing.png" id="2_kabip"]
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="2_pu38u"]
+[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/effect/explosion/Explosions.png" id="3_bioaj"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="3_p5lwt"]
-[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/Effects/explosion/Explosions.png" id="3_rtr13"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="5_b8jpv"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2gb72"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_r4kq7"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_wubgv"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_h5tbh"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nawrl"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xdrxn"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_8frjp"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(1152, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_v1o5o"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(1344, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_rkwe8"]
-atlas = ExtResource("3_rtr13")
+atlas = ExtResource("3_bioaj")
 region = Rect2(1536, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_fcylq"]
@@ -319,7 +319,6 @@ script = ExtResource("1_rytyv")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_pu38u")
-health = 10
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 modulate = Color(0.847059, 0.976471, 0.890196, 1)

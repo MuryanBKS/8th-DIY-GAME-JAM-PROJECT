@@ -13,7 +13,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/TntGoblinHurtState.gd" id="9_e0kn6"]
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/TntGoblinDiedState.gd" id="10_vh2mu"]
 [ext_resource type="Texture2D" uid="uid://dt2t1fs6v6iw5" path="res://assets/Dead.png" id="12_v3e8y"]
-[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/Effects/explosion/Explosions.png" id="13_uab17"]
+[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/effect/explosion/Explosions.png" id="13_uab17"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="14_y70xb"]
 
 [sub_resource type="Animation" id="Animation_7rpud"]

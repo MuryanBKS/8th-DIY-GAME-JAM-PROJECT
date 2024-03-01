@@ -2,8 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://bperphtwjshos" path="res://scenes/enemies/tnt_goblin/Dynamite.png" id="1_4bved"]
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/tnt.gd" id="1_yqgwm"]
-[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/Effects/explosion/Explosions.png" id="2_x37ec"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="3_qu35t"]
+[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/effect/explosion/Explosions.png" id="3_uimkx"]
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="5_js2vq"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="6_fwmqg"]
 
@@ -35,39 +35,39 @@ atlas = ExtResource("1_4bved")
 region = Rect2(320, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nrbgt"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(0, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_axydr"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(192, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_q0tge"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(384, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4310u"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(576, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2rqgd"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(768, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_kqptq"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(960, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2khsy"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(1152, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_iwbxt"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(1344, 0, 192, 192)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_okrgt"]
-atlas = ExtResource("2_x37ec")
+atlas = ExtResource("3_uimkx")
 region = Rect2(1536, 0, 192, 192)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_48tfm"]

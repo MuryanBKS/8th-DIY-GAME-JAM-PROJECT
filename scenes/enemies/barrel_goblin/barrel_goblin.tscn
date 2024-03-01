@@ -4,7 +4,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/barrel_goblin.gd" id="1_exh1j"]
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="2_4y4pc"]
 [ext_resource type="Script" path="res://scenes/state_machine/state_machine.gd" id="2_m48un"]
-[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/Effects/explosion/Explosions.png" id="3_2r7qt"]
+[ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/effect/explosion/Explosions.png" id="3_2r7qt"]
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/BarrelGoblinIdleState.gd" id="3_6hamu"]
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/BarrelGoblinWanderState.gd" id="4_web2g"]
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/BarrelGoblinDiedState.gd" id="7_fa8mx"]

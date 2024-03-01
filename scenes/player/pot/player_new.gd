@@ -6,11 +6,14 @@ signal emote_changed(path: String, rect_size: Rect2)
 var input_vector: Vector2
 var blend_position := Vector2(0, 0.1)
 
+@onready var health_component: HealthComponent = $HealthComponent
+@onready var health_bar: ProgressBar = $CanvasLayer/HealthBar
 
 func _ready() -> void:
 	emote_changed.connect(on_emote_changed)
 	GameManager.player_changed.connect(on_player_changed)
-	
+	health_component.health_changed.connect(on_health_changed)
+	health_bar.init_health(health_component.get_health())
 	
 func _physics_process(_delta: float) -> void:
 	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -28,3 +31,7 @@ func on_emote_changed(path, rect2):
 
 func on_player_changed(_value):
 	%StateMachine.current_state.transitioned.emit(%StateMachine.current_state, "NpcState")
+
+
+func on_health_changed():
+	health_bar.health = health_component.get_health()

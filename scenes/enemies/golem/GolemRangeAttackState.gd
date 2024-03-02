@@ -11,6 +11,7 @@ func enter() -> void:
 	animation_player.play("range_attack")
 	await animation_player.animation_finished
 	transitioned.emit(self, "IdleState")
+	owner.switch_lock_health(false)
 	
 func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)
@@ -26,12 +27,13 @@ func physics_update(delta: float) -> void:
 	pass
 
 
-
 func range_attack():
 	var arm_projectile_instance = arm_projectile.instantiate()
 	arm_projectile_instance.global_position = hand_marker.global_position
 	owner.get_parent().add_child(arm_projectile_instance)
 
+
 func on_health_changed():
-	transitioned.emit(self, "HurtState")
+	if not owner.get_buff:
+		transitioned.emit(self, "HurtState")
 

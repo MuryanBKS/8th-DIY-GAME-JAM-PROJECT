@@ -8,10 +8,13 @@ func enter() -> void:
 	magic_circle = get_tree().get_first_node_in_group("magic_circle")
 	magic_circle.glow.connect(on_glow)
 	animation_player.play("seal")
+	owner.switch_lock_health(true)
+	
 	
 func exit() -> void:
 	magic_circle.glow.disconnect(on_glow)
 	animation_player.play("RESET")
+	owner.switch_lock_health(false)
 	
 func update(delta: float) -> void:
 	pass

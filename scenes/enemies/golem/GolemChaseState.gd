@@ -8,7 +8,6 @@ const DASH_SPEED = 700.0
 @export var health_component: HealthComponent
 @export var visuals: Node2D
 @export var range_chase_area: Area2D
-#@export var detect_melee_attack_area: Area2D
 @export var dash_area: Area2D
 @export var melee: Node2D
 @export var range_attack_cooldown_timer: Timer
@@ -20,11 +19,12 @@ var speed := DEFAULT_SPEED
 func enter():
 	health_component.health_changed.connect(on_health_changed)
 	range_chase_area.body_exited.connect(on_body_exited)
-	#detect_melee_attack_area.area_entered.connect(on_melee_attack_area_entered)
 	dash_area.body_entered.connect(on_dash_area_body_entered)
 	range_attack_cooldown_timer.timeout.connect(on_timer_timeout)
 	range_attack_cooldown_timer.wait_time = randf_range(3.0, 5.0)
 	range_attack_cooldown_timer.start()
+	owner.switch_lock_health(false)
+	
 	
 func physics_update(delta: float) -> void:
 	move(delta)
@@ -33,10 +33,8 @@ func physics_update(delta: float) -> void:
 	
 func exit():
 	speed = DEFAULT_SPEED
-	#owner.velocity = Vector2.ZERO
 	health_component.health_changed.disconnect(on_health_changed)
 	range_chase_area.body_exited.disconnect(on_body_exited)
-	#detect_melee_attack_area.area_entered.disconnect(on_melee_attack_area_entered)
 	dash_area.body_entered.disconnect(on_dash_area_body_entered)
 	range_attack_cooldown_timer.timeout.disconnect(on_timer_timeout)
 	range_attack_cooldown_timer.stop()
@@ -64,19 +62,17 @@ func animate():
 		
 		
 func on_health_changed():
-	transitioned.emit(self, "HurtState")
-#
-#
+	if not owner.get_buff:
+		transitioned.emit(self, "HurtState")
+
+
 func on_timer_timeout():
 	transitioned.emit(self, "RangeAttackState")
 
 func on_body_exited(_body: Node2D):
 	transitioned.emit(self, "LaserState")
-#
-#
-#func on_melee_attack_area_entered(_area: Area2D):
-	#transitioned.emit(self, "MeleeAttackState")
-	#
+
+
 func on_dash_area_body_entered(_body: Node2D):
 	transitioned.emit(self, "MeleeAttackState")
 	

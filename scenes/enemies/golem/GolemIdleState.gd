@@ -8,6 +8,7 @@ func enter() -> void:
 	animation_player.play("idle")
 	await get_tree().create_timer(randf_range(0.5, 1.0)).timeout
 	transitioned.emit(self, "ChaseState")
+	owner.switch_lock_health(false)
 	
 func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)
@@ -19,6 +20,7 @@ func physics_update(delta: float) -> void:
 	pass
 
 func on_health_changed():
-	transitioned.emit(self, "HurtState")
+	if not owner.get_buff:
+		transitioned.emit(self, "HurtState")
 
 

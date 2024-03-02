@@ -21,6 +21,7 @@ func enter() -> void:
 	start = true
 	laser_timer.start()
 	laser.position = Vector2(0, -45)
+	owner.switch_lock_health(false)
 	
 	
 func exit() -> void:
@@ -30,7 +31,6 @@ func exit() -> void:
 	
 func update(delta: float) -> void:
 	if start:
-		#animation_player.play("glow")
 		var target_position = laser.global_position + get_player_direction() * 10
 		laser.rotate(deg_to_rad(direction * 0.15))
 		laser.global_position = lerp(laser.global_position, target_position, 0.01)

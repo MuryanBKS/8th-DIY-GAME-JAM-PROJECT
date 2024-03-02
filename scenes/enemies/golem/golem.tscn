@@ -1,4 +1,4 @@
-[gd_scene load_steps=121 format=3 uid="uid://c3cp1iwe0mqlx"]
+[gd_scene load_steps=122 format=3 uid="uid://c3cp1iwe0mqlx"]
 
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="1_7wngp"]
 [ext_resource type="Texture2D" uid="uid://bmfw8ligkmlxf" path="res://scenes/enemies/golem/GolemSprite/PNG sheet/Character_sheet.png" id="1_foy7h"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://bhpslab73d2j1" path="res://scenes/enemies/golem/golem_arm_projectile.tscn" id="14_8i212"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemHurtState.gd" id="16_f0w4n"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemDiedState.gd" id="17_v7h78"]
+[ext_resource type="Script" path="res://scenes/enemies/golem/GolemArmorBuffState.gd" id="18_b3mx1"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemRunAwayState.gd" id="18_uhtht"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemSummonState.gd" id="18_vyjj1"]
 [ext_resource type="PackedScene" uid="uid://bj5hrt234asvg" path="res://scenes/enemies/torch_goblin/torch_goblin.tscn" id="20_3gngc"]
@@ -98,6 +99,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector2(1.2, 0)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Visuals/GolemSprite2D:modulate")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(0.847059, 0.976471, 0.890196, 1)]
+}
 
 [sub_resource type="Animation" id="Animation_eh2wk"]
 resource_name = "buff"
@@ -124,6 +137,18 @@ tracks/1/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "update": 1,
 "values": [0, 1, 2, 3, 4, 5, 6, 7, 8, 9]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Visuals/GolemSprite2D:modulate")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.4, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(0.847059, 0.976471, 0.890196, 1), Color(0.908235, 0.985883, 0.934118, 1), Color(1, 1, 1, 1)]
 }
 
 [sub_resource type="Animation" id="Animation_cs3qn"]
@@ -1117,12 +1142,13 @@ height = 23.3333
 [sub_resource type="CircleShape2D" id="CircleShape2D_udavj"]
 radius = 13.3333
 
-[node name="Golem" type="CharacterBody2D"]
+[node name="Golem" type="CharacterBody2D" node_paths=PackedStringArray("buff_timer")]
 y_sort_enabled = true
 scale = Vector2(3, 3)
 collision_layer = 4
 collision_mask = 7
 script = ExtResource("1_ype62")
+buff_timer = NodePath("BuffTimer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1242,6 +1268,7 @@ position = Vector2(0.666667, -20.6667)
 shape = SubResource("CapsuleShape2D_2bqr3")
 
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
+unique_name_in_owner = true
 script = ExtResource("2_yfiqt")
 initial_state = NodePath("SealState")
 
@@ -1264,10 +1291,9 @@ dash_area = NodePath("../../Melee/DashArea2D")
 melee = NodePath("../../Melee")
 range_attack_cooldown_timer = NodePath("../../RangeAttackCooldownTimer")
 
-[node name="MeleeAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "hit_area", "detect_attack_area", "melee", "visuals")]
+[node name="MeleeAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "hit_area", "detect_attack_area", "melee", "visuals")]
 script = ExtResource("11_gpxbx")
 animation_player = NodePath("../../AnimationPlayer")
-health_component = NodePath("../../HealthComponent")
 hit_area = NodePath("../../Melee/MeleeHitboxComponent")
 detect_attack_area = NodePath("../../Melee/DetectMeleeArea2D")
 melee = NodePath("../../Melee")
@@ -1300,7 +1326,9 @@ animation_player = NodePath("../../AnimationPlayer")
 death_shadow = NodePath("../../DiedShadow")
 default_shadow = NodePath("../../Visuals/ShadowSprite2D")
 
-[node name="ArmorBuffState" type="Node" parent="StateMachine"]
+[node name="ArmorBuffState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player")]
+script = ExtResource("18_b3mx1")
+animation_player = NodePath("../../AnimationPlayer")
 
 [node name="SummonState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "summon_timer", "visuals")]
 script = ExtResource("18_vyjj1")
@@ -1326,6 +1354,7 @@ invincibility_timer = NodePath("Timer")
 is_enemy = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HurtComponent"]
+unique_name_in_owner = true
 position = Vector2(0.666667, -20.6667)
 shape = SubResource("CircleShape2D_udavj")
 debug_color = Color(0.0392157, 0.623529, 0.521569, 0.352941)
@@ -1361,3 +1390,7 @@ offset_right = -25.0
 offset_bottom = -1012.0
 grow_horizontal = 0
 grow_vertical = 0
+
+[node name="BuffTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true

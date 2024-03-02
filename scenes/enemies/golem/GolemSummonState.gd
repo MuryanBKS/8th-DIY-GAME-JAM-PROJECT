@@ -16,10 +16,11 @@ var start_summon = false
 func enter() -> void:
 	spawn_point = get_tree().get_first_node_in_group("spawn_point")
 	summon_timer.timeout.connect(on_timer_timeout)
-	
+	owner.switch_lock_health(true)
 	
 func exit() -> void:
 	summon_timer.timeout.disconnect(on_timer_timeout)
+	owner.switch_lock_health(false)
 	
 func update(delta: float) -> void:
 	pass

@@ -73,4 +73,5 @@ func on_timer_timeout():
 
 
 func on_health_changed():
-	transitioned.emit(self, "HurtState")
+	if not owner.get_buff:
+		transitioned.emit(self, "HurtState")

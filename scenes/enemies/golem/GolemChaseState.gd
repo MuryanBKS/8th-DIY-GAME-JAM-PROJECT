@@ -23,7 +23,7 @@ func enter():
 	range_attack_cooldown_timer.timeout.connect(on_timer_timeout)
 	range_attack_cooldown_timer.wait_time = randf_range(3.0, 5.0)
 	range_attack_cooldown_timer.start()
-	owner.switch_lock_health(false)
+	
 	
 	
 func physics_update(delta: float) -> void:
@@ -62,17 +62,31 @@ func animate():
 		
 		
 func on_health_changed():
+	if health_component.get_health() <= 0:
+		transitioned.emit(self, "DiedState")
+	if health_component.get_health() <= owner.max_health * 1/2 and not owner.in_half_hp:
+		owner.in_half_hp = true
+		transitioned.emit(self, "SummonState")
 	if not owner.get_buff:
-		transitioned.emit(self, "HurtState")
-
+		transitioned.emit(self, "KnockBackState")
 
 func on_timer_timeout():
-	transitioned.emit(self, "RangeAttackState")
+	if randf() > 0.4:
+		transitioned.emit(self, "RangeAttackState")
+	else :
+		transitioned.emit(self, "IdleState")
+		
 
 func on_body_exited(_body: Node2D):
-	transitioned.emit(self, "LaserState")
+	if randf() < 0.4:
+		transitioned.emit(self, "LaserState")
+	else :
+		transitioned.emit(self, "RangeAttackState")
 
 
 func on_dash_area_body_entered(_body: Node2D):
-	transitioned.emit(self, "MeleeAttackState")
-	
+	if randf() > 0.4:
+		transitioned.emit(self, "MeleeAttackState")
+	else:
+		transitioned.emit(self, "RunAwayState")
+		

@@ -1615,12 +1615,13 @@ pot_collision = NodePath("../../PotCollisionShape2D")
 fire_particle = ExtResource("12_tgo6r")
 health_component = NodePath("../../HealthComponent")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "health_component", "animation_tree", "pot")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "health_component", "animation_tree", "pot", "dash_cooldown_timer")]
 script = ExtResource("12_xrppd")
 player = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 animation_tree = NodePath("../../AnimationTree")
 pot = NodePath("../../Pot")
+dash_cooldown_timer = NodePath("../../DashCooldownTimer")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_tree", "animation_player", "pot")]
 script = ExtResource("13_cbeu7")

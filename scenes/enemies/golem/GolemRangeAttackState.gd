@@ -34,6 +34,10 @@ func range_attack():
 
 
 func on_health_changed():
+	if health_component.get_health() <= 0:
+		transitioned.emit(self, "DiedState")
+	if health_component.get_health() <= owner.max_health * 1/2 and not owner.in_half_hp:
+		owner.in_half_hp = true
+		transitioned.emit(self, "SummonState")
 	if not owner.get_buff:
-		transitioned.emit(self, "HurtState")
-
+		transitioned.emit(self, "KnockBackState")

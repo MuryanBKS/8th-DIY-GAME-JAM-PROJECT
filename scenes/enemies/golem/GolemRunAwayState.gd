@@ -69,9 +69,17 @@ func on_timer_timeout():
 		if randf() > 0.5:
 			transitioned.emit(self, "RangeAttackState")
 		else:
-			transitioned.emit(self, "ChaseState")
+			if randf() > 0.4:
+				transitioned.emit(self, "ChaseState")
+			else:
+				transitioned.emit(self, "LaserState")
 
 
 func on_health_changed():
+	if health_component.get_health() <= 0:
+		transitioned.emit(self, "DiedState")
+	if health_component.get_health() <= owner.max_health * 1/2 and not owner.in_half_hp:
+		owner.in_half_hp = true
+		transitioned.emit(self, "SummonState")
 	if not owner.get_buff:
-		transitioned.emit(self, "HurtState")
+		transitioned.emit(self, "KnockBackState")

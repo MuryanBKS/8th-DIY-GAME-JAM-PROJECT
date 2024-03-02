@@ -7,20 +7,23 @@ extends State
 @export var summon_timer: Timer
 @export var visuals: Node2D
 
-var spawn_point: Marker2D
+var spawn_points: Array
+var point_choosed: Marker2D
 var count = 10
 var speed = 150
 var stop_moving = false
 var start_summon = false
 
 func enter() -> void:
-	spawn_point = get_tree().get_first_node_in_group("spawn_point")
+	spawn_points = get_tree().get_nodes_in_group("spawn_point")
 	summon_timer.timeout.connect(on_timer_timeout)
+	owner.collision_mask = 5
 	owner.switch_lock_health(true)
 	
 func exit() -> void:
 	summon_timer.timeout.disconnect(on_timer_timeout)
 	owner.switch_lock_health(false)
+	owner.collision_mask = 7
 	
 func update(delta: float) -> void:
 	pass
@@ -56,7 +59,8 @@ func animate():
 
 func summon():
 	var monster = summon_monster.pick_random().instantiate() as CharacterBody2D
-	monster.global_position = spawn_point.global_position
+	point_choosed = spawn_points.pick_random()
+	monster.global_position = point_choosed.global_position
 	monster.is_summoned = true
 	get_tree().get_first_node_in_group("enemies").add_child(monster)
 	count -= 1

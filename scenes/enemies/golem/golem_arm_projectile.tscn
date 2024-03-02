@@ -329,6 +329,7 @@ sprite_frames = SubResource("SpriteFrames_teetk")
 collision_layer = 32
 collision_mask = 128
 script = ExtResource("3_p5lwt")
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 shape = SubResource("CircleShape2D_s1fv8")

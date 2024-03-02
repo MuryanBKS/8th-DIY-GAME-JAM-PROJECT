@@ -16,7 +16,7 @@
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="13_2alba"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemRangeAttackState.gd" id="13_i2ym3"]
 [ext_resource type="PackedScene" uid="uid://bhpslab73d2j1" path="res://scenes/enemies/golem/golem_arm_projectile.tscn" id="14_8i212"]
-[ext_resource type="Script" path="res://scenes/enemies/golem/GolemHurtState.gd" id="16_f0w4n"]
+[ext_resource type="Script" path="res://scenes/enemies/golem/GolemKnockBackState.gd" id="16_f0w4n"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemDiedState.gd" id="17_v7h78"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemArmorBuffState.gd" id="18_b3mx1"]
 [ext_resource type="Script" path="res://scenes/enemies/golem/GolemRunAwayState.gd" id="18_uhtht"]
@@ -1291,20 +1291,22 @@ dash_area = NodePath("../../Melee/DashArea2D")
 melee = NodePath("../../Melee")
 range_attack_cooldown_timer = NodePath("../../RangeAttackCooldownTimer")
 
-[node name="MeleeAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "hit_area", "detect_attack_area", "melee", "visuals")]
+[node name="MeleeAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "hit_area", "detect_attack_area", "melee", "visuals")]
 script = ExtResource("11_gpxbx")
 animation_player = NodePath("../../AnimationPlayer")
+health_component = NodePath("../../HealthComponent")
 hit_area = NodePath("../../Melee/MeleeHitboxComponent")
 detect_attack_area = NodePath("../../Melee/DetectMeleeArea2D")
 melee = NodePath("../../Melee")
 visuals = NodePath("../../Visuals")
 
-[node name="LaserState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "laser", "laser_mark", "laser_timer")]
+[node name="LaserState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "laser", "laser_mark", "laser_timer", "health_component")]
 script = ExtResource("12_t7ar4")
 animation_player = NodePath("../../AnimationPlayer")
 laser = NodePath("../../Visuals/Laser")
 laser_mark = NodePath("../../Visuals/Laser/LaserMarker2D")
 laser_timer = NodePath("../../LaserTimer")
+health_component = NodePath("../../HealthComponent")
 
 [node name="RangeAttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "animation_player", "range_attack_node", "hand_marker")]
 script = ExtResource("13_i2ym3")
@@ -1314,7 +1316,7 @@ arm_projectile = ExtResource("14_8i212")
 range_attack_node = NodePath("../../RangeAttack")
 hand_marker = NodePath("../../RangeAttack/HandMarker2D")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player")]
+[node name="KnockBackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player")]
 script = ExtResource("16_f0w4n")
 health_component = NodePath("../../HealthComponent")
 hurt_component = NodePath("../../HurtComponent")
@@ -1376,6 +1378,10 @@ one_shot = true
 [node name="SummonTimer" type="Timer" parent="."]
 wait_time = 1.6
 
+[node name="BuffTimer" type="Timer" parent="."]
+wait_time = 180.0
+one_shot = true
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="HealthBar" parent="CanvasLayer" instance=ExtResource("20_y3xsm")]
@@ -1390,7 +1396,3 @@ offset_right = -25.0
 offset_bottom = -1012.0
 grow_horizontal = 0
 grow_vertical = 0
-
-[node name="BuffTimer" type="Timer" parent="."]
-wait_time = 10.0
-one_shot = true

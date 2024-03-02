@@ -4,11 +4,13 @@ extends State
 @export var laser: Node2D
 @export var laser_mark: Marker2D
 @export var laser_timer: Timer
+@export var health_component: HealthComponent
 
 var start = false
 var direction: int
 
 func enter() -> void:
+	health_component.health_changed.connect(on_health_changed)
 	laser_timer.timeout.connect(on_timer_timeout)
 	start = false
 	laser.look_at(GameManager.character_now.global_position)
@@ -25,6 +27,7 @@ func enter() -> void:
 	
 	
 func exit() -> void:
+		health_component.health_changed.disconnect(on_health_changed)
 		laser_timer.timeout.disconnect(on_timer_timeout)
 		animation_player.play("RESET")
 	
@@ -56,3 +59,10 @@ func on_timer_timeout():
 	await animation_player.animation_finished
 	laser.hide()
 	transitioned.emit(self, "IdleState")
+
+func on_health_changed():
+	if health_component.get_health() <= 0:
+		transitioned.emit(self, "DiedState")
+	if health_component.get_health() <= owner.max_health * 1/2 and not owner.in_half_hp:
+		owner.in_half_hp = true
+		transitioned.emit(self, "SummonState")

@@ -37,6 +37,11 @@ func knock_back(delta):
 	owner.velocity = lerp(owner.velocity, Vector2.ZERO, 1 - exp(-8 * delta))
 	if owner.velocity.length() < 30:
 		owner.velocity = Vector2.ZERO
+		change_state()
+	owner.move_and_slide()
+
+
+func change_state():
 		if health_component.get_health() <= 0:
 			transitioned.emit(self, "DiedState")
 		elif health_component.get_health() <= owner.max_health * 1/2 and not owner.in_half_hp:
@@ -54,4 +59,3 @@ func knock_back(delta):
 				else :
 					transitioned.emit(self, "ChaseState")
 					
-	owner.move_and_slide()

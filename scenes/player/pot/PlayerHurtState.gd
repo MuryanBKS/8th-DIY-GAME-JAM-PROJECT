@@ -5,6 +5,7 @@ class_name PlayerHurtState
 @export var health_component: HealthComponent
 @export var animation_tree: AnimationTree
 @export var pot: Node2D
+@export var dash_cooldown_timer: Timer
 
 var blend_pos_path = "parameters/hurt/blend_position"
 var hurt_finished = false
@@ -13,6 +14,7 @@ var hurt_finished = false
 
 
 func enter():
+	dash_cooldown_timer.timeout.connect(on_dash_cooldown_timer_timeout)
 	hurt_finished = false
 	pot.switch_pot_collision(false)
 	hurt()
@@ -28,8 +30,8 @@ func physics_update(_delta: float) -> void:
 		
 		
 func exit():
+	dash_cooldown_timer.timeout.disconnect(on_dash_cooldown_timer_timeout)
 	pot.switch_pot_collision(true)
-	
 	
 func hurt():
 	state_machine.travel("hurt")
@@ -38,3 +40,8 @@ func hurt():
 	if health_component.get_health() <= 0:
 		transitioned.emit(self, "DiedState")
 	hurt_finished = true
+
+
+func on_dash_cooldown_timer_timeout():
+	pot.show_pot_fire()
+	pot.burn()

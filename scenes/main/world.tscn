@@ -841,5 +841,25 @@ position = Vector2(-1272, 532)
 [node name="TntGoblin3" parent="." instance=ExtResource("35_lvenb")]
 position = Vector2(-1521, 560)
 
-[node name="SpawnPoint" type="Marker2D" parent="." groups=["spawn_point"]]
-position = Vector2(-124, -2080)
+[node name="SpawnPoint" type="Node2D" parent="."]
+
+[node name="SpawnPoint1" type="Marker2D" parent="SpawnPoint" groups=["spawn_point"]]
+position = Vector2(-122, -2129)
+
+[node name="SpawnPoint2" type="Marker2D" parent="SpawnPoint" groups=["spawn_point"]]
+position = Vector2(-686, -2538)
+
+[node name="SpawnPoint3" type="Marker2D" parent="SpawnPoint" groups=["spawn_point"]]
+position = Vector2(-134, -2794)
+
+[node name="SpawnPoint4" type="Marker2D" parent="SpawnPoint" groups=["spawn_point"]]
+position = Vector2(-611, -2754)
+
+[node name="SpawnPoint5" type="Marker2D" parent="SpawnPoint" groups=["spawn_point"]]
+position = Vector2(-637, -2231)
+
+[node name="SpawnPoint6" type="Marker2D" parent="SpawnPoint" groups=["spawn_point"]]
+position = Vector2(379, -2760)
+
+[node name="SpawnPoint7" type="Marker2D" parent="SpawnPoint" groups=["spawn_point"]]
+position = Vector2(325, -2230)

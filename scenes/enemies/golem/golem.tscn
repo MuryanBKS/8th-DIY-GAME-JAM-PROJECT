@@ -1,4 +1,4 @@
-[gd_scene load_steps=129 format=3 uid="uid://c3cp1iwe0mqlx"]
+[gd_scene load_steps=130 format=3 uid="uid://c3cp1iwe0mqlx"]
 
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="1_7wngp"]
 [ext_resource type="Texture2D" uid="uid://bmfw8ligkmlxf" path="res://scenes/enemies/golem/GolemSprite/PNG sheet/Character_sheet.png" id="1_foy7h"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/bat/bat.tscn" id="22_jqqcn"]
 [ext_resource type="PackedScene" uid="uid://c56sxv1i8mgrm" path="res://scenes/enemies/barrel_goblin/barrel_goblin.tscn" id="23_gxqvt"]
 [ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="27_anxce"]
+[ext_resource type="FontFile" uid="uid://c2p4ucily3tpj" path="res://assets/MinimalPixel v2.ttf" id="32_cp857"]
 
 [sub_resource type="Animation" id="Animation_d7m0k"]
 length = 0.001
@@ -1579,8 +1580,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("32_cp857")
 theme_override_font_sizes/font_size = 40
-text = "遠古遺跡石像"
+text = "Golem"
 horizontal_alignment = 1
 vertical_alignment = 1
 

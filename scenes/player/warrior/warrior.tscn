@@ -1,4 +1,4 @@
-[gd_scene load_steps=167 format=3 uid="uid://brhggke2fu4n4"]
+[gd_scene load_steps=168 format=3 uid="uid://brhggke2fu4n4"]
 
 [ext_resource type="Script" path="res://scenes/player/warrior/warrior.gd" id="1_bcuvu"]
 [ext_resource type="Texture2D" uid="uid://bpqphcph214le" path="res://scenes/player/warrior/Warrior_Blue.png" id="2_hjbr2"]
@@ -15,6 +15,7 @@
 [ext_resource type="Script" path="res://scenes/player/warrior/WarriorDiedState.gd" id="11_xy3fj"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="14_sre8h"]
 [ext_resource type="PackedScene" uid="uid://b8qp1fs2x70mg" path="res://scenes/ui/health_bar.tscn" id="15_6rg88"]
+[ext_resource type="FontFile" uid="uid://c2p4ucily3tpj" path="res://assets/MinimalPixel v2.ttf" id="16_mrfhl"]
 [ext_resource type="AudioStream" uid="uid://bshqt3who1lun" path="res://assets/sfx/Sword Attack 1.ogg" id="16_xrmfr"]
 [ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="17_2b4rf"]
 [ext_resource type="AudioStream" uid="uid://cwa22mr5kfcep" path="res://assets/sfx/heal.wav" id="18_5o162"]
@@ -1970,8 +1971,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("16_mrfhl")
 theme_override_font_sizes/font_size = 40
-text = "沃利爾"
+text = "Warrior"
 horizontal_alignment = 1
 vertical_alignment = 1
 

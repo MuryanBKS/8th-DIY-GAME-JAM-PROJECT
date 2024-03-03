@@ -3,6 +3,8 @@ class_name Player
 
 signal emote_changed(path: String, rect_size: Rect2)
 
+@export var fire_particle: PackedScene
+
 var input_vector: Vector2
 var blend_position := Vector2(0, 0.1)
 var is_active = false
@@ -15,6 +17,7 @@ func _ready() -> void:
 	GameManager.player_changed.connect(on_player_changed)
 	health_component.health_changed.connect(on_health_changed)
 	health_bar.init_health(health_component.get_health())
+	spawn_fire()
 	
 func _physics_process(_delta: float) -> void:
 	input_vector = Input.get_vector("move_left", "move_right", "move_up", "move_down")
@@ -32,6 +35,13 @@ func get_hp_buff(value: int):
 func active_listener():
 	%AudioListener2D.current = true
 
+func spawn_fire():
+	randomize()
+	var fire_particle_instance = fire_particle.instantiate()
+	var size = randf_range(0.5, 2.0)
+	fire_particle_instance.scale = Vector2(size, size)
+	fire_particle_instance.global_position = global_position
+	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)
 
 
 func on_emote_changed(path, rect2):

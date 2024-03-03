@@ -1,4 +1,4 @@
-[gd_scene load_steps=170 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=171 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/pot/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/pot/player_new.gd" id="1_xdb85"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerDiedState.gd" id="13_cbeu7"]
 [ext_resource type="Script" path="res://scenes/player/pot/PlayerNpcState.gd" id="15_yxqfo"]
 [ext_resource type="PackedScene" uid="uid://b8qp1fs2x70mg" path="res://scenes/ui/health_bar.tscn" id="17_wr5v1"]
+[ext_resource type="FontFile" uid="uid://c2p4ucily3tpj" path="res://assets/MinimalPixel v2.ttf" id="20_xwuxf"]
 
 [sub_resource type="Animation" id="Animation_do5c3"]
 length = 0.001
@@ -1491,6 +1492,7 @@ collision_layer = 2
 collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_xdb85")
+fire_particle = ExtResource("12_tgo6r")
 
 [node name="DashSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_616c6")
@@ -1674,8 +1676,9 @@ theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
 theme_override_constants/shadow_offset_x = 4
 theme_override_constants/shadow_offset_y = 2
 theme_override_constants/outline_size = 3
+theme_override_fonts/font = ExtResource("20_xwuxf")
 theme_override_font_sizes/font_size = 40
-text = "帕特"
+text = "Pot"
 horizontal_alignment = 1
 vertical_alignment = 1
 

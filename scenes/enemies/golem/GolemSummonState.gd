@@ -9,21 +9,25 @@ extends State
 
 var spawn_points: Array
 var point_choosed: Marker2D
-var count = 10
+var count = 20
 var speed = 150
 var stop_moving = false
 var start_summon = false
+var magic_circle: Area2D
 
 func enter() -> void:
 	spawn_points = get_tree().get_nodes_in_group("spawn_point")
 	summon_timer.timeout.connect(on_timer_timeout)
 	owner.collision_mask = 5
 	owner.switch_lock_health(true)
+	magic_circle = get_tree().get_first_node_in_group("magic_circle")
+	magic_circle.start_glow()
 	
 func exit() -> void:
 	summon_timer.timeout.disconnect(on_timer_timeout)
 	owner.switch_lock_health(false)
 	owner.collision_mask = 7
+	magic_circle.finish_glow()
 	
 func update(delta: float) -> void:
 	pass
@@ -65,7 +69,7 @@ func summon():
 	get_tree().get_first_node_in_group("enemies").add_child(monster)
 	count -= 1
 	if count <= 0:
-		transitioned.emit(self, "IdleState")
+		transitioned.emit(self, "ArmorBuffState")
 
 func on_timer_timeout():
 	animation_player.play("glow")

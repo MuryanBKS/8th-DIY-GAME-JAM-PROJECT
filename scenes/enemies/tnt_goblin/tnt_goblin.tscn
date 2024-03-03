@@ -1,4 +1,4 @@
-[gd_scene load_steps=73 format=3 uid="uid://b4ter3f47cmmq"]
+[gd_scene load_steps=74 format=3 uid="uid://b4ter3f47cmmq"]
 
 [ext_resource type="Texture2D" uid="uid://26v0yghlhebo" path="res://scenes/enemies/tnt_goblin/TNT_Red.png" id="1_7oevy"]
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/tnt_goblin.gd" id="1_t2fai"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dt2t1fs6v6iw5" path="res://assets/Dead.png" id="12_v3e8y"]
 [ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/effect/explosion/Explosions.png" id="13_uab17"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="14_y70xb"]
+[ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="16_r8l5t"]
 
 [sub_resource type="Animation" id="Animation_7rpud"]
 length = 0.001
@@ -716,12 +717,13 @@ visuals = NodePath("../../Visuals")
 attack_area = NodePath("../../AttackArea2D")
 wander_timer = NodePath("../../WanderTimer")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player", "sprite")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player", "sprite", "hurt_sound")]
 script = ExtResource("9_e0kn6")
 health_component = NodePath("../../HealthComponent")
 hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Visuals/AnimatedSprite2D")
+hurt_sound = NodePath("../../HurtSound")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "goblin_collision")]
 script = ExtResource("10_vh2mu")
@@ -730,6 +732,7 @@ goblin_collision = NodePath("../../CollisionShape2D")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_1ilxj")
+health = 30.0
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -806,3 +809,10 @@ one_shot = true
 [node name="DetectPlayerRayCast2D" type="RayCast2D" parent="."]
 
 [node name="DetectWallRayCast2D" type="RayCast2D" parent="."]
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_r8l5t")
+volume_db = 5.0
+pitch_scale = 0.8
+max_distance = 600.0
+bus = &"SFX"

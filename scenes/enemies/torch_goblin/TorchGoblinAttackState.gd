@@ -5,6 +5,7 @@ extends State
 @export var health_component: HealthComponent
 @export var hit_area: Area2D
 @export var attack_area: Area2D
+@export var attack_sound: AudioStreamPlayer2D
 
 var attack_finished = false
 
@@ -14,7 +15,7 @@ func enter() -> void:
 	attack_finished = false
 	attack_animate()
 	attack()
-	
+	attack_sound.play()
 	
 func exit() -> void:
 	owner.velocity = Vector2.ZERO

@@ -18,6 +18,10 @@ func enter():
 	owner.velocity = knockback_direction.normalized() * randi_range(600, 1000)
 	hurt_animate()
 	
+	GameManager.slow_down.emit()
+	await get_tree().create_timer(0.1).timeout
+	GameManager.slow_down_finished.emit()
+	
 func physics_update(delta: float) -> void:
 	knock_back(delta)
 		

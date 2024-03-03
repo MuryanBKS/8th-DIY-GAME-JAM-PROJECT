@@ -5,6 +5,9 @@ class_name WarriorAttackState
 @export var animation_player: AnimationPlayer
 @export var animation_tree: AnimationTree
 @export var health_component: HealthComponent
+@export var attack_sound: AudioStreamPlayer2D
+@export var hit_collision: CollisionShape2D
+
 
 var blend_pos_paths = [
 	"parameters/attack_01/attack_01_bs2d/blend_position",
@@ -28,12 +31,12 @@ func enter() -> void:
 	else:
 		attack_02_animate()
 		second_attack = !second_attack
-		
+	attack_sound.play()
 	
 func exit() -> void:
 	warrior.velocity = Vector2.ZERO
 	health_component.health_changed.disconnect(on_health_changed)
-	
+	hit_collision.set_deferred("disabled", true)
 	
 func update(delta: float) -> void:
 	pass

@@ -36,6 +36,8 @@ func physics_update(_delta: float) -> void:
 		transitioned.emit(self, "ChaseState")
 
 func get_target_direction() -> Vector2:
+	if !GameManager.character_now:
+		return Vector2.ZERO
 	return (GameManager.character_now.global_position - owner.global_position).normalized()
 
 

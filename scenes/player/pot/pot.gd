@@ -1,6 +1,9 @@
 class_name Pot
 extends Node2D
 
+func _ready() -> void:
+	GameManager.enemy_collected.connect(on_enemy_collected)
+
 
 func get_pot_center_global_position() -> Vector2:
 	return %PotCenter.global_position
@@ -25,3 +28,6 @@ func show_pot_fire():
 func burn():
 	await %AnimationPlayer.animation_finished
 	%AnimationPlayer.play("burn")
+
+func on_enemy_collected(_bonus_type: String, _bonus_value: int):
+	$EnemyCollectedSound.play()

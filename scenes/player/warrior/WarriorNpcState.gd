@@ -4,6 +4,10 @@ class_name WarriorNpcState
 
 @export var switch_area: Area2D
 @export var thinking_emote: Node2D
+@export var canvas: CanvasLayer
+@export var health_bar: ProgressBar
+@export var health_component: HealthComponent
+@export var change_sound: AudioStreamPlayer2D
 
 var emotes: Array[String] = [
 	"res://scenes/emotes/16x16-Emoji-Pack_v1.1/16x16_emoji_asset_pack_v1.1.png",
@@ -15,10 +19,13 @@ var is_rescued = false
 
 func enter() -> void:
 	switch_area.body_entered.connect(on_body_entered)
+	canvas.hide()
 	
 func exit() -> void:
 	switch_area.body_entered.disconnect(on_body_entered)
 	owner.emote_changed.emit("res://scenes/emotes/16x16-Emoji-Pack_v1.1/16x16_emoji_asset_pack_v1.1.png",  Rect2(1 * 16, 2 * 16, 16, 16))
+	health_bar.init_health(health_component.get_health())
+	change_sound.play()
 	
 func update(delta: float) -> void:
 	if thinking_emote.is_palying() or is_rescued:

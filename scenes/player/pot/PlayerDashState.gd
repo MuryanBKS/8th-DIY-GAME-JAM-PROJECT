@@ -10,6 +10,7 @@ const MAX_DASH_SPEED = 1200
 @export var pot_collision: CollisionShape2D
 @export var fire_particle: PackedScene
 @export var health_component: HealthComponent
+@export var dash_sound: AudioStreamPlayer2D
 
 var dash_vector: Vector2
 var can_apply_friction = false
@@ -26,7 +27,7 @@ func enter() -> void:
 	dash_vector = player.input_vector
 	player.velocity = dash_vector * 6000
 	player.velocity = player.velocity.limit_length(MAX_DASH_SPEED)
-	
+	dash_sound.play()
 	
 func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)

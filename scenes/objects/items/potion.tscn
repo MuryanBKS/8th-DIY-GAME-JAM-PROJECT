@@ -1,0 +1,39 @@
+[gd_scene load_steps=6 format=3 uid="uid://ddladc3ycndpi"]
+
+[ext_resource type="Texture2D" uid="uid://vglxtd4e8qai" path="res://assets/shadow/SmallShadow.png" id="1_8tjw8"]
+[ext_resource type="Texture2D" uid="uid://t5ox57offc03" path="res://scenes/emotes/tile_0114.png" id="1_rpop5"]
+[ext_resource type="Script" path="res://scenes/objects/items/potion.gd" id="1_y1i1p"]
+[ext_resource type="AudioStream" uid="uid://cwa22mr5kfcep" path="res://assets/sfx/heal.wav" id="4_hsdyh"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vfvps"]
+radius = 24.0208
+
+[node name="Potion" type="Area2D"]
+scale = Vector2(2.5, 2.5)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_y1i1p")
+
+[node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="ShadowSprite2D" type="Sprite2D" parent="Visuals"]
+modulate = Color(1, 1, 1, 0.478431)
+texture = ExtResource("1_8tjw8")
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+modulate = Color(0.764706, 0.764706, 0.764706, 1)
+position = Vector2(0, -7)
+texture = ExtResource("1_rpop5")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -5.5)
+shape = SubResource("CircleShape2D_vfvps")
+disabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("4_hsdyh")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

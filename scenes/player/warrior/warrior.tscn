@@ -1,4 +1,4 @@
-[gd_scene load_steps=163 format=3 uid="uid://brhggke2fu4n4"]
+[gd_scene load_steps=167 format=3 uid="uid://brhggke2fu4n4"]
 
 [ext_resource type="Script" path="res://scenes/player/warrior/warrior.gd" id="1_bcuvu"]
 [ext_resource type="Texture2D" uid="uid://bpqphcph214le" path="res://scenes/player/warrior/Warrior_Blue.png" id="2_hjbr2"]
@@ -14,6 +14,10 @@
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="11_m25rq"]
 [ext_resource type="Script" path="res://scenes/player/warrior/WarriorDiedState.gd" id="11_xy3fj"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="14_sre8h"]
+[ext_resource type="PackedScene" uid="uid://b8qp1fs2x70mg" path="res://scenes/ui/health_bar.tscn" id="15_6rg88"]
+[ext_resource type="AudioStream" uid="uid://bshqt3who1lun" path="res://assets/sfx/Sword Attack 1.ogg" id="16_xrmfr"]
+[ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="17_2b4rf"]
+[ext_resource type="AudioStream" uid="uid://cwa22mr5kfcep" path="res://assets/sfx/heal.wav" id="18_5o162"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_5q05u"]
 radius = 25.0799
@@ -1822,6 +1826,7 @@ script = ExtResource("1_bcuvu")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_j4alt")
+health = 100.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -25)
@@ -1843,28 +1848,36 @@ warrior = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 health_component = NodePath("../../HealthComponent")
 
-[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("warrior", "animation_tree", "health_component")]
+[node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("warrior", "animation_tree", "health_component", "canva")]
 script = ExtResource("6_0slfc")
 warrior = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 health_component = NodePath("../../HealthComponent")
+canva = NodePath("../../CanvasLayer")
 
-[node name="AttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("warrior", "animation_player", "animation_tree", "health_component")]
+[node name="AttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("warrior", "animation_player", "animation_tree", "health_component", "attack_sound", "hit_collision")]
 script = ExtResource("6_ear8p")
 warrior = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 animation_tree = NodePath("../../AnimationTree")
 health_component = NodePath("../../HealthComponent")
+attack_sound = NodePath("../../AttackSound")
+hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 
-[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("switch_area", "thinking_emote")]
+[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("switch_area", "thinking_emote", "canvas", "health_bar", "health_component", "change_sound")]
 script = ExtResource("5_xtxqj")
 switch_area = NodePath("../../SwitchArea2D")
 thinking_emote = NodePath("../../ThinkingEmote")
+canvas = NodePath("../../CanvasLayer")
+health_bar = NodePath("../../CanvasLayer/HealthBar")
+health_component = NodePath("../../HealthComponent")
+change_sound = NodePath("../../HealSound")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "animation_tree")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "animation_tree", "hurt_sound")]
 script = ExtResource("8_2wedu")
 health_component = NodePath("../../HealthComponent")
 animation_tree = NodePath("../../AnimationTree")
+hurt_sound = NodePath("../../HurtSound")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_tree")]
 script = ExtResource("11_xy3fj")
@@ -1906,7 +1919,7 @@ position = Vector2(0, -33)
 collision_layer = 16
 collision_mask = 0
 script = ExtResource("8_wo4f8")
-damage = 5
+damage = 10
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(-59, 0)
@@ -1930,3 +1943,54 @@ shape = SubResource("CircleShape2D_m4nhd")
 [node name="ThinkingEmote" parent="." instance=ExtResource("14_sre8h")]
 unique_name_in_owner = true
 position = Vector2(26, -46)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HealthBar" parent="CanvasLayer" instance=ExtResource("15_6rg88")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 24.0
+offset_top = -54.0
+offset_right = 512.0
+offset_bottom = -28.0
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -114.0
+offset_right = 139.0
+offset_bottom = -59.0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 40
+text = "沃利爾"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -38)
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("16_xrmfr")
+volume_db = 10.0
+bus = &"SFX"
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("17_2b4rf")
+pitch_scale = 0.8
+max_distance = 600.0
+bus = &"SFX"
+
+[node name="HealSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("18_5o162")
+pitch_scale = 0.8
+bus = &"SFX"

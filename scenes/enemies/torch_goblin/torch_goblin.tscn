@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://bj5hrt234asvg"]
+[gd_scene load_steps=87 format=3 uid="uid://bj5hrt234asvg"]
 
 [ext_resource type="Script" path="res://scenes/enemies/torch_goblin/torch_goblin.gd" id="1_0q5me"]
 [ext_resource type="Texture2D" uid="uid://cglhvp8ik32js" path="res://scenes/enemies/torch_goblin/Torch_Red.png" id="1_mbccc"]
@@ -13,6 +13,8 @@
 [ext_resource type="Script" path="res://scenes/enemies/torch_goblin/TorchGoblinDiedState.gd" id="7_xqhrw"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="11_rtyay"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="12_m2cn7"]
+[ext_resource type="AudioStream" uid="uid://bmqqvfj42xs2t" path="res://assets/sfx/Torch Attack Strike 1.ogg" id="14_ph5aj"]
+[ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="15_g7cd3"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ufwqa"]
 atlas = ExtResource("1_mbccc")
@@ -994,6 +996,7 @@ script = ExtResource("1_0q5me")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_gngew")
+health = 40.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -33)
@@ -1037,20 +1040,22 @@ chase_area = NodePath("../../ChaseArea2D")
 attack_area = NodePath("../../CanAttackArea2D")
 hit_area = NodePath("../../HitboxComponent")
 
-[node name="AttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "hit_area", "attack_area")]
+[node name="AttackState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "health_component", "hit_area", "attack_area", "attack_sound")]
 script = ExtResource("5_k4efk")
 animation_player = NodePath("../../AnimationPlayer")
 health_component = NodePath("../../HealthComponent")
 hit_area = NodePath("../../HitboxComponent")
 attack_area = NodePath("../../CanAttackArea2D")
+attack_sound = NodePath("../../AttackSound")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player", "hit_collision", "sprite")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("health_component", "hurt_component", "animation_player", "hit_collision", "sprite", "hurt_sound")]
 script = ExtResource("6_c7yqf")
 health_component = NodePath("../../HealthComponent")
 hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 sprite = NodePath("../../AnimatedSprite2D")
+hurt_sound = NodePath("../../HurtSound")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "goblin_collision", "hit_collision")]
 script = ExtResource("7_xqhrw")
@@ -1125,3 +1130,15 @@ debug_color = Color(0.694118, 0.494118, 0, 0.419608)
 [node name="PlayerRayCast2D" type="RayCast2D" parent="."]
 
 [node name="WallRayCast2D" type="RayCast2D" parent="."]
+
+[node name="AttackSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("14_ph5aj")
+max_distance = 400.0
+bus = &"SFX"
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("15_g7cd3")
+volume_db = 5.0
+pitch_scale = 0.8
+max_distance = 600.0
+bus = &"SFX"

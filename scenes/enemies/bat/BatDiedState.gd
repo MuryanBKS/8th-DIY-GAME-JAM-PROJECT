@@ -16,14 +16,14 @@ func enter():
 	player = get_tree().get_first_node_in_group("player")
 	bat_collision.set_deferred("disabled", true)
 	animation_player.play("die")
-
+ 
 
 func physics_update(delta: float) -> void:
 	if GameManager.character_now is Player:
 		absorbed_to_player(delta)
 		if (player.get_cart_position() - bat.global_position).length() < 10:
-			GameManager.enemy_collected.emit("Attack", 10)
-			player.emote_changed.emit("res://scenes/emotes/tile_0120.png", Rect2(0 * 16, 0 * 16, 16, 16))
+			GameManager.enemy_collected.emit("Hp", 10)
+			player.emote_changed.emit("res://scenes/emotes/tile_0114.png", Rect2(0 * 16, 0 * 16, 16, 16))
 			owner.queue_free()
 	else:
 		await animation_player.animation_finished

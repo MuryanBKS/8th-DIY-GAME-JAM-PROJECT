@@ -11,3 +11,10 @@ func _on_body_entered(body: Node2D) -> void:
 	await %AnimationPlayer.animation_finished
 	%AnimationPlayer.play_backwards("glow")
 	
+func start_glow():
+	%AnimationPlayer.play("glow")
+	
+	
+func finish_glow():
+	%AnimationPlayer.play_backwards("glow")
+	

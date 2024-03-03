@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://chxsy8g7k0g4w"
+path="res://.godot/imported/Medieval Vol. 2 6 (Loop).ogg-ae77b3c6fee422e31762222f13ab539a.oggvorbisstr"
+
+[deps]
+
+source_file="res://assets/sfx/Medieval Vol. 2 6 (Loop).ogg"
+dest_files=["res://.godot/imported/Medieval Vol. 2 6 (Loop).ogg-ae77b3c6fee422e31762222f13ab539a.oggvorbisstr"]
+
+[params]
+
+loop=true
+loop_offset=0.0
+bpm=0.0
+beat_count=0
+bar_beats=4

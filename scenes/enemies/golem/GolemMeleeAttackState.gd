@@ -17,14 +17,14 @@ var speed = DASH_SPEED
 func enter() -> void:
 	hit_area.set_deferred("monitorable", true)
 	health_component.health_changed.connect(on_health_changed)
-	#detect_attack_area.area_entered.connect(on_area_entered)
+	detect_attack_area.area_entered.connect(on_area_entered)
 	stop_moving = false
 	owner.switch_lock_health(false)
 	
 func exit() -> void:
 	owner.velocity = Vector2.ZERO
 	health_component.health_changed.disconnect(on_health_changed)
-	#detect_attack_area.area_entered.disconnect(on_area_entered)
+	detect_attack_area.area_entered.disconnect(on_area_entered)
 	
 	
 func update(delta: float) -> void:
@@ -32,7 +32,7 @@ func update(delta: float) -> void:
 	
 	
 func physics_update(_delta: float) -> void:
-	if not stop_moving and (GameManager.character_now.global_position - owner.global_position).length() > 60:
+	if not stop_moving and (GameManager.character_now.global_position - owner.global_position).length() > 100:
 		move(_delta)
 	else:
 		stop_moving = true
@@ -87,18 +87,8 @@ func on_health_changed():
 		transitioned.emit(self, "SummonState")
 
 
-#
-#func on_area_entered(_area: Area2D):
-	#attack_animate()
-	#attack()
+
+func on_area_entered(_area: Area2D):
+	attack_animate()
+	attack()
 	
-		#if owner.in_half_hp:
-			#if randf() > 0.4:
-				#transitioned.emit(self, "RunAwayState")
-			#else :
-				#transitioned.emit(self, "ArmorBuffState")
-		#else :
-			#if randf() > 0.1:
-				#transitioned.emit(self, "RunAwayState")
-			#else :
-				#transitioned.emit(self, "ChaseState")

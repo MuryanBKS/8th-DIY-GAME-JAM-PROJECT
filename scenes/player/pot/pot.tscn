@@ -1,10 +1,13 @@
-[gd_scene load_steps=33 format=3 uid="uid://cblaytvi5tp5m"]
+[gd_scene load_steps=36 format=3 uid="uid://cblaytvi5tp5m"]
 
 [ext_resource type="Script" path="res://scenes/player/pot/pot.gd" id="1_7u0vp"]
 [ext_resource type="Texture2D" uid="uid://chdwb4flsrq85" path="res://assets/animated_witch_cauldron_48x48.png" id="2_kbj6c"]
 [ext_resource type="Texture2D" uid="uid://ctr0eaxnlafh8" path="res://assets/Halloween_Shadow_Singles_48x48_53.png" id="3_2v253"]
 [ext_resource type="Texture2D" uid="uid://cy8idvganejbm" path="res://assets/Fire_Spreadsheet.png" id="3_5y35o"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="4_r1o25"]
+[ext_resource type="AudioStream" uid="uid://bpwri0s0hjxtc" path="res://assets/sfx/Ambiance_Firecamp_Small_Loop_Mono.mp3" id="6_oolfi"]
+[ext_resource type="AudioStream" uid="uid://umwdm6mkqsa2" path="res://assets/sfx/boiling.mp3" id="7_cxmk5"]
+[ext_resource type="AudioStream" uid="uid://dijllajpx40ei" path="res://assets/sfx/51_Flee_02.wav" id="7_ebo5s"]
 
 [sub_resource type="Animation" id="Animation_pjg2c"]
 length = 0.001
@@ -449,3 +452,20 @@ texture_scale = 7.63
 [node name="PotCenter" type="Marker2D" parent="."]
 unique_name_in_owner = true
 position = Vector2(-1, -49)
+
+[node name="PotFireSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_oolfi")
+volume_db = -10.0
+autoplay = true
+max_distance = 500.0
+bus = &"SFX"
+
+[node name="PotWaterSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_cxmk5")
+volume_db = -10.0
+autoplay = true
+max_distance = 500.0
+bus = &"SFX"
+
+[node name="EnemyCollectedSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_ebo5s")

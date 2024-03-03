@@ -1,9 +1,11 @@
-[gd_scene load_steps=168 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=170 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/pot/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/pot/player_new.gd" id="1_xdb85"]
 [ext_resource type="Script" path="res://scenes/components/health_component.gd" id="2_28wlh"]
+[ext_resource type="AudioStream" uid="uid://c8oc2cd4ef8bf" path="res://assets/sfx/dash.wav" id="2_616c6"]
 [ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
+[ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="3_i213n"]
 [ext_resource type="Texture2D" uid="uid://dt2t1fs6v6iw5" path="res://assets/Dead.png" id="4_ffetq"]
 [ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot/pot.tscn" id="4_hypyu"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="6_4dfvd"]
@@ -1490,13 +1492,20 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_xdb85")
 
+[node name="DashSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_616c6")
+volume_db = 8.0
+pitch_scale = 0.8
+bus = &"SFX"
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_i213n")
+pitch_scale = 0.8
+bus = &"SFX"
+
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("2_28wlh")
 health = 200.0
-
-[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
-unique_name_in_owner = true
-pitch_scale = 1.3
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
@@ -1520,7 +1529,7 @@ wait_time = 0.1
 one_shot = true
 
 [node name="DashCooldownTimer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 2.0
 one_shot = true
 
 [node name="CartPosition" type="Node2D" parent="."]
@@ -1575,6 +1584,7 @@ position = Vector2(2, -30)
 shape = SubResource("CircleShape2D_kglci")
 
 [node name="InvincibilityTimer" type="Timer" parent="HurtComponent"]
+wait_time = 0.8
 one_shot = true
 
 [node name="PotCollisionShape2D" type="CollisionShape2D" parent="."]
@@ -1586,7 +1596,7 @@ debug_color = Color(0.87451, 0.345098, 0, 0.419608)
 [node name="StateMachine" type="Node" parent="." node_paths=PackedStringArray("initial_state")]
 unique_name_in_owner = true
 script = ExtResource("8_n36ec")
-initial_state = NodePath("IdleState")
+initial_state = NodePath("NpcState")
 
 [node name="IdleState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "health_component", "pot", "dash_cooldown_timer")]
 script = ExtResource("9_srs8y")
@@ -1605,7 +1615,7 @@ pot_collision = NodePath("../../PotCollisionShape2D")
 health_component = NodePath("../../HealthComponent")
 dash_cooldown_timer = NodePath("../../DashCooldownTimer")
 
-[node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "dash_timer", "invincibility_timer", "pot", "pot_collision", "health_component")]
+[node name="DashState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "dash_timer", "invincibility_timer", "pot", "pot_collision", "health_component", "dash_sound")]
 script = ExtResource("11_edrqs")
 player = NodePath("../..")
 dash_timer = NodePath("../../DashTimer")
@@ -1614,14 +1624,16 @@ pot = NodePath("../../Pot")
 pot_collision = NodePath("../../PotCollisionShape2D")
 fire_particle = ExtResource("12_tgo6r")
 health_component = NodePath("../../HealthComponent")
+dash_sound = NodePath("../../DashSound")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "health_component", "animation_tree", "pot", "dash_cooldown_timer")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "health_component", "animation_tree", "pot", "dash_cooldown_timer", "hurt_sound")]
 script = ExtResource("12_xrppd")
 player = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
 animation_tree = NodePath("../../AnimationTree")
 pot = NodePath("../../Pot")
 dash_cooldown_timer = NodePath("../../DashCooldownTimer")
+hurt_sound = NodePath("../../HurtSound")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_tree", "animation_player", "pot")]
 script = ExtResource("13_cbeu7")
@@ -1629,11 +1641,12 @@ animation_tree = NodePath("../../AnimationTree")
 animation_player = NodePath("../../AnimationPlayer")
 pot = NodePath("../../Pot")
 
-[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "pot")]
+[node name="NpcState" type="Node" parent="StateMachine" node_paths=PackedStringArray("player", "animation_tree", "pot", "canvas")]
 script = ExtResource("15_yxqfo")
 player = NodePath("../..")
 animation_tree = NodePath("../../AnimationTree")
 pot = NodePath("../../Pot")
+canvas = NodePath("../../CanvasLayer")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -1646,5 +1659,29 @@ offset_top = -54.0
 offset_right = 512.0
 offset_bottom = -28.0
 grow_vertical = 0
+
+[node name="Label" type="Label" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 19.0
+offset_top = -114.0
+offset_right = 99.0
+offset_bottom = -59.0
+grow_vertical = 0
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 4
+theme_override_constants/shadow_offset_y = 2
+theme_override_constants/outline_size = 3
+theme_override_font_sizes/font_size = 40
+text = "帕特"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
+unique_name_in_owner = true
+position = Vector2(1, -44)
+current = true
 
 [connection signal="timeout" from="DashTimer" to="." method="_on_dash_timer_timeout"]

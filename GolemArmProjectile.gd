@@ -34,6 +34,9 @@ func get_player_direction() -> Vector2:
 
 
 func _on_area_entered(area: Area2D) -> void:
+	if not hitbox_component.get_overlapping_areas().is_empty():
+		$AnimationPlayer.play("explode")
+		
 	detect_player = true
 	$AnimationPlayer.play("glow")
 	if not start_chase:

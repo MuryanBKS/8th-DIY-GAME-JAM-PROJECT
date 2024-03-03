@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://bhpslab73d2j1"]
+[gd_scene load_steps=31 format=3 uid="uid://bhpslab73d2j1"]
 
 [ext_resource type="Script" path="res://GolemArmProjectile.gd" id="1_rytyv"]
 [ext_resource type="Texture2D" uid="uid://dbcwrla12b7qk" path="res://scenes/enemies/golem/GolemSprite/weapon PNG/arm_projectile_glowing.png" id="2_kabip"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/effect/explosion/Explosions.png" id="3_bioaj"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="3_p5lwt"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="5_b8jpv"]
+[ext_resource type="AudioStream" uid="uid://cqlplvxa0loj7" path="res://assets/sfx/Retro Explosion Short 01.wav" id="7_opbch"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_2gb72"]
 atlas = ExtResource("3_bioaj")
@@ -142,7 +143,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [&"default"]
+"values": [&"glow"]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -246,6 +247,34 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector2(2, 2)]
 }
+tracks/5/type = "method"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HitboxComponent/CollisionShape2D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [&"disabled", true],
+"method": &"set_deferred"
+}]
+}
+tracks/6/type = "method"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("AudioStreamPlayer2D")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
+}
 
 [sub_resource type="Animation" id="Animation_j6hg7"]
 resource_name = "glow"
@@ -324,6 +353,7 @@ script = ExtResource("2_pu38u")
 modulate = Color(0.847059, 0.976471, 0.890196, 1)
 position = Vector2(-28, 13)
 sprite_frames = SubResource("SpriteFrames_teetk")
+animation = &"glow"
 
 [node name="HitboxComponent" type="Area2D" parent="."]
 collision_layer = 32
@@ -343,7 +373,6 @@ debug_color = Color(0, 0.6, 0.701961, 0.0862745)
 libraries = {
 "": SubResource("AnimationLibrary_pgqet")
 }
-autoplay = "glow"
 
 [node name="ChaseTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -365,6 +394,13 @@ shape = SubResource("CapsuleShape2D_c52qs")
 debug_color = Color(0, 0.639216, 0.364706, 0.419608)
 
 [node name="_Timer" type="Timer" parent="HurtComponent"]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_opbch")
+volume_db = 5.0
+pitch_scale = 0.7
+max_distance = 600.0
+bus = &"SFX"
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="timeout" from="ChaseTimer" to="." method="_on_chase_timer_timeout"]

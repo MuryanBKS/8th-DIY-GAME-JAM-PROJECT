@@ -10,3 +10,4 @@ class_name PlayerDiedState
 func enter():
 		state_machine.travel("died")
 		pot.switch_pot_collision(false)
+		GameManager.player_died.emit()

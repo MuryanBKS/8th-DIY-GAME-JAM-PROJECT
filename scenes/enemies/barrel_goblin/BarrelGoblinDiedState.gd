@@ -2,7 +2,7 @@ extends State
 
 @export var animation_player: AnimationPlayer
 @export var barrel_collision: CollisionShape2D
-@export var explosion_area: CollisionShape2D
+@export var hurt_sound: AudioStreamPlayer2D
 
 var knockback_direction: Vector2
 var random_vector: Vector2
@@ -16,6 +16,10 @@ func enter() -> void:
 		random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	knockback_direction = -get_target_direction() + random_vector
 	owner.velocity = knockback_direction.normalized() * randi_range(500, 1000)
+	
+	GameManager.slow_down.emit()
+	await get_tree().create_timer(0.1).timeout
+	GameManager.slow_down_finished.emit()
 	
 func exit() -> void:
 	pass
@@ -41,10 +45,10 @@ func knock_back(delta):
 func explode_animate():
 	is_exploding = true
 	animation_player.play("count_down")
+	hurt_sound.play()
 	await get_tree().create_timer(0.8).timeout
 	barrel_collision.set_deferred("disabled", true)
 	animation_player.play("explode")
-	explosion_area.set_deferred("disabled", false)
 	await animation_player.animation_finished
 	owner.queue_free()
 

@@ -6,6 +6,7 @@ extends State
 @export var animation_player: AnimationPlayer
 @export var hit_collision: CollisionShape2D
 @export var sprite: AnimatedSprite2D
+@export var hurt_sound: AudioStreamPlayer2D
 
 var knockback_direction: Vector2
 var random_vector: Vector2
@@ -21,6 +22,11 @@ func enter():
 	knockback_direction = -get_target_direction() + random_vector
 	owner.velocity = knockback_direction.normalized() * randi_range(800, 1800)
 	hurt_animate()
+	hurt_sound.play()
+	
+	GameManager.slow_down.emit()
+	await get_tree().create_timer(0.1).timeout
+	GameManager.slow_down_finished.emit()
 	
 func physics_update(delta: float) -> void:
 	knock_back(delta)

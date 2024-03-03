@@ -8,6 +8,9 @@ func enter() -> void:
 	default_shadow.hide()
 	animation_player.play("died")
 	death_shadow.show()
+	await animation_player.animation_finished
+	GameManager.game_clear.emit()
+	
 	
 func exit() -> void:
 	pass

@@ -28,7 +28,7 @@ func _set_health(new_health):
 	
 	if health <= 0:
 		hide()
-		
+		$"../Label".hide()
 
 func _on_timer_timeout() -> void:
 	damage_bar.value = health

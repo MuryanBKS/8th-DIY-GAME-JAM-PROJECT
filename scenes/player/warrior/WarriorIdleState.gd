@@ -3,6 +3,7 @@ extends State
 @export var warrior: CharacterBody2D
 @export var animation_tree: AnimationTree
 @export var health_component: HealthComponent
+@export var canva: CanvasLayer
 
 var blend_pos_path = "parameters/idle/idle_bs1d/blend_position"
 var is_active = false
@@ -16,6 +17,7 @@ func enter() -> void:
 		var camera = get_tree().get_first_node_in_group("camera")
 		camera.player = owner
 	is_active = true
+	canva.show()
 	
 func exit() -> void:
 	health_component.health_changed.disconnect(on_health_changed)

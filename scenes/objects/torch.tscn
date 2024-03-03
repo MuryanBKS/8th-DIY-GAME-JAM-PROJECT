@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://df5hywb5pcxrm"]
+[gd_scene load_steps=9 format=3 uid="uid://df5hywb5pcxrm"]
 
 [ext_resource type="Texture2D" uid="uid://dc6v11pu1knxd" path="res://assets/torch/torch_1.png" id="1_1sr2p"]
 [ext_resource type="Texture2D" uid="uid://dwytl26foy0il" path="res://assets/torch/torch_2.png" id="2_fl36j"]
 [ext_resource type="Texture2D" uid="uid://cryogjtkr2xj0" path="res://assets/torch/torch_3.png" id="3_vjcs0"]
 [ext_resource type="Texture2D" uid="uid://b2qpmed8wmeht" path="res://assets/torch/torch_4.png" id="4_01kbr"]
+[ext_resource type="AudioStream" uid="uid://b12mlujrm4o87" path="res://assets/sfx/Torch Loop.ogg" id="5_q6aif"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_6rl34"]
 animations = [{
@@ -46,3 +47,11 @@ color = Color(0.776471, 0.407843, 0.105882, 1)
 energy = 0.7
 texture = SubResource("GradientTexture2D_xk52m")
 texture_scale = 1.66
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_q6aif")
+volume_db = -10.0
+autoplay = true
+stream_paused = true
+max_distance = 400.0
+bus = &"SFX"

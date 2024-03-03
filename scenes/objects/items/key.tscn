@@ -1,0 +1,63 @@
+[gd_scene load_steps=10 format=3 uid="uid://duevytjridwj7"]
+
+[ext_resource type="Script" path="res://scenes/objects/items/key.gd" id="1_2e5dn"]
+[ext_resource type="Texture2D" uid="uid://dgbnmugtrr5ce" path="res://scenes/objects/object_assets/keys_1_1.png" id="1_x7x37"]
+[ext_resource type="Texture2D" uid="uid://8mr882iybs8d" path="res://scenes/objects/object_assets/keys_1_2.png" id="2_8bew0"]
+[ext_resource type="Texture2D" uid="uid://fei6l1e1lujn" path="res://scenes/objects/object_assets/keys_1_3.png" id="3_nema3"]
+[ext_resource type="Texture2D" uid="uid://c6ywg7b70trvb" path="res://scenes/objects/object_assets/keys_1_4.png" id="4_ooogl"]
+[ext_resource type="Texture2D" uid="uid://vglxtd4e8qai" path="res://assets/shadow/SmallShadow.png" id="5_fg3c0"]
+[ext_resource type="AudioStream" uid="uid://dqf02apiwnegf" path="res://assets/sfx/pick_key.wav" id="7_8tcqn"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_8ke1p"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("1_x7x37")
+}, {
+"duration": 1.0,
+"texture": ExtResource("2_8bew0")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_nema3")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ooogl")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_j5cl3"]
+radius = 15.0
+
+[node name="Key" type="Area2D"]
+scale = Vector2(3, 3)
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_2e5dn")
+
+[node name="Visuals" type="Node2D" parent="."]
+unique_name_in_owner = true
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Visuals"]
+position = Vector2(0, -5)
+sprite_frames = SubResource("SpriteFrames_8ke1p")
+autoplay = "default"
+frame_progress = 0.259192
+
+[node name="Sprite2D" type="Sprite2D" parent="Visuals"]
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_fg3c0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -4)
+shape = SubResource("CircleShape2D_j5cl3")
+disabled = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+unique_name_in_owner = true
+stream = ExtResource("7_8tcqn")
+bus = &"SFX"
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

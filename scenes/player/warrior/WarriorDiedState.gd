@@ -7,3 +7,4 @@ extends State
 
 func enter():
 	state_machine.travel("died")
+	GameManager.player_died.emit()

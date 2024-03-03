@@ -1,4 +1,4 @@
-[gd_scene load_steps=33 format=3 uid="uid://ckbf5eqgs5mc5"]
+[gd_scene load_steps=34 format=3 uid="uid://ckbf5eqgs5mc5"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bat/bat_new.gd" id="1_hbnp0"]
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://scenes/enemies/bat/Bat_Sprite_Sheet.png" id="2_b1qpj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/bat/BatHurtState.gd" id="9_ijdca"]
 [ext_resource type="Script" path="res://scenes/enemies/bat/BatDiedState.gd" id="10_ffd4f"]
 [ext_resource type="Script" path="res://scenes/enemies/bat/BatChaseState.gd" id="10_whr3e"]
+[ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="12_2i6gn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0eoq"]
 atlas = ExtResource("2_b1qpj")
@@ -150,7 +151,7 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_uhg7w"]
 resource_name = "die"
-length = 0.7
+length = 0.4
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -312,6 +313,7 @@ script = ExtResource("1_hbnp0")
 
 [node name="HealthComponent" type="Node" parent="."]
 script = ExtResource("5_65u4c")
+health = 20.0
 
 [node name="Visual" type="Node2D" parent="."]
 unique_name_in_owner = true
@@ -387,7 +389,7 @@ bat = NodePath("../..")
 animation_player = NodePath("../../AnimationPlayer")
 health_component = NodePath("../../HealthComponent")
 
-[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("bat", "health_component", "hurt_component", "animation_player", "hit_collision", "sprite")]
+[node name="HurtState" type="Node" parent="StateMachine" node_paths=PackedStringArray("bat", "health_component", "hurt_component", "animation_player", "hit_collision", "sprite", "hurt_sound")]
 script = ExtResource("9_ijdca")
 bat = NodePath("../..")
 health_component = NodePath("../../HealthComponent")
@@ -395,6 +397,7 @@ hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 sprite = NodePath("../../Visual/AnimatedSprite2D")
+hurt_sound = NodePath("../../HurtSound")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "bat", "bat_collision", "hit_collision")]
 script = ExtResource("10_ffd4f")
@@ -412,5 +415,11 @@ collision_mask = 2
 position = Vector2(0, -47)
 shape = SubResource("CircleShape2D_hblm1")
 debug_color = Color(0.94902, 0.643137, 0.25098, 0.223529)
+
+[node name="HurtSound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("12_2i6gn")
+pitch_scale = 0.8
+max_distance = 400.0
+bus = &"SFX"
 
 [connection signal="timeout" from="KnockbackTimer" to="." method="_on_knockback_timer_timeout"]

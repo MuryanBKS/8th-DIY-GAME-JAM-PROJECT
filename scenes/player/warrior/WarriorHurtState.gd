@@ -3,6 +3,7 @@ extends State
 
 @export var health_component: HealthComponent
 @export var animation_tree: AnimationTree
+@export var hurt_sound: AudioStreamPlayer2D
 
 var blend_pos_path = "parameters/hurt/hurt_bs2d/blend_position"
 var hurt_finished = false
@@ -13,7 +14,7 @@ var hurt_finished = false
 func enter():
 	hurt_finished = false
 	hurt()
-	
+	hurt_sound.play()
 	
 func physics_update(_delta: float) -> void:
 	if !hurt_finished:

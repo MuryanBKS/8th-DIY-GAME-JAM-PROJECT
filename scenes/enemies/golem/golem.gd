@@ -10,6 +10,7 @@ var in_half_hp = false
 @onready var health_component: HealthComponent = $HealthComponent
 @onready var max_health = health_component.get_health()
 @onready var health_bar: ProgressBar = $CanvasLayer/HealthBar
+@onready var hurt_sound: AudioStreamPlayer2D = $HurtSound
 
 
 
@@ -30,7 +31,7 @@ func set_buff(value):
 
 func on_health_changed():
 	health_bar.health = health_component.get_health()
-
+	hurt_sound.play()
 
 func on_timer_timeout():
 	%StateMachine.current_state.transitioned.emit(%StateMachine.current_state, "ArmorBuffState")

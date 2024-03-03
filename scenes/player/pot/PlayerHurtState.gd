@@ -6,6 +6,7 @@ class_name PlayerHurtState
 @export var animation_tree: AnimationTree
 @export var pot: Node2D
 @export var dash_cooldown_timer: Timer
+@export var hurt_sound: AudioStreamPlayer2D
 
 var blend_pos_path = "parameters/hurt/blend_position"
 var hurt_finished = false
@@ -18,7 +19,7 @@ func enter():
 	hurt_finished = false
 	pot.switch_pot_collision(false)
 	hurt()
-	
+	hurt_sound.play()
 	
 func physics_update(_delta: float) -> void:
 	if !hurt_finished:

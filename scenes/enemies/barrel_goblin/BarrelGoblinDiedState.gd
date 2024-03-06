@@ -3,6 +3,7 @@ extends State
 @export var animation_player: AnimationPlayer
 @export var barrel_collision: CollisionShape2D
 @export var hurt_sound: AudioStreamPlayer2D
+@export var fire_particle: PackedScene
 
 var knockback_direction: Vector2
 var random_vector: Vector2
@@ -10,6 +11,8 @@ var random_vector: Vector2
 var is_exploding = false
 
 func enter() -> void:
+	if GameManager.character_now.name == "Player":
+		spawn_fire()
 	random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	if random_vector == get_target_direction():
 		randomize()
@@ -52,3 +55,10 @@ func explode_animate():
 	await animation_player.animation_finished
 	owner.queue_free()
 
+func spawn_fire():
+	randomize()
+	var fire_particle_instance = fire_particle.instantiate()
+	var size = randf_range(1.0, 3.0)
+	fire_particle_instance.scale = Vector2(size, size)
+	fire_particle_instance.global_position = owner.global_position
+	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)

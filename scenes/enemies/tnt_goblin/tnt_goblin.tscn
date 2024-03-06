@@ -1,4 +1,4 @@
-[gd_scene load_steps=74 format=3 uid="uid://b4ter3f47cmmq"]
+[gd_scene load_steps=75 format=3 uid="uid://b4ter3f47cmmq"]
 
 [ext_resource type="Texture2D" uid="uid://26v0yghlhebo" path="res://scenes/enemies/tnt_goblin/TNT_Red.png" id="1_7oevy"]
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/tnt_goblin.gd" id="1_t2fai"]
@@ -11,6 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bssbkxhrb8ghs" path="res://scenes/enemies/tnt_goblin/tnt.tscn" id="7_fxt84"]
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/TntGoblinThrowState.gd" id="8_dt40c"]
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/TntGoblinHurtState.gd" id="9_e0kn6"]
+[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/effect/particles/explosion_particles_2d.tscn" id="10_5dv8j"]
 [ext_resource type="Script" path="res://scenes/enemies/tnt_goblin/TntGoblinDiedState.gd" id="10_vh2mu"]
 [ext_resource type="Texture2D" uid="uid://dt2t1fs6v6iw5" path="res://assets/Dead.png" id="12_v3e8y"]
 [ext_resource type="Texture2D" uid="uid://bc5vdwiojsmqw" path="res://scenes/effect/explosion/Explosions.png" id="13_uab17"]
@@ -724,6 +725,7 @@ hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
 sprite = NodePath("../../Visuals/AnimatedSprite2D")
 hurt_sound = NodePath("../../HurtSound")
+fire_particle = ExtResource("10_5dv8j")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "goblin_collision")]
 script = ExtResource("10_vh2mu")

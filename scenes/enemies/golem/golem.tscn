@@ -1,4 +1,4 @@
-[gd_scene load_steps=132 format=3 uid="uid://c3cp1iwe0mqlx"]
+[gd_scene load_steps=133 format=3 uid="uid://c3cp1iwe0mqlx"]
 
 [ext_resource type="Texture2D" uid="uid://crhh8o3m1d74x" path="res://assets/shadow/MediumShadow.png" id="1_7wngp"]
 [ext_resource type="Texture2D" uid="uid://bmfw8ligkmlxf" path="res://scenes/enemies/golem/GolemSprite/PNG sheet/Character_sheet.png" id="1_foy7h"]
@@ -28,6 +28,7 @@
 [ext_resource type="PackedScene" uid="uid://bj5hrt234asvg" path="res://scenes/enemies/torch_goblin/torch_goblin.tscn" id="20_3gngc"]
 [ext_resource type="PackedScene" uid="uid://b8qp1fs2x70mg" path="res://scenes/ui/health_bar.tscn" id="20_y3xsm"]
 [ext_resource type="PackedScene" uid="uid://b4ter3f47cmmq" path="res://scenes/enemies/tnt_goblin/tnt_goblin.tscn" id="21_kk61m"]
+[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/effect/particles/explosion_particles_2d.tscn" id="22_03dll"]
 [ext_resource type="PackedScene" uid="uid://ckbf5eqgs5mc5" path="res://scenes/enemies/bat/bat.tscn" id="22_jqqcn"]
 [ext_resource type="PackedScene" uid="uid://c56sxv1i8mgrm" path="res://scenes/enemies/barrel_goblin/barrel_goblin.tscn" id="23_gxqvt"]
 [ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="27_anxce"]
@@ -1505,6 +1506,7 @@ script = ExtResource("16_f0w4n")
 health_component = NodePath("../../HealthComponent")
 hurt_component = NodePath("../../HurtComponent")
 animation_player = NodePath("../../AnimationPlayer")
+fire_particle = ExtResource("22_03dll")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "death_shadow", "default_shadow")]
 script = ExtResource("17_v7h78")

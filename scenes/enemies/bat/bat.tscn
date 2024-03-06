@@ -1,4 +1,4 @@
-[gd_scene load_steps=34 format=3 uid="uid://ckbf5eqgs5mc5"]
+[gd_scene load_steps=35 format=3 uid="uid://ckbf5eqgs5mc5"]
 
 [ext_resource type="Script" path="res://scenes/enemies/bat/bat_new.gd" id="1_hbnp0"]
 [ext_resource type="Texture2D" uid="uid://boro0l52ogqc2" path="res://scenes/enemies/bat/Bat_Sprite_Sheet.png" id="2_b1qpj"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/bat/BatHurtState.gd" id="9_ijdca"]
 [ext_resource type="Script" path="res://scenes/enemies/bat/BatDiedState.gd" id="10_ffd4f"]
 [ext_resource type="Script" path="res://scenes/enemies/bat/BatChaseState.gd" id="10_whr3e"]
+[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/effect/particles/explosion_particles_2d.tscn" id="11_33h0e"]
 [ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="12_2i6gn"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_b0eoq"]
@@ -398,6 +399,7 @@ animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 sprite = NodePath("../../Visual/AnimatedSprite2D")
 hurt_sound = NodePath("../../HurtSound")
+fire_particle = ExtResource("11_33h0e")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "bat", "bat_collision", "hit_collision")]
 script = ExtResource("10_ffd4f")

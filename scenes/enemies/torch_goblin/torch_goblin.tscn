@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://bj5hrt234asvg"]
+[gd_scene load_steps=88 format=3 uid="uid://bj5hrt234asvg"]
 
 [ext_resource type="Script" path="res://scenes/enemies/torch_goblin/torch_goblin.gd" id="1_0q5me"]
 [ext_resource type="Texture2D" uid="uid://cglhvp8ik32js" path="res://scenes/enemies/torch_goblin/Torch_Red.png" id="1_mbccc"]
@@ -11,6 +11,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/torch_goblin/TorchGoblinWanderState.gd" id="5_k6qka"]
 [ext_resource type="Script" path="res://scenes/enemies/torch_goblin/TorchGoblinHurtState.gd" id="6_c7yqf"]
 [ext_resource type="Script" path="res://scenes/enemies/torch_goblin/TorchGoblinDiedState.gd" id="7_xqhrw"]
+[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/effect/particles/explosion_particles_2d.tscn" id="11_ojlu1"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="11_rtyay"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="12_m2cn7"]
 [ext_resource type="AudioStream" uid="uid://bmqqvfj42xs2t" path="res://assets/sfx/Torch Attack Strike 1.ogg" id="14_ph5aj"]
@@ -1056,6 +1057,7 @@ animation_player = NodePath("../../AnimationPlayer")
 hit_collision = NodePath("../../HitboxComponent/CollisionShape2D")
 sprite = NodePath("../../AnimatedSprite2D")
 hurt_sound = NodePath("../../HurtSound")
+fire_particle = ExtResource("11_ojlu1")
 
 [node name="DiedState" type="Node" parent="StateMachine" node_paths=PackedStringArray("animation_player", "goblin_collision", "hit_collision")]
 script = ExtResource("7_xqhrw")

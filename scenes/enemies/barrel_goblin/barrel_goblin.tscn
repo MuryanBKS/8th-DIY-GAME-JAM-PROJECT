@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://c56sxv1i8mgrm"]
+[gd_scene load_steps=55 format=3 uid="uid://c56sxv1i8mgrm"]
 
 [ext_resource type="Texture2D" uid="uid://dkw7u4eadxufq" path="res://scenes/enemies/barrel_goblin/Barrel_Red.png" id="1_dques"]
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/barrel_goblin.gd" id="1_exh1j"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/BarrelGoblinWanderState.gd" id="4_web2g"]
 [ext_resource type="Script" path="res://scenes/enemies/barrel_goblin/BarrelGoblinDiedState.gd" id="7_fa8mx"]
 [ext_resource type="Script" path="res://scenes/components/hurt_component.gd" id="8_itc1n"]
+[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/effect/particles/explosion_particles_2d.tscn" id="9_qxxes"]
 [ext_resource type="Script" path="res://scenes/components/hitbox_component.gd" id="10_srdab"]
 [ext_resource type="AudioStream" uid="uid://cqlplvxa0loj7" path="res://assets/sfx/Retro Explosion Short 01.wav" id="11_ikq5q"]
 [ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="11_td7w5"]
@@ -532,6 +533,7 @@ script = ExtResource("7_fa8mx")
 animation_player = NodePath("../../AnimationPlayer")
 barrel_collision = NodePath("../../CollisionShape2D")
 hurt_sound = NodePath("../../HurtSound")
+fire_particle = ExtResource("9_qxxes")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {

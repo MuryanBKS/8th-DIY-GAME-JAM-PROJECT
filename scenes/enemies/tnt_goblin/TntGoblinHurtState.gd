@@ -6,12 +6,15 @@ extends State
 @export var animation_player: AnimationPlayer
 @export var sprite: AnimatedSprite2D
 @export var hurt_sound: AudioStreamPlayer2D
+@export var fire_particle: PackedScene
 
 var knockback_direction: Vector2
 var random_vector: Vector2
 
 
 func enter():
+	if GameManager.character_now.name == "Player":
+		spawn_fire()
 	owner.collision_mask = 1
 	random_vector = Vector2(randf_range(-1, 1), randf_range(-1, 1)).normalized()
 	if random_vector == get_target_direction():
@@ -51,3 +54,11 @@ func knock_back(delta):
 			transitioned.emit(self, "DiedState")
 		transitioned.emit(self, "RunAwayState")
 	owner.move_and_slide()
+
+func spawn_fire():
+	randomize()
+	var fire_particle_instance = fire_particle.instantiate()
+	var size = randf_range(1.0, 3.0)
+	fire_particle_instance.scale = Vector2(size, size)
+	fire_particle_instance.global_position = owner.global_position + Vector2(0, -27)
+	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)

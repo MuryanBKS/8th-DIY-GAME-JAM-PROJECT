@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cdb8bniutipmp"]
+[gd_scene load_steps=10 format=3 uid="uid://cdb8bniutipmp"]
 
 [ext_resource type="Script" path="res://scenes/objects/magic_circle.gd" id="1_ay2yn"]
 [ext_resource type="Texture2D" uid="uid://c7r8kb2dedrw3" path="res://scenes/objects/object_assets/TX Shadow.png" id="1_qgp03"]
@@ -6,21 +6,6 @@
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_b5ft3"]
 radius = 18.6682
-
-[sub_resource type="Animation" id="Animation_i5t4t"]
-resource_name = "glow"
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("GlowFont:modulate")
-tracks/0/interp = 2
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0, 1),
-"transitions": PackedFloat32Array(2, 1),
-"update": 0,
-"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
-}
 
 [sub_resource type="Animation" id="Animation_wadcc"]
 length = 0.001
@@ -36,12 +21,60 @@ tracks/0/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_i5t4t"]
+resource_name = "glow"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("GlowFont:modulate")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(2, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("PointLight2D:energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.7]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_scito"]
 _data = {
 "RESET": SubResource("Animation_wadcc"),
 "glow": SubResource("Animation_i5t4t")
 }
+
+[sub_resource type="Gradient" id="Gradient_8fixd"]
+colors = PackedColorArray(0.295389, 1, 0.998552, 0.431373, 0, 0, 0, 0.776471)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_4ldhq"]
+gradient = SubResource("Gradient_8fixd")
+fill = 1
+fill_from = Vector2(0.5, 0.5)
+fill_to = Vector2(0.799145, 0.117521)
 
 [node name="MagicCircle" type="Area2D" groups=["magic_circle"]]
 scale = Vector2(2, 2)
@@ -107,5 +140,10 @@ unique_name_in_owner = true
 libraries = {
 "": SubResource("AnimationLibrary_scito")
 }
+
+[node name="PointLight2D" type="PointLight2D" parent="."]
+energy = 0.0
+texture = SubResource("GradientTexture2D_4ldhq")
+texture_scale = 3.59
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

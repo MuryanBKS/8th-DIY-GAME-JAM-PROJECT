@@ -68,7 +68,6 @@ func decide_rotate_direction() -> int:
 func on_timer_timeout():
 	start = false
 	animation_player.play_backwards("laser_start")
-	laser_sound.play()
 	await animation_player.animation_finished
 	laser.hide()
 	if health_component.get_health() <= owner.max_health * 1/2 and not owner.in_half_hp:

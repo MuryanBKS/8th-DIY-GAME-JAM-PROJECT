@@ -9,7 +9,7 @@ extends State
 
 var spawn_points: Array
 var point_choosed: Marker2D
-var count = 20
+var count = 15
 var speed = 150
 var stop_moving = false
 var start_summon = false

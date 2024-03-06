@@ -25,7 +25,6 @@ func physics_update(delta: float) -> void:
 	pass
 
 func on_glow():
-	await get_tree().create_timer(2).timeout
 	animation_player.play("immune", -1, -1, true)
 	await animation_player.animation_finished
 	transitioned.emit(self, "ChaseState")

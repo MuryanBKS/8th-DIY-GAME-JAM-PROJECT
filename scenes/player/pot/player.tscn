@@ -1,4 +1,4 @@
-[gd_scene load_steps=171 format=3 uid="uid://cn38ud11gvhsv"]
+[gd_scene load_steps=172 format=3 uid="uid://cn38ud11gvhsv"]
 
 [ext_resource type="Texture2D" uid="uid://t6ym8pkknabt" path="res://scenes/player/pot/Premade_Character_48x48_11.png" id="1_4mymq"]
 [ext_resource type="Script" path="res://scenes/player/pot/player_new.gd" id="1_xdb85"]
@@ -6,6 +6,7 @@
 [ext_resource type="AudioStream" uid="uid://c8oc2cd4ef8bf" path="res://assets/sfx/dash.wav" id="2_616c6"]
 [ext_resource type="Texture2D" uid="uid://bojyf4gios6by" path="res://assets/shadow/LargeShadow.png" id="3_52dnf"]
 [ext_resource type="AudioStream" uid="uid://bfgcxis614g6r" path="res://assets/sfx/Spell Impact 1.ogg" id="3_i213n"]
+[ext_resource type="PackedScene" uid="uid://b3pd1lb5w77i" path="res://scenes/effect/particles/explosion_particles_2d.tscn" id="3_wfoda"]
 [ext_resource type="Texture2D" uid="uid://dt2t1fs6v6iw5" path="res://assets/Dead.png" id="4_ffetq"]
 [ext_resource type="PackedScene" uid="uid://cblaytvi5tp5m" path="res://scenes/player/pot/pot.tscn" id="4_hypyu"]
 [ext_resource type="PackedScene" uid="uid://doid1l5jum87c" path="res://scenes/emotes/thinking_emote.tscn" id="6_4dfvd"]
@@ -1493,6 +1494,7 @@ collision_mask = 5
 motion_mode = 1
 script = ExtResource("1_xdb85")
 fire_particle = ExtResource("12_tgo6r")
+explode_particle = ExtResource("3_wfoda")
 
 [node name="DashSound" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("2_616c6")

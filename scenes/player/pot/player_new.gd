@@ -4,6 +4,7 @@ class_name Player
 signal emote_changed(path: String, rect_size: Rect2)
 
 @export var fire_particle: PackedScene
+@export var explode_particle: PackedScene
 
 var input_vector: Vector2
 var blend_position := Vector2(0, 0.1)
@@ -38,10 +39,15 @@ func active_listener():
 func spawn_fire():
 	randomize()
 	var fire_particle_instance = fire_particle.instantiate()
-	var size = randf_range(0.5, 2.0)
+	var explode_particle_instance = explode_particle.instantiate()
+	
+	var size = 0.01
 	fire_particle_instance.scale = Vector2(size, size)
 	fire_particle_instance.global_position = global_position
+	explode_particle_instance.scale = Vector2(size, size)
+	explode_particle_instance.global_position = global_position
 	get_tree().get_first_node_in_group("fire").add_child(fire_particle_instance)
+	get_tree().get_first_node_in_group("fire").add_child(explode_particle_instance)
 
 
 func on_emote_changed(path, rect2):

@@ -104,7 +104,7 @@ layer_3/tile_data = PackedInt32Array(262138, 196608, 2, 327674, 196608, 3, 26213
 position = Vector2(-138, 14)
 
 [node name="Warrior" parent="." instance=ExtResource("4_nu5up")]
-position = Vector2(-1216, -874)
+position = Vector2(-2599, -1169)
 
 [node name="Fire" parent="." instance=ExtResource("3_xjmy5")]
 z_index = -1
@@ -1163,7 +1163,7 @@ position = Vector2(-3344, 32)
 position = Vector2(-3360, -416)
 
 [node name="Bat18" parent="Enemies" instance=ExtResource("13_apsh7")]
-position = Vector2(-3056, -384)
+position = Vector2(-2769, -719)
 
 [node name="Bat19" parent="Enemies" instance=ExtResource("13_apsh7")]
 position = Vector2(-2528, 0)
@@ -1172,16 +1172,16 @@ position = Vector2(-2528, 0)
 position = Vector2(-2480, -560)
 
 [node name="Bat21" parent="Enemies" instance=ExtResource("13_apsh7")]
-position = Vector2(-2528, -1139)
+position = Vector2(-1368, -795)
 
 [node name="Bat22" parent="Enemies" instance=ExtResource("13_apsh7")]
-position = Vector2(-2402, -1044)
+position = Vector2(-1096, -933)
 
 [node name="Bat13" parent="Enemies" instance=ExtResource("13_apsh7")]
 position = Vector2(-3456, -1136)
 
 [node name="TorchGoblin" parent="Enemies" instance=ExtResource("20_clm6u")]
-position = Vector2(-3074, 588)
+position = Vector2(-842, -895)
 
 [node name="TorchGoblin8" parent="Enemies" instance=ExtResource("20_clm6u")]
 position = Vector2(-2640, 832)
@@ -1190,7 +1190,7 @@ position = Vector2(-2640, 832)
 position = Vector2(-2272, 544)
 
 [node name="TorchGoblin10" parent="Enemies" instance=ExtResource("20_clm6u")]
-position = Vector2(-2080, 832)
+position = Vector2(-2994, -1457)
 
 [node name="TorchGoblin3" parent="Enemies" instance=ExtResource("20_clm6u")]
 position = Vector2(-3234, 707)
@@ -1248,13 +1248,13 @@ position = Vector2(-1264, 336)
 position = Vector2(-3174, 27)
 
 [node name="TntGoblin6" parent="Enemies" instance=ExtResource("35_lvenb")]
-position = Vector2(-2928, -608)
+position = Vector2(-1851, -333)
 
 [node name="TntGoblin5" parent="Enemies" instance=ExtResource("35_lvenb")]
 position = Vector2(-2992, 800)
 
 [node name="TntGoblin4" parent="Enemies" instance=ExtResource("35_lvenb")]
-position = Vector2(-2496, -752)
+position = Vector2(-3128, -587)
 
 [node name="TntGoblin2" parent="Enemies" instance=ExtResource("35_lvenb")]
 position = Vector2(-1398, 690)
